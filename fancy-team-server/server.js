@@ -5,15 +5,20 @@ var { buildSchema } = require('graphql');
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type Query {
-    hello: String
+    hello: String,
+    world: String
   }
 `);
 
 // The root provides a resolver function for each API endpoint
 var root = {
     hello: () => {
+        console.log('****');
         return 'Hello world!';
     },
+    world: () => {
+        return 'is round';
+    }
 };
 
 var app = express();
