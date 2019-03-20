@@ -15,7 +15,7 @@ class App extends Component {
                 <p>Email: <input type="email" /></p>
                 <button>Login</button>
 
-                
+
                 {/* sorted newest to oldest (newest on top) */}
                 <ul>
                     {/* potentially -> list item level*/}
