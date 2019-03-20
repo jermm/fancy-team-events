@@ -1,0 +1,10 @@
+{
+  "name": "fancy-team-server",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1"
+  }
+}
