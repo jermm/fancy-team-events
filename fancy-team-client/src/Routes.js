@@ -10,7 +10,7 @@ function Routes(){
     return (
         <Provider store={store}>
           <Router>
-              <Route exact path='/' component={App} />
+              <Route exact path='/' component={ App } />
               <Route component={ Handle404 } />
           </Router>
         </Provider>

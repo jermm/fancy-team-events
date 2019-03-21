@@ -3,7 +3,7 @@ const initialState = {
   email: ''
 };
 
-export default function LoginReducer(state = initialState, action) {
+export default function loginReducer(state = initialState, action) {
     switch(action.type){
       case 'Update_UserName':
         return Object.assign({},state, action.payload);
