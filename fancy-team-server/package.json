@@ -7,10 +7,13 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "pg": "^7.9.0",
-    "pg-format": "^1.0.4"
-
+    "pg-format": "^1.0.4",
+    "typescript": "^3.3.4000",
+    "typescript-require": "^0.2.10"
   },
   "devDependencies": {
+    "@types/graphql": "^14.0.7",
+    "@types/pg": "^7.4.14",
     "nodemon": "^1.18.10"
   },
   "scripts": {

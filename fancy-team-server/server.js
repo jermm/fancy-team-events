@@ -1,6 +1,11 @@
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
+var graphql = require('graphql');
+require("typescript-require");
+
+// require("types/user").schema2
+var schema3 = require('./types/user.js').schema2;
 
 
 const { Client } = require('pg');
@@ -25,6 +30,63 @@ var schema = buildSchema(`
   }
   
 `);
+
+
+// Define the User type
+var userType = new graphql.GraphQLObjectType({
+    name: 'User',
+    fields: {
+        id: { type: new graphql.GraphQLNonNull(graphql.GraphQLInt) },
+        name: { type: graphql.GraphQLString },
+        email: { type: graphql.GraphQLString }
+    }
+});
+
+
+var queryType = new graphql.GraphQLObjectType({
+    name: 'Query',
+    fields: {
+        user: {
+            type: userType,
+            // `args` describes the arguments that the `user` query accepts
+            args: {
+                id: { type: new graphql.GraphQLNonNull(graphql.GraphQLInt) }
+            },
+            resolve: function (_, {id}) {
+                console.log(id);
+                return client.query(getUserQuery, [id]).then(res => {
+                    if (res.rows.length > 0) {
+                        return res.rows[0];
+                    }
+                });
+            }
+        }
+    }
+});
+
+var mutatorType = new graphql.GraphQLObjectType( {
+    name: 'Mutation',
+    fields: {
+        addUser: {
+            type: userType,
+            args: {
+                name: { type: graphql.GraphQLString },
+                email: { type: graphql.GraphQLString }
+            },
+            resolve: function (_, {name, email}) {
+                return client.query(addUserQuery, [name, email]).then(res => {
+                    if (res.rows.length > 0) {
+                        return res.rows[0];
+                    }
+                })
+            }
+        }
+    }
+
+});
+
+var schema2 = new graphql.GraphQLSchema({query: queryType, mutation: mutatorType});
+
 
 const getAllUserQuery = "select id, email, name from users;";
 const getUserQuery = "select id, email, name from users where id=$1";
@@ -66,7 +128,7 @@ var root = {
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
-    schema: schema,
+    schema: schema3,
     rootValue: root,
     graphiql: true,
 }));
