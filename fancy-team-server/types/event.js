@@ -15,8 +15,9 @@ type Event {
 }
 
 type Query {
-    event(id: ID!): Event
+    event(id: ID!, userId: ID): Event
     events(userId: ID!): [Event]
 }
+ 
 `;
 //# sourceMappingURL=event.js.map

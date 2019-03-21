@@ -5,7 +5,7 @@ var graphql = require('graphql');
 require("typescript-require");
 
 // require("types/user").schema2
-var schema3 = require('./types/user.js').schema2;
+var userSchema = require('./types/user.js').userSchema;
 
 
 const { Client } = require('pg');
@@ -128,7 +128,7 @@ var root = {
 
 var app = express();
 app.use('/graphql', graphqlHTTP({
-    schema: schema3,
+    schema: userSchema,
     rootValue: root,
     graphiql: true,
 }));
