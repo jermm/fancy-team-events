@@ -7,5 +7,13 @@
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "pg": "^7.9.0"
+
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "dev": "nodemon server",
+    "prod": "node server"
   }
 }

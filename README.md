@@ -19,9 +19,14 @@ in `fancy-team-events/fancy-team-client`, `npm start`
 
 1. start the server:
 
-in `ancy-team-events/fancy-team-server`, `node server.js`
+in `fancy-team-events/fancy-team-server`, 
+```
+node server.js OR npm/yarn dev/prod
+
+npm/yarn dev (supports live reloading using nodemon)
+npm/yarn prod (runs node server.js)
+```
 
 localhost:3000 for the client. server on localhost:4000
 
 The [proxy](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development) is setup so you can make API requests to localhost:3000/graphql 
-
