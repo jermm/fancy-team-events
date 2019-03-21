@@ -13,4 +13,12 @@ exports.findUser = (id) => {
         }
     });
 };
+// @ts-ignore
+exports.addUser = (name, email) => {
+    return client.query(addUserQuery, [name, email]).then(res => {
+        if (res.rows.length > 0) {
+            return res.rows[0];
+        }
+    });
+};
 //# sourceMappingURL=index.js.map

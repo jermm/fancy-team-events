@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema } from 'graphql';
 
-import {findUserResolver} from "../resolvers/userResolver"
+import {userResolver, addUserResolver} from "../resolvers/userResolver"
 
 
 
@@ -25,7 +25,7 @@ const queryType = new GraphQLObjectType({
                 id: { type: new GraphQLNonNull(GraphQLInt) }
             },
             // @ts-ignore
-            resolve: findUserResolver
+            resolve: userResolver
         }
     }
 });
@@ -41,17 +41,9 @@ const mutatorType = new GraphQLObjectType( {
                 email: { type: GraphQLString }
             },
             // @ts-ignore
-            resolve: function (_, {name, email}) {
-                console.log(name);
-                // @ts-ignore
-                // return client.query(addUserQuery, [name, email]).then(res => {
-                //     if (res.rows.length > 0) {
-                //         return res.rows[0];
-                //     }
-                // })
+            resolve: addUserResolver
             }
         }
-    }
 });
 
 // @ts-ignore

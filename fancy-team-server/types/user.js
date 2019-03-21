@@ -22,7 +22,7 @@ const queryType = new graphql_1.GraphQLObjectType({
                 id: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLInt) }
             },
             // @ts-ignore
-            resolve: userResolver_1.findUserResolver
+            resolve: userResolver_1.userResolver
         }
     }
 });
@@ -37,15 +37,7 @@ const mutatorType = new graphql_1.GraphQLObjectType({
                 email: { type: graphql_1.GraphQLString }
             },
             // @ts-ignore
-            resolve: function (_, { name, email }) {
-                console.log(name);
-                // @ts-ignore
-                // return client.query(addUserQuery, [name, email]).then(res => {
-                //     if (res.rows.length > 0) {
-                //         return res.rows[0];
-                //     }
-                // })
-            }
+            resolve: userResolver_1.addUserResolver
         }
     }
 });

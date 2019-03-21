@@ -13,3 +13,12 @@ export const findUser = (id) => {
         }
     })
 };
+
+// @ts-ignore
+export const addUser = (name, email) => {
+    return client.query(addUserQuery, [name, email]).then(res => {
+        if (res.rows.length > 0) {
+            return res.rows[0];
+        }
+    })
+}
