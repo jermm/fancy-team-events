@@ -1,5 +1,4 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema } from 'graphql';
-import {userResolver, addUserResolver} from "../resolvers/userResolver"
+import { GraphQLObjectType, GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema } from 'graphql';
 
 // Define the User type
 const userType = new GraphQLObjectType({
@@ -20,6 +19,9 @@ const queryType = new GraphQLObjectType({
             args: {
                 id: { type: new GraphQLNonNull(GraphQLInt) }
             }
+        },
+        users: {
+            type: new GraphQLList(userType)
         }
     }
 });
@@ -33,10 +35,9 @@ const mutatorType = new GraphQLObjectType( {
             args: {
                 name: { type: GraphQLString },
                 email: { type: GraphQLString }
-            },
-            resolve: addUserResolver
             }
         }
+    }
 });
 
 

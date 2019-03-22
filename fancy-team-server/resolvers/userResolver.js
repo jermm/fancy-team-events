@@ -7,6 +7,11 @@ exports.userResolver = {
             resolve(_, inputObject) {
                 return User_1.findUser(inputObject.id);
             }
+        },
+        users: {
+            resolve(_) {
+                return User_1.findUsers();
+            }
         }
     },
     Mutation: {

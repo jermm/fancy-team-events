@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const graphql_1 = require("graphql");
-const userResolver_1 = require("../resolvers/userResolver");
 // Define the User type
 const userType = new graphql_1.GraphQLObjectType({
     name: 'User',
@@ -20,6 +19,9 @@ const queryType = new graphql_1.GraphQLObjectType({
             args: {
                 id: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLInt) }
             }
+        },
+        users: {
+            type: new graphql_1.GraphQLList(userType)
         }
     }
 });
@@ -31,8 +33,7 @@ const mutatorType = new graphql_1.GraphQLObjectType({
             args: {
                 name: { type: graphql_1.GraphQLString },
                 email: { type: graphql_1.GraphQLString }
-            },
-            resolve: userResolver_1.addUserResolver
+            }
         }
     }
 });
