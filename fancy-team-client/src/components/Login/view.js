@@ -1,34 +1,34 @@
 import React, {Component} from 'react';
+import Config from '../../config';
+import './login.scss';
+import {connect} from 'react-redux';
 
 class Login extends Component{
-    constructor(props){
-        super(props);
-        this.state = {userName:'' , email:''};
-        this.userNameChange = this.userNameChange.bind(this);
-        this.emailOnChange = this.emailOnChange.bind(this);
-    }
 
-    emailOnChange(e){
-      console.log(e);
-    }
+  loginButtonClick(e){
+    window.location = Config.clientRedirection;
+  }
 
-    userNameChange(e){
-      console.log(e);
-    }
-
-    render() {
-     return (
-         <>
+  // We need to set state indicating that the user is logged in.
+  // So that In case the user visits the login page we automatically redirect to the /events page
+  render(){
+    return (
+        <>
+          <section id='Empty-Color' />
+          <section id='Login'>
             <header>
-                I am the logo
+              I am the logo
             </header>
-            <div>
-                <input type='text' id='userName' onChange={this.userNameChange} />
-                <input type ='text' id ='Email' onchange={this.emailOnChange} />
-            </div>
-         </>
-     )   
-    }
+            <button className='LoginBtn' onClick={this.loginButtonClick}>Login</button>
+          </section>
+        </>
+    );
+  }
+
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  // Read the state variables here
+});
+
+export default connect(mapStateToProps)(Login);
