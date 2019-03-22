@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
+import {UserList} from "./UserList";
 
 class App extends Component {
     render() {
@@ -30,6 +31,7 @@ class App extends Component {
                 <button>Make new event</button>
                 {/*take you to create event page to / */}
 
+                <UserList />
 
                 <h1>create a new event!</h1>
                 <EventName callback={(event) => {console.log(event.target.value)}} placeholderForEntry="fancy party" />
