@@ -1,7 +1,34 @@
+import {findEvent, addEvent, eventObject} from '../Services/Event'
 
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
-const { Client } = require('pg');
-const client = new Client();
-const cors = require('cors');
+interface inputForEvent {
+    id: Number
+}
+
+interface inputForAddingEvent {
+    createdById: Number,
+    type: String,
+    date: String,
+    locationName: String,
+    description: String,
+    deadline: String
+}
+
+export const eventResolver = {
+    Query: {
+        event: {
+            resolve(_: any, inputObject: inputForEvent): Promise<eventObject> {
+                return findEvent(inputObject.id);
+            }
+        }
+
+    },
+    Mutation: {
+        addEvent: {
+            resolve(_: any, inputObject: inputForAddingEvent ): any {
+                return addEvent(inputObject.createdById, inputObject.type,
+                    inputObject.date, inputObject.locationName, inputObject.description, inputObject.deadline);
+            }
+        }
+    }
+
+};

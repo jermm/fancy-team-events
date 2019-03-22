@@ -1,22 +1,54 @@
 
-export default `
+import {GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString} from "graphql";
 
-type Event {
-    id: ID!
-    type: String
-    date: Date
-    createdBy: User
-    startTime: String
-    endTime: String
-    location: String
-    description: String
-    deadlineDate: Date
-}
+const EventType: GraphQLObjectType = new GraphQLObjectType({
+    name: 'Event',
+    fields: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+        type: { type: GraphQLString },
+        date: { type: GraphQLString },
+        startTime: { type: GraphQLString },
+        endTime: { type: GraphQLString },
+        location: { type: GraphQLString },
+        description: { type: GraphQLString },
+        deadlineDtate: { type: GraphQLString }
+    }
+});
 
-type Query {
-    event(id: ID!, userId: ID): Event
-    events(userId: ID!): [Event]
-}
- 
-`;
+const EventQuery: GraphQLObjectType = new GraphQLObjectType({
+    name: 'Query',
+    fields: {
+        event: {
+            type: EventType,
+            // `args` describes the arguments that the `user` query accepts
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLInt) },
+                userId: { type: GraphQLInt }
+            }
+        }
+    }
+});
+
+const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
+    name: 'Mutation',
+    fields: {
+        addEvent: {
+            type: EventType,
+            args: {
+                type: { type: GraphQLString },
+                date: { type: GraphQLString },
+                createdBy: { type: new GraphQLNonNull(GraphQLInt) },
+                startTime: { type: GraphQLString },
+                endTime: { type: GraphQLString },
+                location: { type: GraphQLString },
+                description: { type: GraphQLString },
+                deadlineDtate: { type: GraphQLString }
+            }
+        }
+    }
+});
+
+export const eventSchema: GraphQLSchema = new GraphQLSchema({query: EventQuery, mutation: EventMutation});
+
+
 

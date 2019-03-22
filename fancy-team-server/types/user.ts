@@ -1,13 +1,17 @@
-import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema } from 'graphql';
-import {userResolver, addUserResolver} from "../resolvers/userResolver"
+
+import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema, GraphQLList } from 'graphql';
+//import {userResolver} from "../resolvers/userResolver"
 
 // Define the User type
-const userType = new GraphQLObjectType({
+const userType: GraphQLObjectType = new GraphQLObjectType({
     name: 'User',
     fields: {
         id: { type: new GraphQLNonNull(GraphQLInt) },
         name: { type: GraphQLString },
-        email: { type: GraphQLString }
+        email: { type: GraphQLString },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+       // events: { type: new GraphQLList(EventType) }
     }
 });
 
@@ -25,6 +29,7 @@ const queryType = new GraphQLObjectType({
 });
 
 
+
 const mutatorType = new GraphQLObjectType( {
     name: 'Mutation',
     fields: {
@@ -33,12 +38,12 @@ const mutatorType = new GraphQLObjectType( {
             args: {
                 name: { type: GraphQLString },
                 email: { type: GraphQLString }
-            },
-            resolve: addUserResolver
+            }
+            //resolve: addUserResolver
             }
         }
 });
 
 
-// @ts-ignore
+
 export const userSchema: GraphQLSchema = new GraphQLSchema({query: queryType, mutation: mutatorType});
