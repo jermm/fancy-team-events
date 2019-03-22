@@ -48,7 +48,7 @@ const mutatorType = new GraphQLObjectType( {
             }
         }
     }
-});
+);
 
 
 
