@@ -1,0 +1,18 @@
+{
+  "compileOnSave":true,
+  "compilerOptions":{
+    "target":"ES2018",
+    "module":"commonjs",
+    "rootDir":"./",
+    "inlineSources": true,
+    "sourceMap":true,
+    "strict":true,
+    "resolveJsonModule":true,
+    "esModuleInterop":true,
+    "preserveSymlinks":true
+  },
+  "exclude":[
+    "./node_modules",
+    "./dist"
+  ]
+}
