@@ -8,14 +8,12 @@ class Login extends Component{
         this.emailOnChange = this.emailOnChange.bind(this);
     }
 
-    userNameChange(e){
-        this.setState({
-            userName = e.target.value;
-        });
+    emailOnChange(e){
+      console.log(e);
     }
 
-    emailOnChange(e){
-
+    userNameChange(e){
+      console.log(e);
     }
 
     render() {
@@ -27,7 +25,6 @@ class Login extends Component{
             <div>
                 <input type='text' id='userName' onChange={this.userNameChange} />
                 <input type ='text' id ='Email' onchange={this.emailOnChange} />
-                <button id='Login' value='Login' />
             </div>
          </>
      )   
