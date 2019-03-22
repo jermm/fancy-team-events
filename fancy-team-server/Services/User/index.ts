@@ -22,13 +22,15 @@ export const findUser = (id: Number) => {
     })
 };
 
-export const findUsers = () => {
+export const findUsers = function (): Promise<[userObject]> {
     return client.query(getAllUserQuery).then(res => {
-        return res.rows;
-    }).catch(function (err) {
-        console.log(err);
+        let userArray: [userObject];
+        // @ts-ignore
+        userArray = res.rows;
+        return userArray
     })
-}
+};
+
 
 export const addUser = (name: String, email: String) => {
     return client.query(addUserQuery, [name, email]).then(res => {

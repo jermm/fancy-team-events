@@ -18,7 +18,7 @@ export const userResolver = {
             }
         },
         users: {
-            resolve(_: any): any {
+            resolve(_: any): Promise<[userObject]> {
                 return findUsers();
             }
         }

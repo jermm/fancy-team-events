@@ -13,11 +13,12 @@ exports.findUser = (id) => {
         }
     });
 };
-exports.findUsers = () => {
+exports.findUsers = function () {
     return client.query(getAllUserQuery).then(res => {
-        return res.rows;
-    }).catch(function (err) {
-        console.log(err);
+        let userArray;
+        // @ts-ignore
+        userArray = res.rows;
+        return userArray;
     });
 };
 exports.addUser = (name, email) => {
