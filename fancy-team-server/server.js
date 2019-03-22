@@ -7,29 +7,31 @@ require("typescript-require");
 // require("types/user").schema2
 var schemas = require('./types/index').default;
 
+//var schemas =  require('./schemas');
+
 
 const { Client } = require('pg');
 const client = new Client();
 
 // Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
-  type user {
-    id: Int!
-    name: String
-    email: String
-  
-  }
-
-  type Query {
-    users: [user]
-    user(id: Int): user
-  }
-  
-  type Mutation {
-    addUser(name: String, email: String): user
-  }
-  
-`);
+// var schema = buildSchema(`
+//   type user {
+//     id: Int!
+//     name: String
+//     email: String
+//
+//   }
+//
+//   type Query {
+//     users: [user]
+//     user(id: Int): user
+//   }
+//
+//   type Mutation {
+//     addUser(name: String, email: String): user
+//   }
+//
+// `);
 
 
 // Define the User type
