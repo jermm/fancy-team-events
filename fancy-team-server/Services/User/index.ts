@@ -22,12 +22,9 @@ export const findUser = (id: Number) => {
     })
 };
 
-export const findUsers = function (): Promise<[userObject]> {
+export const findUsers = function (): Promise<userObject[]> {
     return client.query(getAllUserQuery).then(res => {
-        let userArray: [userObject];
-        // @ts-ignore
-        userArray = res.rows;
-        return userArray
+        return res.rows;
     })
 };
 

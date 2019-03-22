@@ -15,10 +15,7 @@ exports.findUser = (id) => {
 };
 exports.findUsers = function () {
     return client.query(getAllUserQuery).then(res => {
-        let userArray;
-        // @ts-ignore
-        userArray = res.rows;
-        return userArray;
+        return res.rows;
     });
 };
 exports.addUser = (name, email) => {
