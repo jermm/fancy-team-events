@@ -1,9 +1,7 @@
-import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-class Handle404 extends Component{
-
-  render(){
+function Handle404() {
     return (
         <>
           <div>
@@ -11,9 +9,7 @@ class Handle404 extends Component{
           </div>
           <Link to='/'>Home</Link>
         </>
-    )
-  }
-
+    );
 }
 
 export default Handle404;
