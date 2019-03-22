@@ -1,8 +1,21 @@
 "use strict";
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
-const { Client } = require('pg');
-const client = new Client();
-const cors = require('cors');
+Object.defineProperty(exports, "__esModule", { value: true });
+const Event_1 = require("../Services/Event");
+exports.eventResolver = {
+    Query: {
+        event: {
+            resolve(_, inputObject) {
+                return Event_1.findEvent(inputObject.id);
+            }
+        }
+    },
+    Mutation: {
+        addEvent: {
+            resolve(_, inputObject) {
+                console.log(inputObject);
+                return Event_1.addEvent(inputObject.createdBy, inputObject.type, inputObject.date, inputObject.locationName, inputObject.description, inputObject.deadline);
+            }
+        }
+    }
+};
 //# sourceMappingURL=eventResolver.js.map

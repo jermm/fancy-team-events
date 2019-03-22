@@ -5,7 +5,7 @@ interface inputForEvent {
 }
 
 interface inputForAddingEvent {
-    createdById: Number,
+    createdBy: Number,
     type: String,
     date: String,
     locationName: String,
@@ -25,7 +25,8 @@ export const eventResolver = {
     Mutation: {
         addEvent: {
             resolve(_: any, inputObject: inputForAddingEvent ): any {
-                return addEvent(inputObject.createdById, inputObject.type,
+                console.log(inputObject);
+                return addEvent(inputObject.createdBy, inputObject.type,
                     inputObject.date, inputObject.locationName, inputObject.description, inputObject.deadline);
             }
         }

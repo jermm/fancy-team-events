@@ -1,5 +1,5 @@
 
-import {findUser, addUser, userObject} from '../Services/User'
+import {findUser, addUser, findUsers, userObject} from '../Services/User'
 
 interface inputForUser {
     id: Number
@@ -15,6 +15,11 @@ export const userResolver = {
         user: {
             resolve(_: any, inputObject: inputForUser): Promise<userObject> {
                 return findUser(inputObject.id);
+            }
+        },
+        users: {
+            resolve(_: any): Promise<[userObject]> {
+                return findUsers();
             }
         }
 
