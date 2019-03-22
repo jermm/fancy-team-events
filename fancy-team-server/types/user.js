@@ -37,7 +37,6 @@ const mutatorType = new graphql_1.GraphQLObjectType({
                 name: { type: graphql_1.GraphQLString },
                 email: { type: graphql_1.GraphQLString }
             }
-            //resolve: addUserResolver
         }
     }
 });

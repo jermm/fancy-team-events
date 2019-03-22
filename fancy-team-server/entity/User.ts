@@ -1,12 +1,15 @@
-import {Column, PrimaryGeneratedColumn, Entity} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable} from "typeorm";
 
 @Entity()
-export class Category {
+export class User {
 
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
     name: string;
+
+    @Column()
+    email: string;
 
 }

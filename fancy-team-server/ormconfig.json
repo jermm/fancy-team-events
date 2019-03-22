@@ -3,12 +3,11 @@
   "host": "localhost",
   "port": 5432,
   "username": "fancyevents",
-  "password": "Welcome1",
   "database": "fancyevents",
   "synchronize": true,
   "logging": false,
   "entities": [
-    "src/entity/**/*.ts"
+    "./entity/**/*.ts"
   ],
   "migrations": [
     "src/migration/**/*.ts"
