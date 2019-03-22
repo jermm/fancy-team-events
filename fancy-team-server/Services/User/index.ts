@@ -5,8 +5,15 @@ client.connect();
 const getUserQuery = "select id, email, name from users where id=$1";
 const addUserQuery = "insert into users (name, email) values ($1, $2) RETURNING id, name, email;";
 
-// @ts-ignore
-export const findUser = (id) => {
+
+export interface userObject {
+    id: Number,
+    email: String,
+    name: String
+
+}
+
+export const findUser = (id: Number) => {
     return client.query(getUserQuery, [id]).then(res => {
         if (res.rows.length > 0) {
             return res.rows[0];
@@ -14,11 +21,10 @@ export const findUser = (id) => {
     })
 };
 
-// @ts-ignore
-export const addUser = (name, email) => {
+export const addUser = (name: String, email: String) => {
     return client.query(addUserQuery, [name, email]).then(res => {
         if (res.rows.length > 0) {
             return res.rows[0];
         }
     })
-}
+};

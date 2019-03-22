@@ -6,6 +6,8 @@
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
+    "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.9.0",
     "pg-format": "^1.0.4",
     "typescript": "^3.3.4000",

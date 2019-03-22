@@ -1,9 +1,10 @@
-import { mergeTypes } from "merge-graphql-schemas";
-
+import   { mergeSchemas} from 'graphql-tools';
 import Event from "./event";
-import User from "./user";
+import {userSchema} from "./user";
 import Carpool from "./carpool"
+import {userResolver} from "../resolvers/userResolver";
 
-const typeDefs = [User, Event, Carpool];
+const typeDefs = [userSchema];
+const resolvers = [userResolver];
 
-export default mergeTypes(typeDefs, { all: true });
+export default mergeSchemas({schemas: typeDefs, resolvers: resolvers});

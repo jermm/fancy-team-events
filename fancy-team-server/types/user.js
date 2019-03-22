@@ -11,7 +11,6 @@ const userType = new graphql_1.GraphQLObjectType({
         email: { type: graphql_1.GraphQLString }
     }
 });
-// @ts-ignore
 const queryType = new graphql_1.GraphQLObjectType({
     name: 'Query',
     fields: {
@@ -20,13 +19,10 @@ const queryType = new graphql_1.GraphQLObjectType({
             // `args` describes the arguments that the `user` query accepts
             args: {
                 id: { type: new graphql_1.GraphQLNonNull(graphql_1.GraphQLInt) }
-            },
-            // @ts-ignore
-            resolve: userResolver_1.userResolver
+            }
         }
     }
 });
-// @ts-ignore
 const mutatorType = new graphql_1.GraphQLObjectType({
     name: 'Mutation',
     fields: {
@@ -36,7 +32,6 @@ const mutatorType = new graphql_1.GraphQLObjectType({
                 name: { type: graphql_1.GraphQLString },
                 email: { type: graphql_1.GraphQLString }
             },
-            // @ts-ignore
             resolve: userResolver_1.addUserResolver
         }
     }
