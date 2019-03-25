@@ -1,18 +1,42 @@
+import {GraphQLInt, GraphQLList, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString} from "graphql";
 
-export default `
 
-type CarpoolDriver {
-    id: ID!
-    driver: User
-    event: Event
-    noOfPassengers: Int
-    passengers: [User]  
-}
+const CarpoolDriverType: GraphQLObjectType = new GraphQLObjectType({
+    name: 'CarpoolDriver',
+    fields: {
+        id: { type: new GraphQLNonNull(GraphQLInt) },
+        driver: { type: GraphQLString },
+        eventId: { type: new GraphQLNonNull(GraphQLInt) },
+        noOfPassengers: { type: GraphQLInt },
+        //passengers: { type: new GraphQLList(UserType) }
+    }
+});
 
-type Query {
-  carpoolDrivers(eventId: ID!): [CarpoolDriver]
-}
+const CarpoolDriverQuery: GraphQLObjectType = new GraphQLObjectType({
+    name: 'Query',
+    fields: {
+        user: {
+            type: CarpoolDriverType,
+            // `args` describes the arguments that the `user` query accepts
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLInt) }
+            }
+        }
+    }
+});
+const CarpoolDriverMutation: GraphQLObjectType = new GraphQLObjectType( {
+    name: 'Mutation',
+    fields: {
+        addCarpoolDriver: {
+            type: CarpoolDriverType,
+            args: {
+                driverId: { type: new GraphQLNonNull(GraphQLInt) },
+                eventId: { type: new GraphQLNonNull(GraphQLInt) },
+                noOfPassengers: { type: GraphQLInt }
+            }
 
-type Mutation {
-  addCarpoolDriver(userId: ID) : CarpoolDriver
-`;
+        }
+    }
+});
+
+export const carpoolSchema: GraphQLSchema = new GraphQLSchema({query: CarpoolDriverQuery, mutation: CarpoolDriverMutation});
