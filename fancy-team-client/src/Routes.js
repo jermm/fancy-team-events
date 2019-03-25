@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import App from './App';
-import Login from './components/Login/view'
+import Login from './components/Login/view';
 import Handle404 from './components/404/view';
 
 import store from './Redux/store';
