@@ -14,6 +14,7 @@ function Routes(){
           <Switch>
               <Route exact path='/' component={ App } />
               <Route exact path='/login' component={ Login } />
+              <Route exact path='/events/create' component={ Login } />
               <Route component={ Handle404 } />
           </Switch>
           </Router>
