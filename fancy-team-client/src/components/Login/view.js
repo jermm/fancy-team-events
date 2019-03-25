@@ -1,34 +1,40 @@
-import React, {Component} from 'react';
+import { withAuth } from '@okta/okta-react';
+import React, { Component } from 'react';
+import './login.scss';
+import { checkAuthentication } from '../../util/helpers';
 
-class Login extends Component{
-    constructor(props){
+export default withAuth(class Login extends Component {
+    constructor(props) {
         super(props);
-        this.state = {userName:'' , email:''};
-        this.userNameChange = this.userNameChange.bind(this);
-        this.emailOnChange = this.emailOnChange.bind(this);
+        debugger;
+        this.state = { authenticated: null, userinfo: null };
+        this.checkAuthentication = checkAuthentication.bind(this);
+        this.login = this.login.bind(this);
     }
 
-    emailOnChange(e){
-      console.log(e);
+    async componentDidMount() {
+        this.checkAuthentication();
     }
 
-    userNameChange(e){
-      console.log(e);
+    async componentDidUpdate() {
+        this.checkAuthentication();
+    }
+
+    async login() {
+        this.props.auth.login('/');
     }
 
     render() {
-     return (
-         <>
+        return (
+   <>
+            <section id='Empty-Color' />
+            <section id='Login'>
             <header>
-                I am the logo
-            </header>
-            <div>
-                <input type='text' id='userName' onChange={this.userNameChange} />
-                <input type ='text' id ='Email' onchange={this.emailOnChange} />
-            </div>
-         </>
-     )   
+            I am the logo
+        </header>
+        <button className='LoginBtn' onClick={this.login}>Login</button>
+            </section>
+</>
+    );
     }
-}
-
-export default Login;
+});
