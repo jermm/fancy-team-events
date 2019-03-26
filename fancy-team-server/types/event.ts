@@ -5,6 +5,8 @@ const EventType: GraphQLObjectType = new GraphQLObjectType({
     name: 'Event',
     fields: {
         id: { type: new GraphQLNonNull(GraphQLInt) },
+        title: { type: GraphQLString },
+        createdBy: {type: GraphQLInt},
         type: { type: GraphQLString },
         date: { type: GraphQLString },
         startTime: { type: GraphQLString },
@@ -36,13 +38,14 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
             type: EventType,
             args: {
                 type: { type: GraphQLString },
+                title: { type: GraphQLString },
                 date: { type: GraphQLString },
                 createdBy: { type: new GraphQLNonNull(GraphQLInt) },
                 startTime: { type: GraphQLString },
                 endTime: { type: GraphQLString },
                 location: { type: GraphQLString },
                 description: { type: GraphQLString },
-                deadlineDtate: { type: GraphQLString }
+                deadlineDate: { type: GraphQLString }
             }
         }
     }
