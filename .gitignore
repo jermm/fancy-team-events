@@ -64,6 +64,8 @@ typings/
 
 .idea/
 
+fancy-team-server/*.js
+fancy-team-server/*.js.map
 fancy-team-server/**/*.js
 fancy-team-server/**/*.js.map
 
