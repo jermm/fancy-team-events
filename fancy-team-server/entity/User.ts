@@ -9,30 +9,34 @@ import {CarpoolPassenger} from "./CarpoolPassenger";
 export class User {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
-    @Column()
+    @Column('text', {nullable: true})
     firstName?: string;
 
-    @Column()
-    lastName: string;
+    @Column('text', {nullable: true})
+    lastName?: string;
 
-    @Column()
-    email: string;
+    @Column('text', {nullable: true})
+    email?: string;
 
-    @Column()
-    oAuthId: string;
+    @Column('text', {nullable: true})
+    oAuthId?: string;
 
+    @Column({nullable: true})
     @OneToMany(() => Carpool, carpool => carpool.driver)
-    carpools: Carpool[];
+    carpools?: Carpool[];
 
+    @Column({nullable: true})
     @OneToMany(() => Event, (event: Event) => event.createdBy)
-    events: Event[];
+    events?: Event[];
 
+    @Column({nullable: true})
     @OneToMany(() => UserEventStatus, (userEventStatus: UserEventStatus) => userEventStatus.user)
-    userEventStatuses: UserEventStatus[];
+    userEventStatuses?: UserEventStatus[];
 
+    @Column({nullable: true})
     @OneToMany(() => CarpoolPassenger, (carpoolPassenger: CarpoolPassenger) => carpoolPassenger.user)
-    carpoolPassengers: CarpoolPassenger[]
+    carpoolPassengers?: CarpoolPassenger[]
 
 }

@@ -21,11 +21,11 @@ exports.findUsers = function () {
     const userRepository = typeorm_1.getConnection().getRepository(User_1.User);
     return userRepository.find();
 };
-exports.addUser = (name, email) => {
+exports.addUser = (firstName, email) => {
     const userRepository = typeorm_1.getConnection().getRepository(User_1.User);
     const user = new User_1.User();
     user.email = email;
-    user.name = name;
+    user.firstName = firstName;
     return userRepository.save(user).then(() => {
         return userRepository.findOne({ email: email });
     });

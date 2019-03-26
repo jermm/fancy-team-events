@@ -1,19 +1,20 @@
 
 import {findUser, addUser, findUsers, userObject} from '../Services/User'
+import {User} from "../entity/User";
 
 interface inputForUser {
-    id: Number
+    id: number
 }
 
 interface inputForAddingUser {
-    name: String,
-    email: String
+    name: string,
+    email: string
 }
 
 export const userResolver = {
     Query: {
         user: {
-            resolve(_: any, inputObject: inputForUser): Promise<userObject> {
+            resolve(_: any, inputObject: inputForUser): Promise<User> {
                 return findUser(inputObject.id);
             }
         },

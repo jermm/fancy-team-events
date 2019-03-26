@@ -6,11 +6,13 @@ import {User} from "./User";
 export class CarpoolPassenger {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
+    @Column({nullable: true})
     @ManyToOne(() => User, (user: User) => user.carpoolPassengers)
     user?: User;
 
+    @Column({nullable: true})
     @ManyToOne(() => Carpool, (carpool: Carpool) => carpool.carPoolPassengers)
-    carpool: Carpool;
+    carpool?: Carpool;
 }

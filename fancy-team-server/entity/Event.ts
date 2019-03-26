@@ -8,46 +8,51 @@ import {Carpool} from "./Carpool";
 export class Event {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
+    @Column({nullable: true})
     @ManyToOne(() => User, (user: User) => user.events)
     createdBy?: User;
 
-    @Column()
+    @Column('text', {nullable: true})
     createdAt?: string;
 
-    @Column()
+    @Column('text', {nullable: true})
     title?: string;
 
-    @Column()
-    type: string;
+    @Column('text', {nullable: true})
+    type?: string;
 
-    @Column()
-    description: string;
+    @Column('text', {nullable: true})
+    description?: string;
 
-    @Column()
-    eventDate: string;
+    @Column('text', {nullable: true})
+    eventDate?: string;
 
-    @Column()
-    startTime: string;
+    @Column('text', {nullable: true})
+    startTime?: string;
 
-    @Column()
-    endTime: string;
+    @Column('text', {nullable: true})
+    endTime?: string;
 
-    @Column()
-    locationName: string;
+    @Column('text', {nullable: true})
+    locationName?: string;
 
-    @Column()
-    locationAddress: string;
+    @Column('text', {nullable: true})
+    locationAddress?: string;
 
-    @Column()
-    deadlineDate: string;
+    @Column('text', {nullable: true})
+    deadlineDate?: string;
 
-    @OneToMany(() => UserEventStatus, (userEventStatus: UserEventStatus) => userEventStatus.event)
-    userEventStatuses: UserEventStatus[]
+    @Column({nullable: true})
+    @OneToMany(() => UserEventStatus, (userEventStatus: UserEventStatus) => userEventStatus.event,  {
+        cascade: true,
+    })
+    userEventStatuses?: UserEventStatus[];
 
+    @Column({nullable: true})
     @ManyToMany(type => Carpool, carpool => carpool.event)
     @JoinTable()
-    carpoolDrivers: Carpool[];
+    carpoolDrivers?: Carpool[];
 
 }

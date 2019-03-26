@@ -1,22 +1,24 @@
 import {findEvent, addEvent, eventObject} from '../Services/Event'
 
 interface inputForEvent {
-    id: Number
+    id: number
 }
 
 interface inputForAddingEvent {
-    createdBy: Number,
-    type: String,
-    date: String,
-    locationName: String,
-    description: String,
-    deadline: String
+    createdBy: number,
+    type: string,
+    date: string,
+    startTime: string,
+    endTime: string,
+    locationName: string,
+    description: string,
+    deadline: string
 }
 
 export const eventResolver = {
     Query: {
         event: {
-            resolve(_: any, inputObject: inputForEvent): Promise<eventObject> {
+            resolve(_: any, inputObject: inputForEvent): Promise<any> {
                 return findEvent(inputObject.id);
             }
         }
@@ -27,7 +29,7 @@ export const eventResolver = {
             resolve(_: any, inputObject: inputForAddingEvent ): any {
                 console.log(inputObject);
                 return addEvent(inputObject.createdBy, inputObject.type,
-                    inputObject.date, inputObject.locationName, inputObject.description, inputObject.deadline);
+                    inputObject.date, inputObject.startTime, inputObject.endTime, inputObject.locationName, inputObject.description, inputObject.deadline);
             }
         }
     }

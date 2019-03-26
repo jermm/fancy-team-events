@@ -13,7 +13,7 @@ exports.eventResolver = {
         addEvent: {
             resolve(_, inputObject) {
                 console.log(inputObject);
-                return Event_1.addEvent(inputObject.createdBy, inputObject.type, inputObject.date, inputObject.locationName, inputObject.description, inputObject.deadline);
+                return Event_1.addEvent(inputObject.createdBy, inputObject.type, inputObject.date, inputObject.startTime, inputObject.endTime, inputObject.locationName, inputObject.description, inputObject.deadline);
             }
         }
     }

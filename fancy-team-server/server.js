@@ -1,17 +1,22 @@
-var User =  require("./entity/User").User;
+// import {Carpool} from "./entity/Carpool";
+// import {CarpoolPassenger} from "./entity/CarpoolPassenger";
+// import {UserEventStatus} from "./entity/UserEventStatus";
+require("reflect-metadata");
 
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var schemas = require('./types/index').default;
 
-require("reflect-metadata");
 var createConnection = require("typeorm").createConnection;
 
 
-// import {User} from "./entity/User"
+var User =  require("./entity/User").User;
+var Event =  require("./entity/Event").Event;
+var Carpool =  require("./entity/Carpool").Carpool;
+var CarpoolPassenger =  require("./entity/CarpoolPassenger").CarpoolPassenger;
+var UserEventStatus =  require("./entity/UserEventStatus").UserEventStatus;
 
-// const { Client } = require('pg');
-// const client = new Client();
+
 var app = express();
 app.use('/graphql', graphqlHTTP({
     schema: schemas,
@@ -22,6 +27,10 @@ createConnection({
     type: "postgres",
     entities: [
         User
+     //   Event
+       //  Carpool,
+       // CarpoolPassenger
+       // // UserEventStatus,
     ],
     synchronize: true,
 }).then(() => {

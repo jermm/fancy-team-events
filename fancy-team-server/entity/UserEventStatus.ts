@@ -8,20 +8,22 @@ import {Event} from "./Event";
 export class UserEventStatus {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
+    @Column({nullable: true})
     @ManyToOne(() => User, (user: User) => user.userEventStatuses)
     user?: User;
 
+    @Column({nullable: true})
     @ManyToOne(() => Event, (event: Event) => event.userEventStatuses)
-    event: Event;
+    event?: Event;
 
-    @Column()
-    roleType: string;
+    @Column({nullable: true})
+    roleType?: string;
 
-    @Column()
-    isAttending: boolean;
+    @Column({nullable: true})
+    isAttending?: boolean;
 
-    @Column()
-    tShirtSize: string;
+    @Column({nullable: true})
+    tShirtSize?: string;
 }

@@ -11,18 +11,23 @@ export class Carpool {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column({nullable: true})
     @ManyToOne(() => User, (user: User) => user.carpools)
     driver?: User;
 
+    @Column({nullable: true})
     @ManyToMany(type => Event, event => event.carpoolDrivers)
-    event: Event;
+    event?: Event;
 
+    @Column({nullable: true})
     @Column()
-    noOfSeats: number;
+    noOfSeats?: number;
 
+    @Column({nullable: true})
     @Column()
-    locationName: string;
+    locationName?: string;
 
+    @Column({nullable: true})
     @OneToMany(() => CarpoolPassenger, (carpoolPassenger: CarpoolPassenger) => carpoolPassenger.carpool)
-    carPoolPassengers: CarpoolPassenger[];
+    carPoolPassengers?: CarpoolPassenger[];
 }
