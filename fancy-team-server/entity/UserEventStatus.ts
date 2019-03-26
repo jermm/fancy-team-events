@@ -1,8 +1,4 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne} from "typeorm";
-import {User} from "./User";
-import {Event} from "./Event";
-
-
 
 @Entity()
 export class UserEventStatus {
@@ -11,12 +7,13 @@ export class UserEventStatus {
     id?: number;
 
     @Column("integer", {nullable: true})
-    @ManyToOne(type => User, (user: User) => user.userEventStatuses)
-    user?: User;
+    user?: number;
 
     @Column('integer', {nullable: true})
-    @ManyToOne(() => Event, (event: Event) => event.userEventStatuses)
-    event?: Event;
+    event?: number;
+
+    @Column('text', {nullable: true})
+    email?: string;
 
     @Column('text', {nullable: true})
     roleType?: string;

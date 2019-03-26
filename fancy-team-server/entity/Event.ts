@@ -1,7 +1,4 @@
 import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany} from "typeorm";
-import {User} from "./User";
-import {UserEventStatus} from "./UserEventStatus";
-import {Carpool} from "./Carpool";
 
 
 @Entity()
@@ -11,8 +8,7 @@ export class Event {
     id?: number;
 
     @Column('integer',{nullable: true})
-    @ManyToOne(() => User, (user: User) => user.events)
-    createdBy?: User;
+    createdBy?: number;
 
     @Column('text', {nullable: true})
     createdAt?: string;
@@ -43,16 +39,5 @@ export class Event {
 
     @Column('text', {nullable: true})
     deadlineDate?: string;
-
-    @Column({type:'integer', nullable: true, array: true})
-    @OneToMany(() => UserEventStatus, (userEventStatus: UserEventStatus) => userEventStatus.event,  {
-        cascade: true,
-    })
-    userEventStatuses?: UserEventStatus[];
-
-    @Column({type: 'integer',nullable: true, array: true})
-    @ManyToMany(type => Carpool, carpool => carpool.event)
-    @JoinTable()
-    carpoolDrivers?: Carpool[];
 
 }

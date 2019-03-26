@@ -7,7 +7,6 @@ import { GraphQLRoutes } from './routes';
 import {User} from "./entity/User";
 import {Event} from "./entity/Event";
 import {Carpool} from "./entity/Carpool";
-import {CarpoolPassenger} from "./entity/CarpoolPassenger";
 import {UserEventStatus} from "./entity/UserEventStatus";
 import {createConnection} from "typeorm";
 
@@ -20,7 +19,6 @@ createConnection({
         User,
         Event,
         Carpool,
-        CarpoolPassenger,
         UserEventStatus,
     ],
     synchronize: true,
