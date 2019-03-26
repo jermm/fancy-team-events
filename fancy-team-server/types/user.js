@@ -40,6 +40,5 @@ const mutatorType = new graphql_1.GraphQLObjectType({
         }
     }
 });
-;
 exports.userSchema = new graphql_1.GraphQLSchema({ query: queryType, mutation: mutatorType });
 //# sourceMappingURL=user.js.map

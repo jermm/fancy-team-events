@@ -64,5 +64,7 @@ typings/
 
 .idea/
 
+fancy-team-server/**/*.js
+fancy-team-server/**/*.js.map
 
 package-lock.json
