@@ -70,16 +70,18 @@ export default withAuth(class Events extends Component {
                     <table className='table'>
                         <thead>
                         <tr>
-                            <th>Date</th><th>Event</th>
+                            <th>Event Date</th><th>Event Description</th><th>LocationName</th><th>Organizated By</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {/* {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.date}</td><td>{event.text}</td></tr>)} */}
+                        {/* {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.eventDate}</td><td>{event.description}</td></tr>)} */}
                         <tr>
-                        <td>5-13-19</td><td>Bowling after work</td>
+                            <td>5-13-19</td>
+                            <td><Link to="/event/edit">Bowling after work</Link></td>
                         </tr>
                         <tr>
-                        <td>6-18-19</td><td>Happy hour</td>
+                            <td>6-18-19</td>
+                            <td><Link to="/event/view">Happy Hour</Link></td>
                         </tr>
                         </tbody>
                     </table>
