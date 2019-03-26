@@ -1,6 +1,6 @@
 'use strict';
-import express from 'express';
-import cors from 'cors';
+import * as express from 'express';
+import * as cors from 'cors';
 // Import all routes
 import { GraphQLRoutes } from './routes';
 const app = express();

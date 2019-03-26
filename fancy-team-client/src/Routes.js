@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import App from './App';
 
 import Login from './components/Login/view'
-import Profile from './components/Profile/view';
-import Event from './components/Event/event';
+// import Profile from './components/Profile/view';
+import Event from './components/Events/Events';
 import Handle404 from './components/404/view';
 import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import config from './config';
@@ -20,13 +20,13 @@ function Routes(){
                   client_id={config.oidc.clientId}
                   redirect_uri={config.oidc.redirectUri}
               >
-
+            <Switch>
               <Route exact path='/' component={ App } />
               <Route exact path='/login' component={ Login } />
-              <Route path="/implicit/callback" component={ ImplicitCallback } />
-              <SecureRoute path="/profile" component= { Profile } />
-              <SecureRoute path="/event" component= { Event } />
+              <Route exact path="/implicit/callback" component={ ImplicitCallback } />
+              <Route exact path="/event" component= { Event } />
               <Route component={ Handle404 } />
+            </Switch>
               </Security>
           </Router>
         </Provider>

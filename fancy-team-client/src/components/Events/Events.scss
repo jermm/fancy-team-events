@@ -1,0 +1,27 @@
+.header, .table-name{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+  }
+
+.table th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+}
+
+.table td, .table th {
+    border: 5px solid #ddd;
+    padding: 10px;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}

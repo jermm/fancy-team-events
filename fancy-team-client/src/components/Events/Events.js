@@ -1,12 +1,14 @@
 import { withAuth } from '@okta/okta-react';
 import React, { Component } from 'react';
 import { Header, Icon, Message, Table } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import config from '../../config';
+import './Events.scss';
 
 export default withAuth(class Events extends Component {
     constructor(props) {
         super(props);
-        this.state = { events: null, failed: null };
+        this.state = { events: null, failed: null,  };
     }
 
     componentDidMount() {
@@ -55,25 +57,34 @@ export default withAuth(class Events extends Component {
     render() {
         return (
             <div>
-                <Header as="h1"><Icon name="mail outline" /> My Events</Header>
+                <h1 className='header'>My Events</h1>
+                <Link to="/event/create">
+                    <img src="https://img.icons8.com/color/48/000000/plus.png"></img>
+                </Link>
                 {this.state.failed === true && <Message error header="Failed to fetch events." />}
                 {this.state.failed === null && <p>Fetching Messages..</p>}
-                {this.state.events &&
+                
                 <div>
                     <p>This component makes a GET request to the backend graphql server which must be running at <code>localhost:4000/graphql</code></p>
-
-                    <Table>
+                    <h2 className='table-name'>List of events</h2>
+                    <table className='table'>
                         <thead>
                         <tr>
                             <th>Date</th><th>Event</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.date}</td><td>{event.text}</td></tr>)}
+                        {/* {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.date}</td><td>{event.text}</td></tr>)} */}
+                        <tr>
+                        <td>5-13-19</td><td>Bowling after work</td>
+                        </tr>
+                        <tr>
+                        <td>6-18-19</td><td>Happy hour</td>
+                        </tr>
                         </tbody>
-                    </Table>
+                    </table>
                 </div>
-                }
+                
             </div>
         );
     }
