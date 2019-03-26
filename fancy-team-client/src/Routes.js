@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import App from './App';
 import Login from './components/Login/view'
 import Handle404 from './components/404/view';
+import CreateEvent from './components/CreateEvent/view';
 
 import store from './Redux/store';
 
@@ -14,7 +15,7 @@ function Routes(){
           <Switch>
               <Route exact path='/' component={ App } />
               <Route exact path='/login' component={ Login } />
-              <Route exact path='/events/create' component={ Login } />
+              <Route exact path='/events/create' component={ CreateEvent } />
               <Route component={ Handle404 } />
           </Switch>
           </Router>
