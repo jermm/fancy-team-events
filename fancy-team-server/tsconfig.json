@@ -9,7 +9,8 @@
     "strict":true,
     "resolveJsonModule":true,
     "esModuleInterop":true,
-    "preserveSymlinks":true
+    "preserveSymlinks":true,
+    "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
