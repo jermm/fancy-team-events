@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +15,84 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+
+.form-control{
+  display: block;
+  width: 100%;
+  height: calc(2.25rem + 2px);
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-control:focus{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+
+option{
+  font-weight: normal;
+  display: block;
+  white-space: pre;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}
+
+.errorBorder{
+  border-color: indianred;
+}
+
+.okayBorder{
+  border-color: green;
+}
+
+.CreateEventForm{
+  display:flex;
+}
+
+.createEventForm-SectionA, .createEventForm-SectionB{
+  padding: 1rem;
+  width: 50%;
+}
+
+.form-group{
+  margin-bottom: 1rem;
+}
+
+label{
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+#createEventForm-Submit-btn{
+  font-size: 1rem;
+  color: black;
+  background-color: transparent;
+  border-color: #61dafb;
+  padding: 0.5rem;
+  border-radius: .25rem;
+}
+
+#createEventForm-Submit-btn:hover{
+  cursor:pointer;
+  background-color: white;
+  color: #61dafb;
+}
+
+#EventInviteeList{
+  overflow: auto;
+  resize: vertical;
 }

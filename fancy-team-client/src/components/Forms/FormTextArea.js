@@ -1,22 +1,21 @@
 import React from 'react';
 
-function FormInputs (props) {
+function FormTextArea (props) {
   const {
-    type,
     name,
     placeholder,
     labelText,
     id,
     wrapperDivClassName,
-      handleChange
+    handleChange
   } = props;
 
   return (
       <div className={`${wrapperDivClassName} form-group`}>
         <label htmlFor={id}>{labelText}</label>
-        <input type={type} name={name} placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
+        <textarea name={name} rows='8' cols='50' placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
       </div>
   )
 }
 
-export default FormInputs;
+export default FormTextArea;

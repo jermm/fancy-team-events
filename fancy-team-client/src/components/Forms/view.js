@@ -2,15 +2,16 @@ import React from 'react';
 import {Formik} from 'formik';
 import CreateEventForm from './CreateEventForm';
 
-function determineForm(type, props){
+function determineForm(headerTitle, type, props){
   if(type === 'createEvent'){
-    return <CreateEventForm {...props}/>
+    return <CreateEventForm headerTitle={headerTitle} {...props}/>
   }
 }
 
 function Form(props) {
   const {
-    type
+    type,
+    headerTitle
   } = props;
   return (
       <Formik
@@ -18,7 +19,7 @@ function Form(props) {
             console.log(values);
             console.log(actions);
           }}
-          render = { props => determineForm(type, props)}
+          render = { props => determineForm(headerTitle, type, props)}
       />
   )
 }

@@ -3,7 +3,7 @@ import Form from '../Forms/view';
 
 function CreateEvent (){
   return (
-    <Form type='createEvent' />
+    <Form type='createEvent' headerTitle="Create Event" />
   );
 }
 
