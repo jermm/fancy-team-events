@@ -8,11 +8,11 @@ export class CarpoolPassenger {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column({nullable: true})
+    @Column('integer',{nullable: true})
     @ManyToOne(() => User, (user: User) => user.carpoolPassengers)
     user?: User;
 
-    @Column({nullable: true})
+    @Column('integer',{nullable: true})
     @ManyToOne(() => Carpool, (carpool: Carpool) => carpool.carPoolPassengers)
     carpool?: Carpool;
 }

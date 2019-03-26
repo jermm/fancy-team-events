@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "fancyevents",
   "database": "fancyevents",
-  "synchronize": true,
+  "synchronize": false,
   "logging": false,
   "entities": [
     "./entity/**/*.ts"

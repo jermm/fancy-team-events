@@ -10,7 +10,7 @@ export class Event {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column({nullable: true})
+    @Column('integer',{nullable: true})
     @ManyToOne(() => User, (user: User) => user.events)
     createdBy?: User;
 
@@ -44,13 +44,13 @@ export class Event {
     @Column('text', {nullable: true})
     deadlineDate?: string;
 
-    @Column({nullable: true})
+    @Column({type:'integer', nullable: true, array: true})
     @OneToMany(() => UserEventStatus, (userEventStatus: UserEventStatus) => userEventStatus.event,  {
         cascade: true,
     })
     userEventStatuses?: UserEventStatus[];
 
-    @Column({nullable: true})
+    @Column({type: 'integer',nullable: true, array: true})
     @ManyToMany(type => Carpool, carpool => carpool.event)
     @JoinTable()
     carpoolDrivers?: Carpool[];

@@ -6,6 +6,7 @@ interface inputForEvent {
 
 interface inputForAddingEvent {
     createdBy: number,
+    title: string,
     type: string,
     date: string,
     startTime: string,
@@ -28,8 +29,9 @@ export const eventResolver = {
         addEvent: {
             resolve(_: any, inputObject: inputForAddingEvent ): any {
                 console.log(inputObject);
-                return addEvent(inputObject.createdBy, inputObject.type,
-                    inputObject.date, inputObject.startTime, inputObject.endTime, inputObject.locationName, inputObject.description, inputObject.deadline);
+                return addEvent(inputObject.createdBy, inputObject.title, inputObject.type, inputObject.date,
+                    inputObject.startTime, inputObject.endTime, inputObject.locationName,
+                    inputObject.description, inputObject.deadline);
             }
         }
     }

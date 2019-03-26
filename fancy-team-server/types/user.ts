@@ -40,7 +40,8 @@ const mutatorType = new GraphQLObjectType( {
         addUser: {
             type: userType,
             args: {
-                name: { type: GraphQLString },
+                firstName: { type: GraphQLString },
+                lastName: { type: GraphQLString },
                 email: { type: GraphQLString }
               }
             }

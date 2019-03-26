@@ -7,7 +7,8 @@ interface inputForUser {
 }
 
 interface inputForAddingUser {
-    name: string,
+    firstName: string,
+    lastName: string,
     email: string
 }
 
@@ -28,17 +29,10 @@ export const userResolver = {
     Mutation: {
         addUser: {
             resolve(_: any, inputObject: inputForAddingUser ): any {
-                return addUser(inputObject.name, inputObject.email);
+                return addUser(inputObject.firstName, inputObject.lastName, inputObject.email);
             }
         }
     }
 
 };
 
-// export const userResolver = function (_: any, inputObject: inputForUser): Promise<userObject> {
-// //     return findUser(inputObject.id);
-// // };
-// //
-// // export const addUserResolver = (_: any, inputObject: inputForAddingUser ) => {
-// //     return addUser(inputObject.name, inputObject.email);
-// // };

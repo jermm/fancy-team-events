@@ -14,7 +14,8 @@ const user = new User();
 export interface userObject {
     id: Number,
     email: String,
-    name: String
+    firstName: String,
+    lastName: String
 
 }
 
@@ -27,7 +28,7 @@ export const findUser = (id: number):Promise<any> => {
     })
 };
 
-export const findUsers = function (): Promise<User[]> {
+export const findUsers = function (): Promise<any> {
 
     const userRepository = getConnection().getRepository(User);
     return userRepository.find()
@@ -35,13 +36,14 @@ export const findUsers = function (): Promise<User[]> {
 };
 
 
-export const addUser = (firstName: string, email: string) => {
+export const addUser = (firstName: string,lastName: string, email: string) => {
 
     const userRepository = getConnection().getRepository(User);
     const user = new User();
 
     user.email = email;
     user.firstName = firstName;
+    user.lastName = lastName;
 
     return userRepository.save(user).then(() => {
         return userRepository.findOne({email: email})

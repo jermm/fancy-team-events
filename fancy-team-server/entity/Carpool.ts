@@ -9,13 +9,13 @@ import {User} from "./User";
 export class Carpool {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id?: number;
 
-    @Column({nullable: true})
+    @Column('integer', {nullable: true})
     @ManyToOne(() => User, (user: User) => user.carpools)
     driver?: User;
 
-    @Column({nullable: true})
+    @Column('integer', {nullable: true})
     @ManyToMany(type => Event, event => event.carpoolDrivers)
     event?: Event;
 
@@ -27,7 +27,7 @@ export class Carpool {
     @Column()
     locationName?: string;
 
-    @Column({nullable: true})
+    @Column( {type: 'integer', nullable: true, array:true})
     @OneToMany(() => CarpoolPassenger, (carpoolPassenger: CarpoolPassenger) => carpoolPassenger.carpool)
     carPoolPassengers?: CarpoolPassenger[];
 }

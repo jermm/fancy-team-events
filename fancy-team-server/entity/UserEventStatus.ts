@@ -10,15 +10,15 @@ export class UserEventStatus {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column({nullable: true})
-    @ManyToOne(() => User, (user: User) => user.userEventStatuses)
+    @Column("integer", {nullable: true})
+    @ManyToOne(type => User, (user: User) => user.userEventStatuses)
     user?: User;
 
-    @Column({nullable: true})
+    @Column('integer', {nullable: true})
     @ManyToOne(() => Event, (event: Event) => event.userEventStatuses)
     event?: Event;
 
-    @Column({nullable: true})
+    @Column('text', {nullable: true})
     roleType?: string;
 
     @Column({nullable: true})
