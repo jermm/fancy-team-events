@@ -11,13 +11,15 @@ function determineForm(headerTitle, type, props){
 function Form(props) {
   const {
     type,
-    headerTitle
+    headerTitle,
+    handleFormSubmitCallBack
   } = props;
   return (
       <Formik
           onSubmit={(values, actions) => {
             console.log(values);
             console.log(actions);
+            handleFormSubmitCallBack(values, actions)
           }}
           render = { props => determineForm(headerTitle, type, props)}
       />

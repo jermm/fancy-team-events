@@ -96,3 +96,8 @@ label{
   overflow: auto;
   resize: vertical;
 }
+
+.event-Date-Time{
+  display: flex;
+  justify-content: space-between;
+}

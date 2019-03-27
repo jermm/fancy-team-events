@@ -10,7 +10,6 @@ function FormInputs (props) {
     wrapperDivClassName,
       handleChange
   } = props;
-
   return (
       <div className={`${wrapperDivClassName} form-group`}>
         <label htmlFor={id}>{labelText}</label>
