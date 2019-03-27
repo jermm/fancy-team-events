@@ -5,7 +5,7 @@ import App from './App';
 
 import Login from './components/Login/view'
 // import Profile from './components/Profile/view';
-import Event from './components/Events/Events';
+import EventList from './components/Events/EventList';
 import Handle404 from './components/404/view';
 import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import config from './config';
@@ -24,7 +24,7 @@ function Routes(){
               <Route exact path='/' component={ App } />
               <Route exact path='/login' component={ Login } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
-              <Route exact path="/event" component= { Event } />
+              <Route exact path="/event" component= { EventList } />
               <Route component={ Handle404 } />
             </Switch>
               </Security>

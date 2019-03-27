@@ -1,0 +1,46 @@
+.table-name{
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.table {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    //margin-left:auto;
+    //margin-right:auto;
+    //margin-bottom: 1rem;
+    color: #212529;
+  }
+
+.table th {
+    color: #fff;
+    background-color: #FFA500;
+//    border-color: #454d55;
+}
+
+.table td, .table th {
+//    border: 5px solid #ddd;
+    padding: 10px;
+}
+
+.table tr:hover {
+  background-color: #ddd;
+}
+
+.event-header {
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.event-logo {
+ // animation: App-logo-spin infinite 20s linear;
+  height: 30vmin;
+  pointer-events: none;
+}
