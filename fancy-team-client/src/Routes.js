@@ -7,7 +7,7 @@ import Login from './components/Login/view'
 // import Profile from './components/Profile/view';
 import EventList from './components/Events/EventList';
 import Handle404 from './components/404/view';
-import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
+import { Security, ImplicitCallback} from '@okta/okta-react';
 import config from './config';
 import store from './Redux/store';
 
