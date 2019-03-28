@@ -1,30 +1,26 @@
-import { withAuth } from '@okta/okta-react';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './login.scss';
+import { withAuth } from '@okta/okta-react';
 import { checkAuthentication } from '../../util/helpers';
 import Header from '../Header/header';
 
-export default withAuth(class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { authenticated: null, userinfo: null };
-        this.checkAuthentication = checkAuthentication.bind(this);
-        this.login = this.login.bind(this);
-    }
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {authenticated: null, userinfo: null};
+    this.checkAuthentication = checkAuthentication.bind(this);
+    this.login = this.login.bind(this);
+  }
 
-    async componentDidMount() {
-        this.checkAuthentication();
-    }
+  async componentDidMount() {
+    this.checkAuthentication();
+  }
 
-    async componentDidUpdate() {
-        this.checkAuthentication();
-    }
+  async login() {
+    this.props.auth.login('/event');
+  }
 
-    async login() {
-        this.props.auth.login('/');
-    }
-
-    render() {
+  render() {
         return (
         <>
             <section id='Empty-Color' />
@@ -34,5 +30,7 @@ export default withAuth(class Login extends Component {
             </section>
         </>
         );
-    }
-});
+  }
+}
+
+export default withAuth(Login);
