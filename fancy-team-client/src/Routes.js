@@ -8,14 +8,10 @@ import Login from './components/Login/view'
 // import Profile from './components/Profile/view';
 import EventList from './components/Events/EventList';
 import Handle404 from './components/404/view';
-import { Security,ImplicitCallback} from '@okta/okta-react';
+import CreateEvent from "./components/CreateEvent/view";
+import { Security,SecureRoute,ImplicitCallback} from '@okta/okta-react';
 import config from './config';
 import store from './Redux/store';
-
-// function onAuthRequired({history}) {
-//   history.push('/login');
-// }
-
 
 function Routes (){
   return (
@@ -28,8 +24,9 @@ function Routes (){
           >
             <Switch>
               <Route exact path='/' component={ Login } />
-              <Route path="/event" component= { EventList } />
-              <Route exact path="/profile" component= { Profile } />
+              <SecureRoute exact path="/event" component= { EventList } />
+              <SecureRoute exact path='/event/create' component={ CreateEvent } />
+              <SecureRoute exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
               <Route component={ Handle404 } />
             </Switch>

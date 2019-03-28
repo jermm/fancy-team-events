@@ -23,8 +23,13 @@ class Login extends Component {
     // }
   }
 
+  async componentDidUpdate() {
+    this.checkAuthentication();
+  }
+
   async login() {
-    this.props.auth.login('/');
+    debugger;
+    this.props.auth.login('/event');
   }
 
   render() {
