@@ -1,39 +1,48 @@
-import { withAuth } from '@okta/okta-react';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './login.scss';
-import { checkAuthentication } from '../../util/helpers';
+import { withAuth } from '@okta/okta-react';
 
-export default withAuth(class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { authenticated: null, userinfo: null };
-        this.checkAuthentication = checkAuthentication.bind(this);
-        this.login = this.login.bind(this);
-    }
+import {
+  Redirect,
+} from "react-router-dom";
 
-    async componentDidMount() {
-        this.checkAuthentication();
-    }
+import {checkAuthentication} from '../../util/helpers';
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {authenticated: null, userinfo: null};
+    this.checkAuthentication = checkAuthentication.bind(this);
+    this.login = this.login.bind(this);
+  }
 
-    async componentDidUpdate() {
-        this.checkAuthentication();
-    }
+  async componentDidMount() {
+    this.checkAuthentication();
+  }
 
-    async login() {
-        this.props.auth.login('/');
-    }
+  async login() {
+    console.log('I am getting execited');
+    console.log(this.props);
+    this.props.auth.login('/');
+  }
 
-    render() {
-        return (
-   <>
-            <section id='Empty-Color' />
+  render() {
+    if(this.props.auth.isAuthenticated()){
+      return <Redirect to='/event'/>
+    }else{
+      return (
+          <>
+            <section id='Empty-Color'/>
             <section id='Login'>
-            <header>
-            I am the logo
-        </header>
-        <button className='LoginBtn' onClick={this.login}>Login</button>
+              <header>
+                I am the logo
+              </header>
+              <button className='LoginBtn' onClick={this.login}>Login</button>
             </section>
-</>
-    );
+          </>
+      );
     }
-});
+
+  }
+}
+
+export default withAuth(Login);
