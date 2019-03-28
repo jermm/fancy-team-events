@@ -1,0 +1,12 @@
+{
+  "resourceServer": {
+    "port": 8000,
+    "oidc": {
+      "issuer": "https://dev-751219.okta.com/oauth2/default"
+    },
+    "assertClaims": {
+      "aud": "api://default",
+      "cid": "0oadrmminV9IDToNc356"
+    }
+  }
+}

@@ -1,52 +1,73 @@
 import { Client } from 'pg';
-import {User} from "../../entity/User";
+import {UserEntity} from "../../entity/User";
+
+
 const client = new Client();
 client.connect();
 
-const getUserQuery = "select id, email, name from users where id=$1";
-const addUserQuery = "insert into users (name, email) values ($1, $2) RETURNING id, name, email;";
-const getAllUserQuery = "select id, email, name from users;";
-import {getConnection, getRepository} from "typeorm";
-
-const user = new User();
+import {getConnection} from "typeorm";
 
 
-export interface userObject {
-    id: Number,
-    email: String,
-    firstName: String,
-    lastName: String
+export class User {
+
+    /**
+     *
+     * @param id
+     */
+    public static async findUser(id: number):Promise<any> {
+        try {
+            const userRepository = getConnection().getRepository(UserEntity);
+            return await userRepository.findOne({id});
+        }
+        catch(error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    /**
+     *
+     * @param id
+     */
+    public static async findUserByEmail(email: string):Promise<any> {
+        try {
+            const userRepository = getConnection().getRepository(UserEntity);
+            return await userRepository.findOne({email});
+        }
+        catch(error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+    /**
+     *
+     */
+    public static async findUsers(): Promise<any> {
+        const userRepository = getConnection().getRepository(UserEntity);
+        return userRepository.find()
+
+    }
+
+    /**
+     * addUser
+     *
+     * @param email
+     * @param oAuthId
+     */
+    public static async addUser(email: string, oAuthId: string): Promise<any> {
+        try {
+            const userRepository = getConnection().getRepository(UserEntity);
+            let userEntity = new UserEntity();
+            userEntity.email = email;
+            userEntity.oAuthId = oAuthId;
+            await userRepository.save(userEntity);
+            return await userRepository.findOne({email, oAuthId});
+        }
+        catch (error) {
+            // log error
+            throw error;
+        }
+    }
 
 }
-
-export const findUser = (id: number):Promise<any> => {
-    const userRepository = getConnection().getRepository(User);
-    return userRepository.findOne({id: id}).then((result) => {
-        return result;
-    }).catch((e) => {
-        console.log(e);
-    })
-};
-
-export const findUsers = function (): Promise<any> {
-
-    const userRepository = getConnection().getRepository(User);
-    return userRepository.find()
-
-};
-
-
-export const addUser = (firstName: string,lastName: string, email: string) => {
-
-    const userRepository = getConnection().getRepository(User);
-    const user = new User();
-
-    user.email = email;
-    user.firstName = firstName;
-    user.lastName = lastName;
-
-    return userRepository.save(user).then(() => {
-        return userRepository.findOne({email: email})
-    });
-
-};

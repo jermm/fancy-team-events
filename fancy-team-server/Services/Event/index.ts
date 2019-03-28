@@ -1,8 +1,8 @@
 import { Client } from 'pg';
 import {Event} from "../../entity/Event";
 import {getConnection} from "typeorm";
-import {findUser} from '../User';
-import {User} from "../../entity/User";
+import {User} from  '../User';
+import {UserEntity} from "../../entity/User";
 import {UserEventStatus} from "../../entity/UserEventStatus";
 
 const client = new Client();

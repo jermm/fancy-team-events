@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "@okta/jwt-verifier": "0.0.11",
+    "@okta/oidc-middleware": "0.0.15",
     "@types/bluebird": "^3.5.18",
     "@types/body-parser": "^1.16.7",
     "@types/cors": "^2.8.4",
@@ -22,6 +24,9 @@
     "pg": "^7.9.0",
     "pg-format": "^1.0.4",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "sendgrid": "^5.2.3",
     "ts-node": "^8.0.3",
     "typeorm": "^0.2.15",
     "typescript": "^3.3.4000",
