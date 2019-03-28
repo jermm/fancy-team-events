@@ -8,11 +8,13 @@ export class EmailService {
     private options: IEmailOptions;
 
     constructor() {
+        let sendgridApiKey: string = process.env.SENDGRID_API_KEY ? process.env.SENDGRID_API_KEY : emailConfig.sendgridApiKey;
+        
         this.options = {
             method: 'POST',
             uri: emailConfig.sendgridSendAPI,
             headers: {
-                Authorization: 'Bearer ' + emailConfig.sendgridApiKey,
+                Authorization: 'Bearer ' + sendgridApiKey,
                 'Content-Type': 'application/json'
             },
             json: true
