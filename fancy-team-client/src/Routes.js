@@ -6,7 +6,7 @@ import Profile from './components/Profile/view';
 
 import Login from './components/Login/view'
 // import Profile from './components/Profile/view';
-import Event from './components/Events/Events';
+import EventList from './components/Events/EventList';
 import Handle404 from './components/404/view';
 import { Security,ImplicitCallback} from '@okta/okta-react';
 import config from './config';
