@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
 export class UserEventStatus {
@@ -6,17 +6,11 @@ export class UserEventStatus {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column("integer", {nullable: true})
-    user?: number;
-
-    @Column('integer', {nullable: true})
+    @Column('integer', {nullable: false})
     event?: number;
 
-    @Column('text', {nullable: true})
+    @Column('text', {nullable: false, unique:true})
     email?: string;
-
-    @Column('text', {nullable: true})
-    roleType?: string;
 
     @Column({nullable: true})
     isAttending?: boolean;

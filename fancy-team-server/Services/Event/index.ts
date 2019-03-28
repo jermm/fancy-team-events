@@ -1,6 +1,7 @@
 import { Client } from 'pg';
 import {Event} from "../../entity/Event";
 import {getConnection} from "typeorm";
+import {createQueryBuilder} from 'typeorm';
 import {findUser} from '../User';
 import {User} from "../../entity/User";
 import {UserEventStatus} from "../../entity/UserEventStatus";
@@ -27,6 +28,33 @@ export const findEvent = (id: number) => {
     })
 };
 
+export const updateEvent = async(id: number, title: string, eventType: string, eventDate: string,
+                                 startTime: string, endTime: string,locationName: string,
+                                 description: string, deadline: string) => {
+   return getConnection()
+          .createQueryBuilder()
+          .update(Event)
+          .set({eventType:eventType, title: title,eventDate: eventDate,
+                startTime: startTime,endTime: endTime,  locationName: locationName,
+                description: description, deadlineDate: deadline})
+          .where("id = :id", { id: id })
+          .execute();
+};
+
+
+export const findEventsByUser = async(id: number) => {
+    const eventsAttended = await createQueryBuilder("event")
+        .leftJoinAndSelect(Event, "event", "UserEventStatus.userId = :id")
+        .getMany();
+    const eventsCreated = await getConnection()
+        .getRepository(Event)
+        .createQueryBuilder("event")
+        .where("event.createdBy = :id", {id: id})
+        .getMany();
+
+    return [eventsAttended,eventsCreated];
+};
+
 export const addEvent = async(createdById: number, title: string, tyoe: string, eventDate: string,
                               startTime: string, endTime: string,locationName: string,
                               description: string, deadline: string) => {
@@ -34,11 +62,11 @@ export const addEvent = async(createdById: number, title: string, tyoe: string, 
 
     const eventRepository = getConnection().getRepository(Event);
     const event = new Event();
-   // const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+    const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
     const userEventStatus = new UserEventStatus();
     event.createdBy = createdById;
     event.title = title;
-    event.type = tyoe;
+    event.eventType = tyoe;
     event.eventDate = eventDate;
     event.createdAt = 'now';
     event.startTime = startTime;
@@ -47,13 +75,13 @@ export const addEvent = async(createdById: number, title: string, tyoe: string, 
     event.description = description;
     event.deadlineDate = deadline;
 
-     // userEventStatus.event =event;
-     // userEventStatus.user = event.createdBy;
-     // userEventStatus.isAttending = true;
-     // userEventStatus.roleType = 'Organizer'; userEventStatus.tShirtSize = 'L';
-    //event.userEventStatuses =[userEventStatus];
 
     return eventRepository.save(event).then((result) => {
+        userEventStatus.event = result.id;
+        userEventStatus.user = event.createdBy;
+        userEventStatus.isAttending = true;
+        userEventStatus.roleType = 'Organizer'; userEventStatus.tShirtSize = 'L';
+        userEventStatusRepository.save(userEventStatus);
         return result;
     });
 };

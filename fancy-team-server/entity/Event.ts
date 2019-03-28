@@ -17,7 +17,7 @@ export class Event {
     title?: string;
 
     @Column('text', {nullable: true})
-    type?: string;
+    eventType?: string;
 
     @Column('text', {nullable: true})
     description?: string;

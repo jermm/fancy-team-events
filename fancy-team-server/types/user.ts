@@ -1,6 +1,5 @@
 
 import { GraphQLObjectType, GraphQLNonNull, GraphQLInt, GraphQLString,  GraphQLSchema, GraphQLList } from 'graphql';
-//import {userResolver} from "../resolvers/userResolver"
 
 
 // Define the User type
@@ -11,8 +10,7 @@ const userType: GraphQLObjectType = new GraphQLObjectType({
         name: { type: GraphQLString },
         email: { type: GraphQLString },
         firstName: { type: GraphQLString },
-        lastName: { type: GraphQLString },
-       // events: { type: new GraphQLList(EventType) }
+        lastName: { type: GraphQLString }
     }
 });
 
