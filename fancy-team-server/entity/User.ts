@@ -1,16 +1,10 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany, OneToOne} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 @Entity()
-export class User {
+export class UserEntity {
 
     @PrimaryGeneratedColumn()
     id?: number;
-
-    @Column('text', {nullable: true})
-    firstName?: string;
-
-    @Column('text', {nullable: true})
-    lastName?: string;
 
     @Column('text', {nullable: true})
     email?: string;

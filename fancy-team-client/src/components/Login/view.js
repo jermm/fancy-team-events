@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import './login.scss';
 import { withAuth } from '@okta/okta-react';
+import { checkAuthentication } from '../../util/helpers';
+import Header from '../Header/header';
 
-import {
-  Redirect,
-} from "react-router-dom";
-
-import {checkAuthentication} from '../../util/helpers';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,21 +21,15 @@ class Login extends Component {
   }
 
   render() {
-    if(this.state.authenticated){
-      return <Redirect to='/event' />;
-    }else{
-      return (
-          <>
-            <section id='Empty-Color'/>
-            <section id='Login'>
-              <header>
-                I am the logo
-              </header>
-              <button className='LoginBtn' onClick={this.login}>Login</button>
+        return (
+        <>
+            <section id='Empty-Color' />
+                <section id='Login'>
+                <Header />
+                <button className='LoginBtn' onClick={this.login}>Login</button>
             </section>
-          </>
-      );
-    }
+        </>
+        );
   }
 }
 
