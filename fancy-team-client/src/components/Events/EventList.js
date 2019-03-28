@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import './EventList.scss';
-import EventLogo from "./calendar-events-svgrepo-com.svg";
+import Header from '../Header/header';
 
 // Test data for events per user
 const event = [
@@ -65,11 +65,7 @@ export default withAuth(class EventList extends Component {
     render() {
         return (
             <div>
-                <header className="event-header">
-                    <img src={EventLogo} className="event-logo" alt="Event header logo" width="200" height="300" />
-                    <h1 className='event-title'>Fancy Event Organizer</h1>
-                </header>
-                
+                <Header />
                 <Link to="/event/create">
                     <img src="https://img.icons8.com/color/48/000000/plus.png" alt="Create Event" className="event-add-icon" width="100" />
                 </Link>
@@ -77,8 +73,6 @@ export default withAuth(class EventList extends Component {
                 {this.state.failed === null && <p>Fetching Messages..</p>} */}
                 
                 <div>
-                    {/* <p>This component makes a GET request to the backend graphql server which must be running at <code>localhost:4000/graphql</code></p> */}
-                    
                     <table className='table'>
                         <thead>
                         <tr>
