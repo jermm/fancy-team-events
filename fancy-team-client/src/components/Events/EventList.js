@@ -76,12 +76,12 @@ export default withAuth(class EventList extends Component {
                     <table className='table'>
                         <thead>
                         <tr>
-                            <th colspan="2">Events</th>
+                            <th colSpan="2">Events</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.events.map(event => 
-                        <tr id={event.id}>
+                        <tr id={event.id} key={event.id}>
                             <td>{event.eventDate}</td>
                             {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/view/${event.id}`}>{event.title}</Link></td>} 
                         </tr>)}
