@@ -6,9 +6,12 @@ import './EventList.scss';
 import Event from './Event';
 import EventLogo from "./calendar-events-svgrepo-com.svg";
 
+// Test data for events per user
 const event = [
-    {id: 1, eventDate: "12-10-19", title: "Pinic"},
-    {id: 2, eventDate: "01-13-20", title: "Happy hour"}
+    {id: 1, eventDate: "12-10-19", title: "Pinic", isOrganizer: true},
+    {id: 2, eventDate: "01-13-20", title: "Happy hour", isOrganizer: false},
+    {id: 3, eventDate: "11-10-19", title: "Farewell lunchr", isOrganizer: false},
+    {id: 4, eventDate: "07-17-20", title: "Golf @ Shoreline", isOrganizer: true}
 ];
 
 export default withAuth(class EventList extends Component {
@@ -75,7 +78,7 @@ export default withAuth(class EventList extends Component {
                 {this.state.failed === null && <p>Fetching Messages..</p>} */}
                 
                 <div>
-                    <p>This component makes a GET request to the backend graphql server which must be running at <code>localhost:4000/graphql</code></p>
+                    {/* <p>This component makes a GET request to the backend graphql server which must be running at <code>localhost:4000/graphql</code></p> */}
                     
                     <table className='table'>
                         <thead>
@@ -84,16 +87,11 @@ export default withAuth(class EventList extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.eventDate}</td><td>{event.title}</td></tr>)}
-                        {/* {this.state.events.map(event => <tr id={event.id} key={event.id}><td>{event.eventDate}</td><td>{event.description}</td></tr>)} */}
-                        {/* <tr>
-                            <td>5-13-19</td>
-                            <td><Link to="/event/edit">Bowling after work</Link></td>
-                        </tr>
-                        <tr>
-                            <td>6-18-19</td>
-                            <td><Link to="/event/view">Happy Hour</Link></td>
-                        </tr> */}
+                        {this.state.events.map(event => 
+                        <tr id={event.id}>
+                            <td>{event.eventDate}</td>
+                            {event.isOrganizer ? <td><Link to="/event/edit">{event.title}</Link></td> : <td><Link to="/event/view">{event.title}</Link></td>} 
+                        </tr>)}
                         </tbody>
                     </table>
                 </div>
