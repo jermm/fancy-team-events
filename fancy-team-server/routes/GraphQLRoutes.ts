@@ -15,7 +15,7 @@ export class GraphQLRoutes {
                 // Creates a GraphQLHTTP per request
                 graphqlHTTP({
                     schema: schemas,
-                    context: new Context(req, res, req.userId),
+                    context: new Context(req, res, req.user.oauthId),
                     graphiql: true
                 })(req, res);
             });

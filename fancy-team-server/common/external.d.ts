@@ -4,7 +4,7 @@ import * as express from 'express';
 
 export interface FancyEventsRequest extends express.Request {
     jwt: any //TODO have to define the type
-    userId: string
+    user: { oauthId: string, email: string}
 }
 
 

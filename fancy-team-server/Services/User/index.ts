@@ -27,7 +27,7 @@ export class User {
 
     /**
      *
-     * @param id
+     * @param
      */
     public static async findUserByEmail(email: string):Promise<any> {
         try {
