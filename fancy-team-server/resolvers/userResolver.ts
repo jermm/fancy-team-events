@@ -1,35 +1,31 @@
 
-import {findUser, addUser, findUsers, userObject} from '../Services/User'
-import {User} from "../entity/User";
+import {User} from '../Services/User'
+import {UserEntity} from "../entity/User";
+import {IAddUserEntity, IUserEntity} from "../common/external";
+
 
 interface inputForUser {
     id: number
 }
 
-interface inputForAddingUser {
-    firstName: string,
-    lastName: string,
-    email: string
-}
-
 export const userResolver = {
     Query: {
         user: {
-            resolve(_: any, inputObject: inputForUser): Promise<User> {
-                return findUser(inputObject.id);
+            resolve(_: any, inputObject: inputForUser): Promise<UserEntity> {
+                return User.findUser(inputObject.id);
             }
         },
         users: {
-            resolve(_: any): Promise<userObject[]> {
-                return findUsers();
+            resolve(_: any): Promise<IUserEntity[]> {
+                return User.findUsers();
             }
         }
 
     },
     Mutation: {
         addUser: {
-            resolve(_: any, inputObject: inputForAddingUser ): any {
-                return addUser(inputObject.firstName, inputObject.lastName, inputObject.email);
+            resolve(_: any, inputObject: IAddUserEntity): any {
+                return User.addUser(inputObject.email, inputObject.oauthId);
             }
         }
     }
