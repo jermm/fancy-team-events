@@ -17,18 +17,9 @@ class Login extends Component {
 
   async componentDidMount() {
     this.checkAuthentication();
-    // if(this.props.auth.isAuthenticated()){
-    //   console.log(this.props.auth.isAuthenticated());
-    //   return <Redirect to='/event'/>;
-    // }
-  }
-
-  async componentDidUpdate() {
-    this.checkAuthentication();
   }
 
   async login() {
-    debugger;
     this.props.auth.login('/event');
   }
 
