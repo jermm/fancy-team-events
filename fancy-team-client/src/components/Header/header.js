@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import EventLogo from "./calendar-events-svgrepo-com.svg";
 import './header.scss';
 
