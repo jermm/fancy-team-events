@@ -10,8 +10,6 @@ import {Carpool} from "./entity/Carpool";
 import {UserEventStatus} from "./entity/UserEventStatus";
 import {createConnection} from "typeorm";
 
-
-
 createConnection({
     type: "postgres",
     database: "fancyevents",

@@ -6,7 +6,6 @@ import { checkAuthentication } from '../../util/helpers';
 export default withAuth(class Login extends Component {
     constructor(props) {
         super(props);
-        debugger;
         this.state = { authenticated: null, userinfo: null };
         this.checkAuthentication = checkAuthentication.bind(this);
         this.login = this.login.bind(this);
