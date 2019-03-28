@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import config from '../../config';
 import './EventList.scss';
-import Event from './Event';
 import EventLogo from "./calendar-events-svgrepo-com.svg";
 
 // Test data for events per user
@@ -67,12 +66,12 @@ export default withAuth(class EventList extends Component {
         return (
             <div>
                 <header className="event-header">
-                    <img src={EventLogo} className="event-logo" width="200" height="300" />
+                    <img src={EventLogo} className="event-logo" alt="Event header logo" width="200" height="300" />
                     <h1 className='event-title'>Fancy Event Organizer</h1>
                 </header>
                 
                 <Link to="/event/create">
-                    <img src="https://img.icons8.com/color/48/000000/plus.png"></img>
+                    <img src="https://img.icons8.com/color/48/000000/plus.png" alt="Create Event" className="event-add-icon" width="100" />
                 </Link>
                 {/* {this.state.failed === true && <Message error header="Failed to fetch events." />}
                 {this.state.failed === null && <p>Fetching Messages..</p>} */}
@@ -90,12 +89,11 @@ export default withAuth(class EventList extends Component {
                         {this.state.events.map(event => 
                         <tr id={event.id}>
                             <td>{event.eventDate}</td>
-                            {event.isOrganizer ? <td><Link to="/event/edit">{event.title}</Link></td> : <td><Link to="/event/view">{event.title}</Link></td>} 
+                            {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/view/${event.id}`}>{event.title}</Link></td>} 
                         </tr>)}
                         </tbody>
                     </table>
                 </div>
-                <Event event="Dinner" />
             </div>
         );
     }
