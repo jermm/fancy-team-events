@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Profile from './components/Profile/view';
@@ -28,7 +28,7 @@ function Routes (){
           >
             <Switch>
               <Route exact path='/' component={ Login } />
-              <Route exact path="/event" component= { Event } />
+              <Route path="/event" component= { EventList } />
               <Route exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
               <Route component={ Handle404 } />

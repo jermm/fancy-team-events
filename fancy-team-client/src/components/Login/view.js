@@ -17,17 +17,19 @@ class Login extends Component {
 
   async componentDidMount() {
     this.checkAuthentication();
+    // if(this.props.auth.isAuthenticated()){
+    //   console.log(this.props.auth.isAuthenticated());
+    //   return <Redirect to='/event'/>;
+    // }
   }
 
   async login() {
-    console.log('I am getting execited');
-    console.log(this.props);
     this.props.auth.login('/');
   }
 
   render() {
-    if(this.props.auth.isAuthenticated()){
-      return <Redirect to='/event'/>
+    if(this.state.authenticated){
+      return <Redirect to='/event' />;
     }else{
       return (
           <>
@@ -41,7 +43,6 @@ class Login extends Component {
           </>
       );
     }
-
   }
 }
 
