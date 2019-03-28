@@ -2,8 +2,6 @@ import { Client } from 'pg';
 import {Event} from "../../entity/Event";
 import {getConnection} from "typeorm";
 import {createQueryBuilder} from 'typeorm';
-import {findUser} from '../User';
-import {User} from "../../entity/User";
 import {UserEventStatus} from "../../entity/UserEventStatus";
 
 const client = new Client();
@@ -57,7 +55,7 @@ export const findEventsByUser = async(id: number) => {
 
 export const addEvent = async(createdById: number, title: string, tyoe: string, eventDate: string,
                               startTime: string, endTime: string,locationName: string,
-                              description: string, deadline: string) => {
+                              description: string, deadline: string, emails: string[]) => {
 
 
     const eventRepository = getConnection().getRepository(Event);
@@ -76,12 +74,10 @@ export const addEvent = async(createdById: number, title: string, tyoe: string, 
     event.deadlineDate = deadline;
 
 
+
     return eventRepository.save(event).then((result) => {
         userEventStatus.event = result.id;
-        userEventStatus.user = event.createdBy;
-        userEventStatus.isAttending = true;
-        userEventStatus.roleType = 'Organizer'; userEventStatus.tShirtSize = 'L';
-        userEventStatusRepository.save(userEventStatus);
+
         return result;
     });
 };

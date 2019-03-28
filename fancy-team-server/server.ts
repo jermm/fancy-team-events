@@ -4,19 +4,17 @@ import express from 'express';
 import cors from 'cors';
 // Import all routes
 import { GraphQLRoutes } from './routes';
-import {User} from "./entity/User";
+import {UserEntity} from "./entity/User";
 import {Event} from "./entity/Event";
 import {Carpool} from "./entity/Carpool";
 import {UserEventStatus} from "./entity/UserEventStatus";
 import {createConnection} from "typeorm";
 
-
-
 createConnection({
     type: "postgres",
     database: "fancyevents",
     entities: [
-        User,
+        UserEntity,
         Event,
         Carpool,
         UserEventStatus,
