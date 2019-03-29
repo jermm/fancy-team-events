@@ -6,7 +6,7 @@ const EventType: GraphQLObjectType = new GraphQLObjectType({
     fields: {
         id: { type: new GraphQLNonNull(GraphQLInt) },
         title: { type: GraphQLString },
-        createdBy: {type: GraphQLInt},
+        createdBy: {type: GraphQLString},
         type: { type: GraphQLString },
         date: { type: GraphQLString },
         startTime: { type: GraphQLString },

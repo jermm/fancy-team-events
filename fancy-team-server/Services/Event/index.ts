@@ -30,10 +30,10 @@ export class EventService {
 
     public static updateEvent = async (id: number, title: string, eventType: string, eventDate: string,
                                        startTime: string, endTime: string, locationName: string,
-                                       description: string, deadline: string, emails: string[]) => {
+                                       description: string, deadline: string, emails: string[], context) => {
        try {
            await UserEventStatusService.addInvitees(id, emails);
-           return await getConnection()
+           await getConnection()
                .createQueryBuilder()
                .update(Event)
                .set({
@@ -52,16 +52,16 @@ export class EventService {
     };
 
 
-    public static findEventsByUser = async (id: string) => {
+    public static findEventsByUser = async (context) => {
         try {
-            const user = await UserService.findUser(id);
+            const req = context.Request;
             const eventsAttended = await createQueryBuilder("event")
-                .leftJoinAndSelect(Event, "event", "UserEventStatus.email = :email", {email: user.email})
+                .leftJoinAndSelect(Event, "event", "UserEventStatus.email = :email", {email: req.user.email})
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
                 .createQueryBuilder("event")
-                .where("event.createdBy = :id", {id: id})
+                .where("event.createdBy = :id", {id: req.user.oauthId})
                 .getMany();
 
             return [eventsAttended, eventsCreated];
@@ -73,14 +73,16 @@ export class EventService {
     };
 
 
-    public static addEvent = async (createdById: string, title: string, tyoe: string, eventDate: string,
+    public static addEvent = async (title: string, tyoe: string, eventDate: string,
                       startTime: string, endTime: string, locationName: string,
-                      description: string, deadline: string, emails: string[]) => {
+                      description: string, deadline: string, emails: string[], context) => {
       try {
           const emailService = new EmailService();
           const eventRepository = getConnection().getRepository(Event);
           const event = new Event();
-          event.createdBy = createdById;
+          const userId = context.UserId;
+          const req = context.Request;
+          event.createdBy = userId;
           event.title = title;
           event.eventType = tyoe;
           event.eventDate = eventDate;
@@ -92,9 +94,9 @@ export class EventService {
           event.deadlineDate = deadline;
 
 
-          await emailService.send('sam.thambu@sap.com', emails, {
+          await emailService.send(req.user.email, emails, {
               event_link: 'www.gooogle.com',
-              event_name: 'hello world'
+              event_name: title
           });
 
           const eventSaved = await eventRepository.save(event);

@@ -27,7 +27,7 @@ export const eventResolver = {
         },
         eventsByUser : {
             resolve(_: any, inputObject: inputForEvent, context): Promise<any> {
-                return EventService.findEventsByUser(context.UserId).then(result => {
+                return EventService.findEventsByUser(context).then(result => {
                     const eventsAttended = result[0].map(el => ({...el, ...{isOrganizer:false}}));
                     const eventsOrganized = result[1].map(el => ({...el, ...{isOrganizer:true}}));
                     return [...eventsAttended, ...eventsOrganized];
@@ -40,16 +40,16 @@ export const eventResolver = {
         addEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
 
-                return EventService.addEvent(context.UserId, inputObject.title, inputObject.type, inputObject.date,
+                return EventService.addEvent(inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.emails);
+                    inputObject.description, inputObject.deadline, inputObject.emails, context);
             }
         },
         updateEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
                 return EventService.updateEvent(inputObject.id, inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.emails);
+                    inputObject.description, inputObject.deadline, inputObject.emails, context);
             }
         }
     }
