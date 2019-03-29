@@ -28,10 +28,9 @@ export const eventResolver = {
         eventsByUser : {
             resolve(_: any, inputObject: inputForEvent, context): Promise<any> {
                 return EventService.findEventsByUser(context.UserId).then(result => {
-                    return {
-                        eventsAttended:result[0],
-                        eventsOrganized:result[1]
-                    };
+                    const eventsAttended = result[0].map(el => ({...el, ...{isOrganizer:false}}));
+                    const eventsOrganized = result[1].map(el => ({...el, ...{isOrganizer:true}}));
+                    return [...eventsAttended, ...eventsOrganized];
                 });
             }
        }
