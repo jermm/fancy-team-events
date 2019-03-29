@@ -9,7 +9,7 @@ export class UserEventStatus {
     @Column('integer', {nullable: false})
     event?: number;
 
-    @Column('text', {nullable: false, unique:true})
+    @Column('text', {nullable: true})
     email?: string;
 
     @Column({nullable: true})

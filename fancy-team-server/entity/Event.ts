@@ -7,8 +7,11 @@ export class Event {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column('text',{nullable: false})
+    @Column('text',{nullable: true})
     createdBy?: string;
+
+    @Column('text',{nullable: true})
+    organizerEmail?: string;
 
     @Column('text', {nullable: true})
     createdAt?: string;
