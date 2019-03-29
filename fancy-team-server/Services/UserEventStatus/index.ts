@@ -36,8 +36,11 @@ export class UserEventStatusService {
     };
 
 
-  public static addInvitees = async (eventId: number, emails: string[]) => {
+  public static addInvitees = async (eventId: number, emails = []) => {
 
+    if(emails.length < 0){
+        return;
+    }
         const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
 
         const invitees: UserEventStatus[] = [];

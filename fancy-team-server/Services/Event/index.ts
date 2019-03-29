@@ -52,11 +52,12 @@ export class EventService {
     };
 
 
-    public static findEventsByUser = async (context) => {
+    public static findEventsByUser = async (context): Promise<any> => {
         try {
             const req = context.Request;
-            const eventsAttended = await createQueryBuilder("event")
-                .leftJoinAndSelect(Event, "event", "UserEventStatus.email = :email", {email: req.user.email})
+            const eventsAttended = await getConnection()
+            .getRepository(UserEventStatus).createQueryBuilder("userStatus")
+                .leftJoinAndSelect(Event, "event", "event.organizerEmail = userStatus.email")
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
@@ -68,14 +69,14 @@ export class EventService {
         }
         catch(error){
 
-         throw new Error('Cannot fund events' + error.message);
+         throw new Error('Cannot find events' + error.message);
         }
     };
 
 
     public static addEvent = async (title: string, tyoe: string, eventDate: string,
                       startTime: string, endTime: string, locationName: string,
-                      description: string, deadline: string, emails: string[], context) => {
+                      description: string, deadline: string, emails = [], context) => {
       try {
           const emailService = new EmailService();
           const eventRepository = getConnection().getRepository(Event);
@@ -83,6 +84,7 @@ export class EventService {
           const userId = context.UserId;
           const req = context.Request;
           event.createdBy = userId;
+          event.organizerEmail = req.user.email;
           event.title = title;
           event.eventType = tyoe;
           event.eventDate = eventDate;
@@ -93,16 +95,17 @@ export class EventService {
           event.description = description;
           event.deadlineDate = deadline;
 
-
+          if(emails.length > 0) {
           await emailService.send(req.user.email, emails, {
               event_link: 'www.gooogle.com',
               event_name: title
           });
-
+        }
+       
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, emails);
                              return eventSaved;
-
+        
       }
       catch(error){
           throw new Error('failed to save events' + error.message);

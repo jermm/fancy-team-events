@@ -1,4 +1,5 @@
-import {EventService} from '../Services/Event'
+import {EventService} from '../Services/Event';
+import {Event} from  '../entity/Event';
 
 interface inputForEvent {
     id: number
@@ -26,11 +27,11 @@ export const eventResolver = {
             }
         },
         eventsByUser : {
-            resolve(_: any, inputObject: inputForEvent, context): Promise<any> {
+            resolve(_: any, inputObject: inputForEvent, context): Promise<Event[]> {
                 return EventService.findEventsByUser(context).then(result => {
                     const eventsAttended = result[0].map(el => ({...el, ...{isOrganizer:false}}));
                     const eventsOrganized = result[1].map(el => ({...el, ...{isOrganizer:true}}));
-                    return [...eventsAttended, ...eventsOrganized];
+                    return [...eventsOrganized, ...eventsAttended];
                 });
             }
        }
