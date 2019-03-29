@@ -42,17 +42,46 @@ mutation createEvent($title: String, $newType: String, $createdBy: Int!, $locati
 //   return query;
 // };
 
+// autocomplete: "San Jose, CA, USA"
+// description: "what"
+// eventDate: "2019-03-29"
+// eventType: "TeamOuting"
+// eventend: "12:00"
+// eventname: "asdsad"
+// eventstart: "00:59"
+// inviteEmails: "tharan.vijay@gmail.com"
+// tshirt: "Yes"
+
+
+/// -----
+// createdBy: number,
+//     title: string,
+//     type: string,
+//     date: string,
+//     startTime: string,
+//     endTime: string,
+//     locationName: string,
+//     description: string,
+//     deadline: string,
+//     emails: string[]
+
 const updateCountryFetch = (event) => {
+  console.log(event);
+  console.log('@@@@@@@@');
 
   const query = JSON.stringify({
     query: `mutation createEvent($title: String, $newType: String, $createdBy: Int!, $location: String)
       { addEvent(title: $title, type: $newType, createdBy: $createdBy, location: $location) { id }}
     `,
     variables: {
-      title: 'asdas',
-      newType: 'sadsa',
-      createdBy: 1,
-      location: 'sadasdas'
+      title: event.eventname,
+      type: event.eventType,
+      date: event.eventDate,
+      startTime: event.eventstart,
+      endTime: event.eventend,
+      locationName: event.autoComplete,
+      description: event.description,
+      emails: event.inviteEmails
     }
   }, );
   return query;

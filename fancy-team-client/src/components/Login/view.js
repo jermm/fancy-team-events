@@ -7,6 +7,7 @@ import Header from '../Header/header';
 class Login extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {authenticated: null, userinfo: null};
     this.checkAuthentication = checkAuthentication.bind(this);
     this.login = this.login.bind(this);
