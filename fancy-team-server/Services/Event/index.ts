@@ -21,6 +21,8 @@ export class EventService {
         }
         catch (error) {
             console.log(error);
+            throw new Error('Cannot find event' + error.message);
+
         }
 
     }
@@ -44,6 +46,8 @@ export class EventService {
        }
        catch(error) {
            console.log(error);
+           throw new Error('failed to update event' + error.message);
+
        }
     };
 
@@ -64,6 +68,7 @@ export class EventService {
         }
         catch(error){
 
+         throw new Error('Cannot fund events' + error.message);
         }
     };
 
@@ -92,14 +97,13 @@ export class EventService {
               event_name: 'hello world'
           });
 
-          return eventRepository.save(event).then(async (result) => {
-              await UserEventStatusService.addInvitees(result.id, emails);
+          const eventSaved = await eventRepository.save(event);
+                             await UserEventStatusService.addInvitees(eventSaved.id, emails);
+                             return eventSaved;
 
-              return result;
-          });
       }
       catch(error){
-          console.log();
+          throw new Error('failed to save events' + error.message);
       }
     };
 }
