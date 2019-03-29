@@ -2,7 +2,7 @@ import * as express from 'express';
 import OktaJwtVerifier from '@okta/jwt-verifier';
 import * as oktaConfig from'../config/okta-config.json';
 import {FancyEventsRequest} from "./external";
-import {User} from "../services/User";
+import {UserService} from "../services/User";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
     issuer: oktaConfig.resourceServer.oidc.issuer,
@@ -33,10 +33,10 @@ export class AuthenticationManager {
                 oauthId: jwt.claims.uid
             };
             // check if user exists in Db
-            let user = await User.findUserByEmail(req.user.email);
+            let user = await UserService.findUserByEmail(req.user.email);
             // if no user, create bare minimum user info in Db
             if (!user) {
-                user = await User.addUser(req.user.email, req.user.oauthId);
+                user = await UserService.addUser(req.user.email, req.user.oauthId);
                 console.log(`New user created with Id ${user.id}`);
             }
             next();

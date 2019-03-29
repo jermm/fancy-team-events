@@ -1,10 +1,11 @@
-import {findEvent, addEvent, eventObject} from '../Services/Event'
+import {EventService} from '../Services/Event'
 
 interface inputForEvent {
     id: number
 }
 
 interface inputForAddingEvent {
+    id: number,
     createdBy: number,
     title: string,
     type: string,
@@ -13,25 +14,42 @@ interface inputForAddingEvent {
     endTime: string,
     locationName: string,
     description: string,
-    deadline: string
+    deadline: string,
+    emails: string[]
 }
 
 export const eventResolver = {
     Query: {
         event: {
-            resolve(_: any, inputObject: inputForEvent): Promise<any> {
-                return findEvent(inputObject.id);
+            resolve(_: any, inputObject: inputForEvent, context): Promise<any> {
+                return EventService.findEvent(inputObject.id);
             }
-        }
+        },
+        eventsByUser : {
+            resolve(_: any, inputObject: inputForEvent, context): Promise<any> {
+                return EventService.findEventsByUser(context).then(result => {
+                    const eventsAttended = result[0].map(el => ({...el, ...{isOrganizer:false}}));
+                    const eventsOrganized = result[1].map(el => ({...el, ...{isOrganizer:true}}));
+                    return [...eventsAttended, ...eventsOrganized];
+                });
+            }
+       }
 
     },
     Mutation: {
         addEvent: {
-            resolve(_: any, inputObject: inputForAddingEvent ): any {
-                console.log(inputObject);
-                return addEvent(inputObject.createdBy, inputObject.title, inputObject.type, inputObject.date,
+            resolve(_: any, inputObject: inputForAddingEvent, context): any {
+
+                return EventService.addEvent(inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline);
+                    inputObject.description, inputObject.deadline, inputObject.emails, context);
+            }
+        },
+        updateEvent: {
+            resolve(_: any, inputObject: inputForAddingEvent, context): any {
+                return EventService.updateEvent(inputObject.id, inputObject.title, inputObject.type, inputObject.date,
+                    inputObject.startTime, inputObject.endTime, inputObject.locationName,
+                    inputObject.description, inputObject.deadline, inputObject.emails, context);
             }
         }
     }

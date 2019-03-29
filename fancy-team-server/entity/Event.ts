@@ -1,4 +1,4 @@
-import {Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
 
 
 @Entity()
@@ -7,8 +7,8 @@ export class Event {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column('integer',{nullable: true})
-    createdBy?: number;
+    @Column('text',{nullable: false})
+    createdBy?: string;
 
     @Column('text', {nullable: true})
     createdAt?: string;
@@ -17,7 +17,7 @@ export class Event {
     title?: string;
 
     @Column('text', {nullable: true})
-    type?: string;
+    eventType?: string;
 
     @Column('text', {nullable: true})
     description?: string;

@@ -6,8 +6,8 @@ export class Carpool {
     @PrimaryGeneratedColumn()
     id?: number;
 
-    @Column('integer', {nullable: true})
-    driver?: number;
+    @Column('text', {nullable: false})
+    driver?: string;
 
     @Column('integer', {nullable: true})
     event?: number;
