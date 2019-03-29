@@ -5,39 +5,52 @@ import {UserEventStatus} from "../../entity/UserEventStatus";
 const client = new Client();
 client.connect();
 
+export class UserEventStatusService {
 
-export const findInviteesByEvent = (id: number) => {
-    const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
-    return userEventStatusRepository.find({event: id}).then((result) => {
-        return result;
-    }).catch((e) => {
-        console.log(e);
-    })
-};
 
-export const updateInvite = async(eventId: number, email: string, isAttending: boolean) => {
-    return getConnection()
-        .createQueryBuilder()
-        .update(UserEventStatus)
-        .set({isAttending:isAttending})
-        .where("event = :id", { id: eventId })
-        .andWhere("email = :email", { email: email })
-        .execute();
-};
+    public static findInviteesByEvent = async(id: number) => {
+        try {
+            const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+            return await userEventStatusRepository.find({event: id});
+        }
+          catch(error){
+           console.log(error);
+         }
 
-export const addInvitees = async(eventId: number, emails: string[]) => {
 
-    const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+    };
 
-    const invitees: UserEventStatus[] = [];
+    public static updateInvite = async (eventId: number, email: string, isAttending: boolean) => {
+        try {
+            return await getConnection()
+                .createQueryBuilder()
+                .update(UserEventStatus)
+                .set({isAttending: isAttending})
+                .where("event = :id", {id: eventId})
+                .andWhere("email = :email", {email: email})
+                .execute();
+        }
+        catch(error){
+            console.log(error);
+        }
+    };
 
-    for (let i = 0; i < emails.length; i++) {
-        const userEventStatus = new UserEventStatus();
-        userEventStatus.event = eventId;
-        userEventStatus.email = emails[i];
-        userEventStatus.isAttending = false;
-        invitees.push(userEventStatus);
-    }
-    return userEventStatusRepository.save(invitees);
 
-};
+  public static addInvitees = async (eventId: number, emails: string[]) => {
+
+        const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+
+        const invitees: UserEventStatus[] = [];
+
+        for (let i = 0; i < emails.length; i++) {
+            const userEventStatus = new UserEventStatus();
+            userEventStatus.event = eventId;
+            userEventStatus.email = emails[i];
+            userEventStatus.isAttending = false;
+            invitees.push(userEventStatus);
+        }
+        return await userEventStatusRepository.save(invitees);
+
+    };
+
+}

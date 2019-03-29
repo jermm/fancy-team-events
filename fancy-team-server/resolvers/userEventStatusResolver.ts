@@ -1,5 +1,5 @@
 
-import {findInviteesByEvent, addInvitees, updateInvite} from '../Services/UserEventStatus'
+import {UserEventStatusService} from '../Services/UserEventStatus'
 
 interface inputForUser {
     id: number
@@ -16,7 +16,7 @@ export const userEventStatusResolver = {
     Query: {
         invitees: {
             resolve(_: any, inputObject: inputForUser): any {
-                return findInviteesByEvent(inputObject.id);
+                return UserEventStatusService.findInviteesByEvent(inputObject.id);
             }
         }
 
@@ -24,13 +24,13 @@ export const userEventStatusResolver = {
     Mutation: {
         addInvitees: {
             resolve(_: any, inputObject: inputForAddingUserStatus): any {
-                return addInvitees(inputObject.eventId, inputObject.emails);
+                return UserEventStatusService.addInvitees(inputObject.eventId, inputObject.emails);
             }
         },
 
         updateInvite: {
             resolve(_: any, inputObject: inputForAddingUserStatus): any {
-                return updateInvite(inputObject.eventId, inputObject.email, inputObject.isAttending);
+                return UserEventStatusService.updateInvite(inputObject.eventId, inputObject.email, inputObject.isAttending);
             }
         }
     }

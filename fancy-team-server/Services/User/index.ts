@@ -1,5 +1,5 @@
 import { Client } from 'pg';
-import {UserEntity} from "../../entity/User";
+import {User} from "../../entity/User";
 
 
 const client = new Client();
@@ -8,7 +8,7 @@ client.connect();
 import {getConnection} from "typeorm";
 
 
-export class User {
+export class UserService {
 
     /**
      *
@@ -16,7 +16,7 @@ export class User {
      */
     public static async findUser(id: number):Promise<any> {
         try {
-            const userRepository = getConnection().getRepository(UserEntity);
+            const userRepository = getConnection().getRepository(User);
             return await userRepository.findOne({id});
         }
         catch(error) {
@@ -31,7 +31,7 @@ export class User {
      */
     public static async findUserByEmail(email: string):Promise<any> {
         try {
-            const userRepository = getConnection().getRepository(UserEntity);
+            const userRepository = getConnection().getRepository(User);
             return await userRepository.findOne({email});
         }
         catch(error) {
@@ -44,7 +44,7 @@ export class User {
      *
      */
     public static async findUsers(): Promise<any> {
-        const userRepository = getConnection().getRepository(UserEntity);
+        const userRepository = getConnection().getRepository(User);
         return userRepository.find()
 
     }
@@ -57,8 +57,8 @@ export class User {
      */
     public static async addUser(email: string, oAuthId: string): Promise<any> {
         try {
-            const userRepository = getConnection().getRepository(UserEntity);
-            let userEntity = new UserEntity();
+            const userRepository = getConnection().getRepository(User);
+            let userEntity = new User();
             userEntity.email = email;
             userEntity.oAuthId = oAuthId;
             await userRepository.save(userEntity);

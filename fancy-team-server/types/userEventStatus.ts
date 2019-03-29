@@ -1,5 +1,5 @@
 
-import {GraphQLBoolean} from "graphql";
+import {GraphQLBoolean, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLList, GraphQLSchema} from "graphql";
 
 
 // Define the User type
