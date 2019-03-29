@@ -14,10 +14,10 @@ export class UserService {
      *
      * @param id
      */
-    public static async findUser(id: number):Promise<any> {
+    public static async findUser(oAuthId: string):Promise<any> {
         try {
             const userRepository = getConnection().getRepository(User);
-            return await userRepository.findOne({id});
+            return await userRepository.findOne({oAuthId: oAuthId});
         }
         catch(error) {
             console.log(error);
@@ -32,7 +32,7 @@ export class UserService {
     public static async findUserByEmail(email: string):Promise<any> {
         try {
             const userRepository = getConnection().getRepository(User);
-            return await userRepository.findOne({email});
+            return await userRepository.findOne({email: email});
         }
         catch(error) {
             console.log(error);

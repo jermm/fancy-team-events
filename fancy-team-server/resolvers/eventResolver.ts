@@ -40,7 +40,8 @@ export const eventResolver = {
     Mutation: {
         addEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
-                return EventService.addEvent(inputObject.createdBy, inputObject.title, inputObject.type, inputObject.date,
+
+                return EventService.addEvent(context.UserId, inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
                     inputObject.description, inputObject.deadline, inputObject.emails);
             }

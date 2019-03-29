@@ -48,7 +48,7 @@ export class EventService {
     };
 
 
-    public static findEventsByUser = async (id: number) => {
+    public static findEventsByUser = async (id: string) => {
         try {
             const user = await UserService.findUser(id);
             const eventsAttended = await createQueryBuilder("event")
@@ -68,7 +68,7 @@ export class EventService {
     };
 
 
-    public static addEvent = async (createdById: number, title: string, tyoe: string, eventDate: string,
+    public static addEvent = async (createdById: string, title: string, tyoe: string, eventDate: string,
                       startTime: string, endTime: string, locationName: string,
                       description: string, deadline: string, emails: string[]) => {
       try {
