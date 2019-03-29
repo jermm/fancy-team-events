@@ -70,13 +70,13 @@ class Search extends Component {
   }
 
   render() {
-    console.log(this.props.handleChange);
     return (
-        <div>
+        <div className='autocomplete-container form-group'>
           <Script
               url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNPwjXXOCcQGSDjfCj6r4ClDPORVwswr4&libraries=places"
               onLoad={this.handleScriptLoad}
           />
+          <label htmlFor="autocomplete">Location</label>
           <input type='text' id="autocomplete" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );

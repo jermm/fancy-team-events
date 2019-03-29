@@ -32,3 +32,29 @@
 .table tr:hover {
   background-color: #ddd;
 }
+
+.event-list-page{
+  display: flex;
+}
+
+.event-list-page-header .event-header {
+  height:100vh;
+  box-shadow: 8px 0 10px -6px black;
+}
+
+.event-list-page-header .event-title{
+  font-size: 2.5vw;
+  text-align: center;
+}
+
+.event-list-page-create-event{
+  width: 100%;
+  padding:1rem;
+}
+
+.event-add-icon{
+  margin-left: auto;
+  width: 4rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}

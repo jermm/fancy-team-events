@@ -19,6 +19,8 @@ function Form(props) {
           onSubmit={(values, actions) => {
             console.log(values);
             console.log(actions);
+            console.log(typeof handleFormSubmitCallBack);
+            console.log(handleFormSubmitCallBack);
             handleFormSubmitCallBack(values, actions)
           }}
           render = { props => determineForm(headerTitle, type, props)}

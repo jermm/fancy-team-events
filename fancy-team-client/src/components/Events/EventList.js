@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import config from '../../config';
 import './EventList.scss';
 import Header from '../Header/header';
+import AddEvent from "../../assets/plus.svg";
 
 // Test data for events per user
 const event = [
@@ -24,9 +25,9 @@ export default withAuth(class EventList extends Component {
     }
 
     async getEvents() {
-        if (!this.state.events) {
             try {
                 const accessToken = await this.props.auth.getAccessToken();
+                console.log(accessToken);
                 /* global fetch */
                 const response = await fetch(config.resourceServer.eventsUrl, {
                     method: 'GET',
@@ -59,35 +60,40 @@ export default withAuth(class EventList extends Component {
                 /* eslint-disable no-console */
                 console.error(err);
             }
-        } this.setState({ event });
     }
 
     render() {
         return (
-            <div>
-                <Header />
-                <Link to="/event/create">
-                    <img src="https://img.icons8.com/color/48/000000/plus.png" alt="Create Event" className="event-add-icon" width="100" />
-                </Link>
-                {/* {this.state.failed === true && <Message error header="Failed to fetch events." />}
-                {this.state.failed === null && <p>Fetching Messages..</p>} */}
-                
-                <div>
-                    <table className='table'>
-                        <thead>
-                        <tr>
-                            <th colSpan="2">Events</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.events.map(event => 
-                        <tr id={event.id} key={event.id}>
-                            <td>{event.eventDate}</td>
-                            {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/view/${event.id}`}>{event.title}</Link></td>} 
-                        </tr>)}
-                        </tbody>
-                    </table>
+            <div className='event-list-page'>
+                <div className='event-list-page-header'>
+                  <Header />
                 </div>
+               <div className='event-list-page-create-event'>
+                   <div className='event-list-page-add-event'>
+                     <Link to="/event/create">
+                       <img src={AddEvent} alt="Create Event" className="event-add-icon" width="100" />
+                     </Link>
+                   </div>
+                 {/* {this.state.failed === true && <Message error header="Failed to fetch events." />}
+                {this.state.failed === null && <p>Fetching Messages..</p>} */}
+
+                 <div>
+                   <table className='table'>
+                     <thead>
+                     <tr>
+                       <th colSpan="2">Events</th>
+                     </tr>
+                     </thead>
+                     <tbody>
+                     {this.state.events.map(event =>
+                         <tr id={event.id} key={event.id}>
+                           <td>{event.eventDate}</td>
+                           {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/view/${event.id}`}>{event.title}</Link></td>}
+                         </tr>)}
+                     </tbody>
+                   </table>
+                 </div>
+               </div>
             </div>
         );
     }

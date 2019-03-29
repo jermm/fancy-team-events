@@ -10,10 +10,9 @@ function CreateEventForm (props) {
   } = props;
 
   return (
-      <>
+      <div className='create-event-form-container'>
         <h1>{headerTitle}</h1>
-      <form onSubmit={handleSubmit} className='CreateEventForm'>
-        <div className='createEventForm-SectionA'>
+      <form onSubmit={handleSubmit} className='create-event-form'>
           <FormInputs
               type = 'text'
               name = 'eventname'
@@ -60,14 +59,7 @@ function CreateEventForm (props) {
                 {...props}
             />
           </div>
-          <FromTextArea
-              name = 'description'
-              placeholder = 'Description'
-              labelText = 'Description'
-              id = 'Description'
-              wrapperDivClassName ='create-event-description'
-              {...props}
-          />
+          <Search {...props}/>
           <FromTextArea
               name = 'inviteEmails'
               placeholder = 'Enter Invitee Emails'
@@ -76,6 +68,7 @@ function CreateEventForm (props) {
               wrapperDivClassName ='create-event-eventInviteeList'
               {...props}
           />
+        <div className='create-event-form-search'>
           <FromSelect
               name ='tshirt'
               options = {['No', 'Yes']}
@@ -84,16 +77,21 @@ function CreateEventForm (props) {
               labelName ='Tshirt'
               {...props}
           />
-        </div>
+          <FromTextArea
+              name = 'description'
+              placeholder = 'Description'
+              labelText = 'Description'
+              id = 'Description'
+              wrapperDivClassName ='create-event-description'
+              {...props}
+          />
 
-        <div className='createEventForm-SectionB'>
-          <Search {...props}/>
+        </div>
           <div>
             <button type='submit' id='createEventForm-Submit-btn'>Submit</button>
           </div>
-        </div>
       </form>
-      </>
+      </div>
   )
 }
 

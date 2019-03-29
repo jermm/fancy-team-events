@@ -59,17 +59,46 @@ option{
   border-color: green;
 }
 
-.CreateEventForm{
-  display:flex;
+.create-event-container{
+  display: flex;
 }
 
-.createEventForm-SectionA, .createEventForm-SectionB{
+
+.create-event-container .event-header{
+  height:100vh;
+  box-shadow: 8px 0 10px -6px black;
+}
+
+.create-event-container .event-title{
+  font-size: 2.5vw;
+  text-align: center;
+}
+
+.create-event-form{
+  width: 100%;
+}
+
+.create-event-form-container{
+  flex-direction: row;
+  width: 100%;
   padding: 1rem;
-  width: 50%;
+}
+
+/*.CreateEventForm{*/
+/*display:flex;*/
+/*}*/
+
+.create-event-form-search{
+  display:flex;
 }
 
 .form-group{
   margin-bottom: 1rem;
+}
+
+.create-event-description{
+  width: 60%;
+  margin-left: auto;
 }
 
 label{
