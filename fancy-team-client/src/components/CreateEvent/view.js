@@ -5,13 +5,13 @@ import { withAuth } from '@okta/okta-react';
 
 const updateCountryFetch = (event) => {
   const query = JSON.stringify({
-    query: `mutation createEvent($title: String, $newType: String, $location: String)
-      { addEvent(title: $title, type: $newType, location: $location) { id }}
+    query: `mutation createEvent($title:String, $type: String, $locationName:String, $eventDate:String, $startTime:String, $endTime:String, $description:String)
+      { addEvent(title: $title, type:$type, date:$eventDate, location:$locationName,startTime:$startTime, endTime:$endTime, description:$description) { id }}
     `,
     variables: {
       title: event.eventname,
       type: event.eventType,
-      date: event.eventDate,
+      eventDate: event.eventDate,
       startTime: event.eventstart,
       endTime: event.eventend,
       locationName: event.autoComplete,

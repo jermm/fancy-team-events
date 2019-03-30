@@ -7,17 +7,17 @@ import Header from '../Header/header';
 import AddEvent from "../../assets/plus.svg";
 
 // Test data for events per user
-const event = [
-    {id: 1, eventDate: "12-10-19", title: "Pinic", isOrganizer: true},
-    {id: 2, eventDate: "01-13-20", title: "Happy hour", isOrganizer: false},
-    {id: 3, eventDate: "11-10-19", title: "Farewell lunchr", isOrganizer: false},
-    {id: 4, eventDate: "07-17-20", title: "Golf @ Shoreline", isOrganizer: true}
-];
+// const event = [
+//     {id: 1, eventDate: "12-10-19", title: "Pinic", isOrganizer: true},
+//     {id: 2, eventDate: "01-13-20", title: "Happy hour", isOrganizer: false},
+//     {id: 3, eventDate: "11-10-19", title: "Farewell lunchr", isOrganizer: false},
+//     {id: 4, eventDate: "07-17-20", title: "Golf @ Shoreline", isOrganizer: true}
+// ];
 
 export default withAuth(class EventList extends Component {
     constructor(props) {
         super(props);
-        this.state = { events: event, failed: null};
+        this.state = { events:[], failed: null};
     }
 
     componentDidMount() {
@@ -27,16 +27,19 @@ export default withAuth(class EventList extends Component {
     async getEvents() {
             try {
                 const accessToken = await this.props.auth.getAccessToken();
-                console.log(accessToken);
                 /* global fetch */
                 const response = await fetch(config.resourceServer.eventsUrl, {
-                    method: 'GET',
+                    method: 'POST',
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                        
                     },
+                    body: JSON.stringify({query: `{eventsByUser { id eventDate title isOrganizer}}`, variables: null})
                 });
-
-                if (response.status !== 200) {
+                const json = await response.json();
+                if (response
+                    .status !== 200) {
                     this.setState({ failed: true });
                     return;
                 }
@@ -54,7 +57,7 @@ export default withAuth(class EventList extends Component {
                 //         id: `event-${index}`,
                 //     };
                 // });
-                // this.setState({ events, failed: false });
+                this.setState({ events:json.data.eventsByUser, failed: false });
             } catch (err) {
                 this.setState({ failed: true });
                 /* eslint-disable no-console */
