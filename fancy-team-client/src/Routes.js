@@ -26,6 +26,7 @@ function Routes (){
               <Route exact path='/' component={ Login } />
               <SecureRoute exact path="/event" component= { EventList } />
               <SecureRoute exact path='/event/create' component={ CreateEvent } />
+              <SecureRoute exact path='/event/edit/:id' component={ CreateEvent } />
               <SecureRoute exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
               <Route component={ Handle404 } />
