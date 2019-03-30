@@ -65,13 +65,20 @@ mutation createEvent($title: String, $newType: String, $createdBy: Int!, $locati
 //     deadline: string,
 //     emails: string[]
 
-const updateCountryFetch = (event) => {
-  console.log(event);
-  console.log('@@@@@@@@');
 
+// title: event.eventname,
+//     type: event.eventType,
+//     date: event.eventDate,
+//     startTime: event.eventstart,
+//     endTime: event.eventend,
+//     locationName: event.autoComplete,
+//     description: event.description,
+//     emails: event.inviteEmails
+
+const updateCountryFetch = (event) => {
   const query = JSON.stringify({
-    query: `mutation createEvent($title: String, $newType: String, $createdBy: Int!, $location: String)
-      { addEvent(title: $title, type: $newType, createdBy: $createdBy, location: $location) { id }}
+    query: `mutation createEvent($title: String, $newType: String, $location: String)
+      { addEvent(title: $title, type: $newType, location: $location) { id }}
     `,
     variables: {
       title: event.eventname,

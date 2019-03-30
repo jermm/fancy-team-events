@@ -38,22 +38,3 @@ export class UserList extends Component {
         )
     }
 }
-
-handleMenuClick(e) {
-  fetch("/graphql", {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({query: `{users { id name email }}`, variables: {fromUSerName:''}})
-  }).then(res => {
-    return res.json();
-  }).then(body => {
-    if (body.data) {
-      const users = body.data.users.map((user) =>
-          <li key={user.id}> {user.name} : {user.email}</li>
-      );
-      this.setState({users: users});
-    }
-  });
-}
