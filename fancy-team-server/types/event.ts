@@ -52,7 +52,8 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 endTime: { type: GraphQLString },
                 location: { type: GraphQLString },
                 description: { type: GraphQLString },
-                deadlineDate: { type: GraphQLString }
+                deadlineDate: { type: GraphQLString },
+                emails:{type: new GraphQLList(GraphQLString)},
             }
         },
         updateEvent: {
