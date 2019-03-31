@@ -17,7 +17,6 @@ code {
     monospace;
 }
 
-
 .form-control{
   display: block;
   width: 100%;
@@ -42,7 +41,6 @@ code {
   box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-
 option{
   font-weight: normal;
   display: block;
@@ -59,34 +57,29 @@ option{
   border-color: green;
 }
 
-.create-event-container{
+.event-container{
   display: flex;
 }
 
-
-.create-event-container .event-header{
+.event-container .event-header{
   height:100vh;
   box-shadow: 8px 0 10px -6px black;
 }
 
-.create-event-container .event-title{
+.event-container .event-title{
   font-size: 2.5vw;
   text-align: center;
 }
 
-.create-event-form{
+.event-form{
   width: 100%;
 }
 
-.create-event-form-container{
+.event-form-container{
   flex-direction: row;
   width: 100%;
   padding: 1rem;
 }
-
-/*.CreateEventForm{*/
-/*display:flex;*/
-/*}*/
 
 .create-event-form-search{
   display:flex;
@@ -96,7 +89,7 @@ option{
   margin-bottom: 1rem;
 }
 
-.create-event-description{
+.event-form-description{
   width: 60%;
   margin-left: auto;
 }
@@ -106,7 +99,18 @@ label{
   margin-bottom: .5rem;
 }
 
-#createEventForm-Submit-btn{
+.linkButton{
+  border: 1px solid #61dafb;
+  padding: 0.5rem;
+  border-radius: .25rem;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+#event-form-submit-btn{
   font-size: 1rem;
   color: black;
   background-color: transparent;
@@ -115,7 +119,7 @@ label{
   border-radius: .25rem;
 }
 
-#createEventForm-Submit-btn:hover{
+#event-form-submit-btn:hover, .linkButton:hover{
   cursor:pointer;
   background-color: white;
   color: #61dafb;

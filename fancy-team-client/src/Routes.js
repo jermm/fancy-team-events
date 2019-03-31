@@ -9,6 +9,7 @@ import Login from './components/Login/view'
 import EventList from './components/Events/EventList';
 import Handle404 from './components/404/view';
 import CreateEvent from './components/CreateEvent/view';
+import EditEvent from './components/EditEvent/view';
 import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import config from './config';
 import store from './Redux/store';
@@ -26,7 +27,7 @@ function Routes (){
               <Route exact path='/' component={ Login } />
               <SecureRoute exact path="/event" component= { EventList } />
               <SecureRoute exact path='/event/create' component={ CreateEvent } />
-              <SecureRoute exact path='/event/edit/:id' component={ CreateEvent } />
+              <SecureRoute exact path='/event/edit/:id' component={ EditEvent } />
               <SecureRoute exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
               <Route component={ Handle404 } />

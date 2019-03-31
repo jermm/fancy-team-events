@@ -8,12 +8,13 @@ function FormInputs (props) {
     labelText,
     id,
     wrapperDivClassName,
-      handleChange
+    handleChange,
+    value
   } = props;
   return (
       <div className={`${wrapperDivClassName} form-group`}>
         <label htmlFor={id}>{labelText}</label>
-        <input type={type} name={name} placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
+        <input value={value} type={type} name={name} placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
       </div>
   )
 }

@@ -1,23 +1,15 @@
 import { withAuth } from '@okta/okta-react';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import config from '../../config';
 import './EventList.scss';
 import Header from '../Header/header';
 import AddEvent from "../../assets/plus.svg";
+import {getEventByUser} from "../../services/events";
 
-// Test data for events per user
-// const event = [
-//     {id: 1, eventDate: "12-10-19", title: "Pinic", isOrganizer: true},
-//     {id: 2, eventDate: "01-13-20", title: "Happy hour", isOrganizer: false},
-//     {id: 3, eventDate: "11-10-19", title: "Farewell lunchr", isOrganizer: false},
-//     {id: 4, eventDate: "07-17-20", title: "Golf @ Shoreline", isOrganizer: true}
-// ];
-
-export default withAuth(class EventList extends Component {
+class EventList extends Component {
     constructor(props) {
         super(props);
-        this.state = { events:[], failed: null};
+        this.state = { events:[]};
     }
 
     componentDidMount() {
@@ -27,39 +19,9 @@ export default withAuth(class EventList extends Component {
     async getEvents() {
             try {
                 const accessToken = await this.props.auth.getAccessToken();
-                /* global fetch */
-                const response = await fetch(config.resourceServer.eventsUrl, {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        'Content-Type': 'application/json'
-                        
-                    },
-                    body: JSON.stringify({query: `{eventsByUser { id eventDate title isOrganizer}}`, variables: null})
-                });
-                const json = await response.json();
-                if (response
-                    .status !== 200) {
-                    this.setState({ failed: true });
-                    return;
-                }
-
-                // let index = 0;
-                // const data = await response.json();
-                // const events = data.events.map((event) => {
-                //     const date = new Date(event.date);
-                //     const day = date.toLocaleDateString();
-                //     const time = date.toLocaleTimeString();
-                //     index += 1;
-                //     return {
-                //         date: `${day} ${time}`,
-                //         text: event.text,
-                //         id: `event-${index}`,
-                //     };
-                // });
-                this.setState({ events:json.data.eventsByUser, failed: false });
+                const response = await getEventByUser(accessToken);
+                this.setState({ events:response.eventsByUser, failed: false });
             } catch (err) {
-                this.setState({ failed: true });
                 /* eslint-disable no-console */
                 console.error(err);
             }
@@ -77,9 +39,6 @@ export default withAuth(class EventList extends Component {
                        <img src={AddEvent} alt="Create Event" className="event-add-icon" width="100" />
                      </Link>
                    </div>
-                 {/* {this.state.failed === true && <Message error header="Failed to fetch events." />}
-                {this.state.failed === null && <p>Fetching Messages..</p>} */}
-
                  <div>
                    <table className='table'>
                      <thead>
@@ -100,4 +59,6 @@ export default withAuth(class EventList extends Component {
             </div>
         );
     }
-});
+}
+
+export default withAuth(EventList);

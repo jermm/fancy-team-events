@@ -1,10 +1,10 @@
 import React from 'react';
 import {Formik} from 'formik';
-import CreateEventForm from './CreateEventForm';
+import EventForm from './EventForm';
 
 function determineForm(headerTitle, type, props){
-  if(type === 'createEvent'){
-    return <CreateEventForm headerTitle={headerTitle} {...props}/>
+  if(type === 'createEvent' || type === 'editEvent'){
+    return <EventForm headerTitle={headerTitle} {...props}/>
   }
 }
 
@@ -12,15 +12,15 @@ function Form(props) {
   const {
     type,
     headerTitle,
-    handleFormSubmitCallBack
+    handleFormSubmitCallBack,
+    formInitialValues,
+    enableReinitialize
   } = props;
   return (
       <Formik
+          enableReinitialize={enableReinitialize}
+          initialValues={formInitialValues}
           onSubmit={(values, actions) => {
-            console.log(values);
-            console.log(actions);
-            console.log(typeof handleFormSubmitCallBack);
-            console.log(handleFormSubmitCallBack);
             handleFormSubmitCallBack(values, actions)
           }}
           render = { props => determineForm(headerTitle, type, props)}
