@@ -61,7 +61,5 @@ export const updateEventById = async (accessToken, eventId, event) => {
   };
   const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
   const responseJson = await response.json();
-  console.log(responseJson);
-  console.log('^^^^^^^^^^^');
   return responseJson.data;
 };
