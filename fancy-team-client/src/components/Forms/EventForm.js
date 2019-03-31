@@ -9,7 +9,8 @@ function EventForm(props) {
   const {
     handleSubmit,
     headerTitle,
-    values
+    values,
+    submitBtnText
   } = props;
 
   return (
@@ -96,7 +97,7 @@ function EventForm(props) {
             />
           </div>
           <div>
-            <button type='submit' id='event-form-submit-btn'>Submit</button>
+            <button type='submit' id='event-form-submit-btn'>{submitBtnText}</button>
             <LinkButton link='/event' text='EventsPage'/>
           </div>
         </form>

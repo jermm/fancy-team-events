@@ -49,6 +49,7 @@ class CreateEvent extends Component {
           <Form
               type='createEvent'
               headerTitle="Create Event"
+              submitBtnText='Create'
               handleFormSubmitCallBack={this.formCallBack(this.state.accessToken)}
               formInitialValues={this.state.formInitialValue}/>
         </div>

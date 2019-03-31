@@ -14,7 +14,7 @@ class EditComponent extends Component {
         description:'',
         startTime:'',
         endTime:'',
-        type:''
+        eventType:'SelectEvent'
       },
       eventId: Number(this.props.match.params.id),
       enableReinitialize: false,
@@ -58,6 +58,7 @@ class EditComponent extends Component {
               formInitialValues={FormValues}
               type='editEvent'
               headerTitle="Edit Event"
+              submitBtnText='Edit'
               handleFormSubmitCallBack={this.editEventCallback()}
           />
         </div>
