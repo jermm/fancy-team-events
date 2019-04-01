@@ -7,6 +7,7 @@
     "@okta/oidc-middleware": "0.0.15",
     "@types/bluebird": "^3.5.18",
     "@types/body-parser": "^1.16.7",
+    "@types/config": "0.0.34",
     "@types/cors": "^2.8.4",
     "@types/dotenv": "^4.0.2",
     "@types/express": "^4.0.39",
@@ -15,12 +16,14 @@
     "@types/node": "^11.11.7",
     "@types/reflect-metadata": "0.1.0",
     "@types/request": "^2.0.8",
+    "config": "^3.0.1",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
     "merge-graphql-schemas": "^1.5.8",
+    "node-config-ts": "^2.2.3",
     "pg": "^7.9.0",
     "pg-format": "^1.0.4",
     "reflect-metadata": "^0.1.13",
@@ -40,6 +43,7 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "nodemon server",
-    "prod": "node server"
+    "prod": "node server",
+    "postinstall": "node-config-ts"
   }
 }

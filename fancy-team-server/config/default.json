@@ -1,0 +1,19 @@
+{
+  "okta": {
+    "resourceServer": {
+      "port": 4000,
+      "oidc": {
+        "issuer": "https://dev-751219.okta.com/oauth2/default"
+      },
+      "assertClaims": {
+        "aud": "api://default",
+        "cid": "0oaeua30mnzGCYZcN356"
+      }
+    }
+  },
+  "sendgrid": {
+    "sendgridSendAPI" : "https://api.sendgrid.com/v3/mail/send",
+    "sendgridApiKey": "use-env-vars",
+    "sendgridTemplateId": "d-3f6b1634798c450ebd64557a900b0fab"
+  }
+}

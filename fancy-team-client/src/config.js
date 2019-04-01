@@ -1,6 +1,6 @@
 const Config = {
     oidc: {
-      clientId: '0oadrmminV9IDToNc356',
+      clientId: '0oaeua30mnzGCYZcN356',
       issuer: 'https://dev-751219.okta.com/oauth2/default',
       redirectUri: 'http://localhost:3000/implicit/callback',
       scope: 'profile email',

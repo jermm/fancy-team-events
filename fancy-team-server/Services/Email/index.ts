@@ -1,7 +1,7 @@
 import requestPromise from 'request-promise';
-import * as emailConfig from "../../config/email-config.json";
+import {config} from 'node-config-ts'
 import {IEmail, IEmailOptions} from "../../common/external";
-
+const emailConfig = config.sendgrid;
 
 export class EmailService {
 
@@ -9,7 +9,6 @@ export class EmailService {
 
     constructor() {
         let sendgridApiKey: string = process.env.SENDGRID_API_KEY ? process.env.SENDGRID_API_KEY : emailConfig.sendgridApiKey;
-        
         this.options = {
             method: 'POST',
             uri: emailConfig.sendgridSendAPI,

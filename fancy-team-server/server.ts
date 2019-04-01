@@ -2,6 +2,7 @@
 import 'reflect-metadata';
 import express from 'express';
 import cors from 'cors';
+process.env["NODE_CONFIG_TS_DIR"] = __dirname + "/config";
 // Import all routes
 import { GraphQLRoutes } from './routes';
 import {User} from "./entity/User";
@@ -9,6 +10,7 @@ import {Event} from "./entity/Event";
 import {Carpool} from "./entity/Carpool";
 import {UserEventStatus} from "./entity/UserEventStatus";
 import {createConnection} from "typeorm";
+
 
 createConnection({
     type: "postgres",
