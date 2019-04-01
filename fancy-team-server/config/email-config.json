@@ -1,5 +1,0 @@
-{
-  "sendgridSendAPI" : "https://api.sendgrid.com/v3/mail/send",
-  "sendgridApiKey": "abcdef",
-  "sendgridTemplateId": "d-3f6b1634798c450ebd64557a900b0fab"
-}
