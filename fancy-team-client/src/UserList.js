@@ -14,7 +14,7 @@ export class UserList extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({query: `{users { id name email}}`, variables: null})
+            body: JSON.stringify({query: `{users { id name email }}`, variables: {fromUSerName:''}})
         }).then(res => {
             return res.json();
         }).then(body => {

@@ -5,7 +5,7 @@ import {IAddUserEntity, IUserEntity} from "../common/external";
 
 
 interface inputForUser {
-    id: number
+    id: string
 }
 
 export const userResolver = {

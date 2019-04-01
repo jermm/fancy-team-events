@@ -1,5 +1,5 @@
 
-import {GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString} from "graphql";
+import {GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLSchema, GraphQLString, GraphQLList, GraphQLBoolean} from "graphql";
 
 const EventType: GraphQLObjectType = new GraphQLObjectType({
     name: 'Event',
@@ -7,13 +7,15 @@ const EventType: GraphQLObjectType = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLInt) },
         title: { type: GraphQLString },
         createdBy: {type: GraphQLString},
-        type: { type: GraphQLString },
-        date: { type: GraphQLString },
+        organizerEmail: {type : GraphQLString },
+        eventType: { type: GraphQLString },
+        eventDate: { type: GraphQLString },
         startTime: { type: GraphQLString },
         endTime: { type: GraphQLString },
         locationName: { type: GraphQLString },
         description: { type: GraphQLString },
-        deadlineDate: { type: GraphQLString }
+        deadlineDate: { type: GraphQLString },
+        isOrganizer: { type: GraphQLBoolean }
     }
 });
 
@@ -25,14 +27,12 @@ const EventQuery: GraphQLObjectType = new GraphQLObjectType({
             // `args` describes the arguments that the `user` query accepts
             args: {
                 id: { type: new GraphQLNonNull(GraphQLInt) },
-                createdBy: { type: GraphQLInt }
+                createdBy: { type: GraphQLString }
             }
         },
         eventsByUser: {
-            type: EventType,
-            args: {
-                createdBy: { type: new GraphQLNonNull(GraphQLInt) }
-              }
+            type: new GraphQLList(EventType),
+            args: {}
 
         }
     }
@@ -47,12 +47,13 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 type: { type: GraphQLString },
                 title: { type: GraphQLString },
                 date: { type: GraphQLString },
-                createdBy: { type: new GraphQLNonNull(GraphQLInt) },
+                createdBy: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endTime: { type: GraphQLString },
-                location: { type: GraphQLString },
+                locationName: { type: GraphQLString },
                 description: { type: GraphQLString },
-                deadlineDate: { type: GraphQLString }
+                deadlineDate: { type: GraphQLString },
+                emails:{type: new GraphQLList(GraphQLString)},
             }
         },
         updateEvent: {
@@ -64,7 +65,7 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 date: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endTime: { type: GraphQLString },
-                location: { type: GraphQLString },
+                locationName: { type: GraphQLString },
                 description: { type: GraphQLString },
                 deadlineDate: { type: GraphQLString }
             }

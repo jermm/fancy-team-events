@@ -6,6 +6,7 @@ import {GraphQLBoolean, GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNon
 const userEventStatusType: GraphQLObjectType = new GraphQLObjectType({
     name: 'UserEventStatus',
     fields: {
+        userId: { type: GraphQLString },
         email: { type: GraphQLString },
         eventId: { type: GraphQLInt },
         isAttending: { type: GraphQLBoolean }
@@ -34,6 +35,7 @@ const userEventStatusMutation = new GraphQLObjectType( {
                 type: userEventStatusType,
                 args: {
                     eventId: { type: GraphQLInt },
+                    userId: { type: GraphQLString },
                     emails: { type: new GraphQLList(GraphQLString) },
                     isAttending: { type: GraphQLBoolean },
                 }
