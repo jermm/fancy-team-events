@@ -22,7 +22,7 @@ in `fancy-team-events/fancy-team-client`, `npm start`
 in `fancy-team-events/fancy-team-server`, 
 ```
 tsc
-node server.js OR npm/yarn dev/prod
+node server.js OR npm/yarn dev/prod OR `npm run start`
 
 npm/yarn dev (supports live reloading using nodemon)
 npm/yarn prod (runs node server.js)
