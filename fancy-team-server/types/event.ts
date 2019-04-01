@@ -50,7 +50,7 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 createdBy: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endTime: { type: GraphQLString },
-                location: { type: GraphQLString },
+                locationName: { type: GraphQLString },
                 description: { type: GraphQLString },
                 deadlineDate: { type: GraphQLString },
                 emails:{type: new GraphQLList(GraphQLString)},
@@ -65,7 +65,7 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 date: { type: GraphQLString },
                 startTime: { type: GraphQLString },
                 endTime: { type: GraphQLString },
-                location: { type: GraphQLString },
+                locationName: { type: GraphQLString },
                 description: { type: GraphQLString },
                 deadlineDate: { type: GraphQLString }
             }

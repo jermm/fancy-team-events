@@ -40,7 +40,7 @@ class Search extends Component {
     // Initialize Google Autocomplete
     /*global google*/ // To disable any eslint 'google not defined' errors
     this.autocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('autocomplete'),
+        document.getElementById('locationName'),
         options,
     );
 
@@ -76,8 +76,8 @@ class Search extends Component {
               url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNPwjXXOCcQGSDjfCj6r4ClDPORVwswr4&libraries=places"
               onLoad={this.handleScriptLoad}
           />
-          <label htmlFor="autocomplete">Location</label>
-          <input type='text' id="autocomplete" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
+          <label htmlFor="locationName">Location</label>
+          <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );
   }
