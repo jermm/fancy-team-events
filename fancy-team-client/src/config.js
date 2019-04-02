@@ -1,5 +1,3 @@
-console.log(process.env);
-
 const {
   REACT_APP_clientid,
   REACT_APP_issuer,
