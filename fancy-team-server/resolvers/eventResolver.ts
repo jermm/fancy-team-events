@@ -49,9 +49,10 @@ export const eventResolver = {
         },
         updateEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
+                console.log(inputObject);
                 return EventService.updateEvent(inputObject.id, inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.emails, context);
+                    inputObject.description, inputObject.deadline, inputObject.inviteEmails, context);
             }
         }
     }

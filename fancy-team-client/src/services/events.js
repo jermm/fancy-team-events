@@ -43,7 +43,7 @@ export const createEvent = async (accessToken, eventFormValues) => {
 
 export const getEventById = async (accessToken, eventId) => {
   const query = {
-    query: `query GetEvent($id:Int!) {event(id:$id) {id title eventDate startTime endTime locationName description eventType }}`,
+    query: `query GetEvent($id:Int!) {event(id:$id) {id title eventDate startTime endTime locationName description eventType inviteEmails }}`,
     variables: {id: eventId}
   };
   const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
@@ -55,8 +55,8 @@ export const updateEventById = async (accessToken, eventId, event) => {
   // const {eventName, eventType, eventDate, eventStart, eventEnd, autoComplete, description, inviteEmails} = event;
 
   const query = {
-    query: `mutation EditEvent($id:Int!, $title:String, $type: String, $locationName:String, $eventDate:String, $startTime:String, $endTime:String, $description:String)
-      { updateEvent(id:$id, title: $title, type:$type, date:$eventDate, location:$locationName,startTime:$startTime, endTime:$endTime, description:$description) { id }}
+    query: `mutation EditEvent($id:Int!, $title:String, $type: String, $locationName:String,  $inviteEmails:String,  $eventDate:String, $startTime:String, $endTime:String, $description:String)
+      { updateEvent(id:$id, title: $title, type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description) { id }}
     `,
     variables: {id: eventId, ...event}
   };
