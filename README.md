@@ -1,6 +1,8 @@
 # fancy-team-events
 plan and hound people to do fun stuff
 
+don't worry about ci builds failing, we haven't set up the config yet 🙊
+
 ## Quick Start
 
 1. clone repo
