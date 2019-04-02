@@ -17,7 +17,10 @@ export class EventService {
     public static findEvent = async (id: number) => {
         try {
             const eventRepository = getConnection().getRepository(Event);
-            return await eventRepository.findOne({id: id});
+            return await eventRepository.findOne({id: id}).then(function (res) {
+                console.log(res);
+                return res;
+            });
         }
         catch (error) {
             console.log(error);
@@ -30,16 +33,20 @@ export class EventService {
 
     public static updateEvent = async (id: number, title: string, eventType: string, eventDate: string,
                                        startTime: string, endTime: string, locationName: string,
-                                       description: string, deadline: string, emails: string[], context) => {
+                                       description: string, deadline: string, emails: string, context) => {
        try {
-           await UserEventStatusService.addInvitees(id, emails);
+           let parsedEmails = [];
+           if (emails.length > 0) {
+               parsedEmails = emails.split(',');
+           }
+           await UserEventStatusService.addInvitees(id, parsedEmails);
            await getConnection()
                .createQueryBuilder()
                .update(Event)
                .set({
                    eventType: eventType, title: title, eventDate: eventDate,
                    startTime: startTime, endTime: endTime, locationName: locationName,
-                   description: description, deadlineDate: deadline
+                   description: description, deadlineDate: deadline, inviteEmails: parsedEmails
                })
                .where("id = :id", {id: id})
                .execute();
@@ -94,7 +101,7 @@ export class EventService {
           event.locationName = locationName;
           event.description = description;
           event.deadlineDate = deadline;
-          
+
           let parsedEmails = emails.split(',');
 
           if(parsedEmails.length > 0) {
@@ -104,6 +111,8 @@ export class EventService {
               event_name: title
           });
         }
+
+          console.log(event);
        
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
