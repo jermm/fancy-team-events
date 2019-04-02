@@ -1,12 +1,12 @@
 const Config = {
     oidc: {
-      clientId: '0oadrmminV9IDToNc356',
+      clientId: '0oaeua30mnzGCYZcN356',
       issuer: 'https://dev-751219.okta.com/oauth2/default',
-      redirectUri: 'http://34.211.115.42/implicit/callback',
+      redirectUri: 'http://localhost:3000/implicit/callback',
       scope: 'profile email',
     },
     resourceServer: {
-      eventsUrl: 'http://34.211.115.42/graphql',
+      eventsUrl: 'http://localhost:4000/graphql',
     }
 };
 
