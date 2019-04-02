@@ -35,6 +35,9 @@ export class EmailService {
                 }],
                 template_id: emailConfig.sendgridTemplateId
             };
+            
+
+            console.log(this.options);
 
             await requestPromise(this.options); // call sendgrid to send the email
 

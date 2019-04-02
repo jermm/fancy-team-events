@@ -76,7 +76,7 @@ export class EventService {
 
     public static addEvent = async (title: string, tyoe: string, eventDate: string,
                       startTime: string, endTime: string, locationName: string,
-                      description: string, deadline: string, emails = [], context) => {
+                      description: string, deadline: string, emails: string, context) => {
       try {
           const emailService = new EmailService();
           const eventRepository = getConnection().getRepository(Event);
@@ -94,16 +94,19 @@ export class EventService {
           event.locationName = locationName;
           event.description = description;
           event.deadlineDate = deadline;
+          
+          let parsedEmails = emails.split(',');
 
-          if(emails.length > 0) {
-          await emailService.send(req.user.email, emails, {
-              event_link: 'www.gooogle.com',
+          if(parsedEmails.length > 0) {
+              console.log(parsedEmails);
+          await emailService.send(req.user.email, parsedEmails, {
+              event_link: 'www.google.com',
               event_name: title
           });
         }
        
           const eventSaved = await eventRepository.save(event);
-                             await UserEventStatusService.addInvitees(eventSaved.id, emails);
+                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;
         
       }

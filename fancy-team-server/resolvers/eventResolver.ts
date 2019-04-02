@@ -16,6 +16,7 @@ interface inputForAddingEvent {
     locationName: string,
     description: string,
     deadline: string,
+    inviteEmails: string,
     emails: string[]
 }
 
@@ -43,7 +44,7 @@ export const eventResolver = {
 
                 return EventService.addEvent(inputObject.title, inputObject.type, inputObject.date,
                     inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.emails, context);
+                    inputObject.description, inputObject.deadline, inputObject.inviteEmails, context);
             }
         },
         updateEvent: {
