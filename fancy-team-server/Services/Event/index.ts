@@ -7,6 +7,7 @@ import {EmailService} from "../../services/Email";
 import {UserService} from "../../services/User";
 
 import {UserEventStatusService} from "../../services/UserEventStatus"
+import {hostname} from "os";
 
 
 const client = new Client();
@@ -95,16 +96,19 @@ export class EventService {
           event.description = description;
           event.deadlineDate = deadline;
 
-          if(emails.length > 0) {
-          await emailService.send(req.user.email, emails, {
-              event_link: 'www.gooogle.com',
-              event_name: title
-          });
-        }
+
        
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, emails);
-                             return eventSaved;
+
+          if (emails.length > 0) {
+              await emailService.send(req.user.email, emails, {
+                  event_link: `http://${hostname}: ${port}/event/${eventSaved.id}`,
+                  event_name: title,
+                  event_deadline: deadline
+              });
+          }
+          return eventSaved;
         
       }
       catch(error){

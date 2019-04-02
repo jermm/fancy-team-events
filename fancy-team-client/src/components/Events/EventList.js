@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import './EventList.scss';
 import Header from '../Header/header';
 import AddEvent from "../../assets/plus.svg";
+import deleteEvent from "../../assets/delete.png";
+
+import editEvent from "../../assets/edit.png";
+import viewEvent from "../../assets/eye.png";
+
 import {getEventByUser} from "../../services/events";
 
 class EventList extends Component {
@@ -40,17 +45,27 @@ class EventList extends Component {
                      </Link>
                    </div>
                  <div>
-                   <table className='table'>
-                     <thead>
+                   <table className='event-table'>
                      <tr>
-                       <th colSpan="2">Events</th>
+                         <th>EventDate</th>
+                         <th>Title</th>
                      </tr>
-                     </thead>
                      <tbody>
                      {this.state.events.map(event =>
                          <tr id={event.id} key={event.id}>
                            <td>{event.eventDate}</td>
-                           {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/view/${event.id}`}>{event.title}</Link></td>}
+                             <td>{event.title}</td>
+                            <td>
+                                {event.isOrganizer ? [
+                                <Link to="/event/create">
+                                <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
+                            </Link>, <Link to={`/event/edit/${event.id}`}>
+                                    <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
+                                </Link> ] : (
+                                <Link to={`/event/${event.id}`}>
+                                    <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
+                                </Link> )}
+                            </td>
                          </tr>)}
                      </tbody>
                    </table>
@@ -62,3 +77,5 @@ class EventList extends Component {
 }
 
 export default withAuth(EventList);
+
+// {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/${event.id}`}>{event.title}</Link></td>}

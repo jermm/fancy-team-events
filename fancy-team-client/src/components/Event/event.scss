@@ -1,0 +1,22 @@
+$color-blue: #0000FF;
+
+.event-field {
+  display: flex;
+  justify-content: flex-end;
+  padding: .5em;
+  &-key {
+    padding: .5em 1em .5em 0;
+    flex:1;
+  }
+  &-value {
+    flex: 2;
+  }
+}
+.event-separator{
+  display:block;
+  height: 1px;
+  border:0;
+  border-top:1px solid $color-blue;
+  margin: 1em 0;
+  padding: 0;
+}
