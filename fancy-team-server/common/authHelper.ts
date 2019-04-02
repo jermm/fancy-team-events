@@ -1,12 +1,12 @@
 import * as express from 'express';
 import OktaJwtVerifier from '@okta/jwt-verifier';
-import * as oktaConfig from'../config/okta-config.json';
+import {config} from 'node-config-ts'
 import {FancyEventsRequest} from "./external";
 import {UserService} from "../services/User";
 
 const oktaJwtVerifier = new OktaJwtVerifier({
-    issuer: oktaConfig.resourceServer.oidc.issuer,
-    assertClaims: oktaConfig.resourceServer.assertClaims
+    issuer: config.okta.resourceServer.oidc.issuer,
+    assertClaims: config.okta.resourceServer.assertClaims
 });
 
 

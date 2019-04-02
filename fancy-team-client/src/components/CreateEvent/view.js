@@ -26,6 +26,7 @@ class CreateEvent extends Component {
 
   formCallBack(accessToken) {
     return (async function createEventCallback(event, action) {
+      console.log(event);
       await createEvent(accessToken, event);
     });
   }

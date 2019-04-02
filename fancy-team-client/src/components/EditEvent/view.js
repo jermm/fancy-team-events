@@ -14,6 +14,7 @@ class EditComponent extends Component {
         description:'',
         startTime:'',
         endTime:'',
+        location:'',
         eventType:'SelectEvent'
       },
       eventId: Number(this.props.match.params.id),
