@@ -1,4 +1,4 @@
-import {EventService} from '../Services/Event';
+import {EventService} from '../services/Event';
 import {Event} from  '../entity/Event';
 
 interface inputForEvent {

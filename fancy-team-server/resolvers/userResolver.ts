@@ -1,5 +1,5 @@
 
-import {UserService} from '../Services/User'
+import {UserService} from '../services/User'
 import {User} from "../entity/User";
 import {IAddUserEntity, IUserEntity} from "../common/external";
 
