@@ -6,6 +6,8 @@ interface inputForEvent {
 }
 
 interface inputForAddingEvent {
+    eventType: string,
+    eventDate: string,
     id: number,
     createdBy: number,
     title: string,
@@ -41,20 +43,29 @@ export const eventResolver = {
     Mutation: {
         addEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
-
-                return EventService.addEvent(inputObject.title, inputObject.type, inputObject.date,
-                    inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.inviteEmails, context);
+                convertInputObject(inputObject);
+                return EventService.addEvent(inputObject, context);
             }
         },
         updateEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
-                console.log(inputObject);
-                return EventService.updateEvent(inputObject.id, inputObject.title, inputObject.type, inputObject.date,
-                    inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.inviteEmails, context);
+                convertInputObject(inputObject);]
+                return EventService.updateEvent(inputObject, context);
             }
         }
     }
 
 };
+
+function convertInputObject(inputObject) {
+    // TODO move conversion
+    if (inputObject.type) {
+        inputObject.eventType = inputObject.type;
+        delete inputObject.type;
+    }
+    if (inputObject.date) {
+        inputObject.eventDate = inputObject.date;
+        delete inputObject.date;
+    }
+
+}

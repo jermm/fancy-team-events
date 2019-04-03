@@ -17,6 +17,7 @@ class EditComponent extends Component {
         location:'',
         eventType:'SelectEvent'
       },
+        formStartValue: {},
       eventId: Number(this.props.match.params.id),
       enableReinitialize: false,
       accessToken:''
@@ -24,24 +25,26 @@ class EditComponent extends Component {
   }
 
   editEventCallback() {
-    const {accessToken, eventId} = this.state;
+    const {accessToken, eventId, formStartValue} = this.state;
     return(async function editEventFnCallback(event, action){
-      await updateEventById(accessToken, eventId, event);
+      await updateEventById(accessToken, eventId, formStartValue, event);
     });
   }
 
   async componentDidMount() {
     const token = await this.props.auth.getAccessToken();
     const fetchEventById = await getEventById(token, this.state.eventId);
+    const initValue = fetchEventById.event;
     this.setState({
-      formInitialValue: fetchEventById.event,
+      formInitialValue: initValue,
+      formStartValue: initValue,
       enableReinitialize: true,
       accessToken:token
     });
   }
 
   render() {
-    const {title, eventDate, description, startTime, endTime, locationName,  eventType, inviteEmails} = this.state.formInitialValue;
+    const {title, eventDate, description, startTime, endTime, locationName,  type, inviteEmails} = this.state.formInitialValue;
     console.log(this.state.formInitialValue);
     const FormValues = {
       title: title,
@@ -49,7 +52,7 @@ class EditComponent extends Component {
       description: description,
       startTime: startTime,
       endTime: endTime,
-      type: eventType,
+      type: type,
       locationName: locationName,
       inviteEmails: inviteEmails
     };
