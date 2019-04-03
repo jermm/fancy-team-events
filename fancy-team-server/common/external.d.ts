@@ -20,11 +20,12 @@ export interface IAddUserEntity {
 }
 
 interface IEmail {
-    email: string
+    email: string,
 }
 
 interface IPersonalizations {
     to: IEmail[],
+    bcc: IEmail[],
     dynamic_template_data: any
 }
 export interface ISendGridApiBody {

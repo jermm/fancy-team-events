@@ -14,6 +14,7 @@ class Login extends Component {
 
   async componentDidMount() {
     this.checkAuthentication();
+    document.title = "Fancy Events | Login"
   }
 
   async login() {

@@ -72,7 +72,8 @@ function EventForm(props) {
           <FromTextArea
               name='inviteEmails'
               placeholder='Enter Invitee Emails'
-              labelText='EventInviteeList'
+              value={values.inviteEmails}
+              labelText='Invitee List'
               id='eventInviteeList'
               wrapperDivClassName='event-form-eventInviteeList'
               {...props}

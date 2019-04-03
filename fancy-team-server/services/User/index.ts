@@ -35,7 +35,6 @@ export class UserService {
             return await userRepository.findOne({email: email});
         }
         catch(error) {
-            console.log(error);
             throw error;
         }
     }

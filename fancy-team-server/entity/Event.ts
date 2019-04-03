@@ -40,6 +40,9 @@ export class Event {
     @Column('text', {nullable: true})
     locationAddress?: string;
 
+    @Column('text', {nullable: true, array: true})
+    inviteEmails?: Array<string>;
+
     @Column('text', {nullable: true})
     deadlineDate?: string;
 
