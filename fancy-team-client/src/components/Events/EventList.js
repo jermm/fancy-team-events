@@ -33,15 +33,15 @@ function EventList(props){
                            <td>{event.eventDate}</td>
                              <td>{event.title}</td>
                             <td>
+                                <Link to={`/event/${event.id}`}>
+                                    <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
+                                </Link>
                                 {event.isOrganizer ? [
                                 <Link to="/event/create">
                                 <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
                             </Link>, <Link to={`/event/edit/${event.id}`}>
                                     <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
-                                </Link> ] : (
-                                <Link to={`/event/${event.id}`}>
-                                    <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
-                                </Link> )}
+                                </Link> ] : null}
                             </td>
                          </tr>)}
                      </tbody>
