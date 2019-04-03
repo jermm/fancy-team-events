@@ -31,24 +31,29 @@ export class EventService {
     }
 
 
-    public static updateEvent = async (id: number, title: string, eventType: string, eventDate: string,
-                                       startTime: string, endTime: string, locationName: string,
-                                       description: string, deadline: string, emails: string, context) => {
+    public static updateEvent = async (updateObject, context) => {
        try {
+
            let parsedEmails = [];
-           if (emails.length > 0) {
-               parsedEmails = emails.split(',');
+           let onlyEmailChange = true;
+           if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
+               parsedEmails = updateObject.inviteEmails.split(',');
+               updateObject.inviteEmails = parsedEmails;
            }
-           await UserEventStatusService.addInvitees(id, parsedEmails);
+
+           console.log(updateObject);
+
+           if (Object.keys(updateObject).length !== 2) {
+               onlyEmailChange = false
+           }
+
+
+           await UserEventStatusService.addInvitees(updateObject.id, parsedEmails, onlyEmailChange);
            await getConnection()
                .createQueryBuilder()
                .update(Event)
-               .set({
-                   eventType: eventType, title: title, eventDate: eventDate,
-                   startTime: startTime, endTime: endTime, locationName: locationName,
-                   description: description, deadlineDate: deadline, inviteEmails: parsedEmails
-               })
-               .where("id = :id", {id: id})
+               .set(updateObject)
+               .where("id = :id", {id: updateObject.id})
                .execute();
        }
        catch(error) {
@@ -104,18 +109,18 @@ export class EventService {
 
           let parsedEmails = emails.split(',');
 
-          if(parsedEmails.length > 0) {
-              console.log(parsedEmails);
-          await emailService.send(req.user.email, parsedEmails, {
-              event_link: 'www.google.com',
-              event_name: title
-          });
-        }
+        //   if(parsedEmails.length > 0) {
+        //       console.log(parsedEmails);
+        //   await emailService.send(req.user.email, parsedEmails, {
+        //       event_link: 'www.google.com',
+        //       event_name: title
+        //   });
+        // }
 
           console.log(event);
        
           const eventSaved = await eventRepository.save(event);
-                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
+                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails, false);
                              return eventSaved;
         
       }

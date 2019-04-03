@@ -6,6 +6,8 @@ interface inputForEvent {
 }
 
 interface inputForAddingEvent {
+    eventType: string,
+    eventDate: string,
     id: number,
     createdBy: number,
     title: string,
@@ -49,10 +51,18 @@ export const eventResolver = {
         },
         updateEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
-                console.log(inputObject);
-                return EventService.updateEvent(inputObject.id, inputObject.title, inputObject.type, inputObject.date,
-                    inputObject.startTime, inputObject.endTime, inputObject.locationName,
-                    inputObject.description, inputObject.deadline, inputObject.inviteEmails, context);
+
+                // TODO move converison
+                if (inputObject.type) {
+                    inputObject.eventType = inputObject.type;
+                    delete inputObject.type;
+                }
+                if (inputObject.date) {
+                    inputObject.eventDate = inputObject.date;
+                    delete inputObject.date;
+                }
+
+                return EventService.updateEvent(inputObject, context);
             }
         }
     }

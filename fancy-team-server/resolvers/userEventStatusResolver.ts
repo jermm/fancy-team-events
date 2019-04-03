@@ -24,7 +24,7 @@ export const userEventStatusResolver = {
     Mutation: {
         addInvitees: {
             resolve(_: any, inputObject: inputForAddingUserStatus): any {
-                return UserEventStatusService.addInvitees(inputObject.eventId, inputObject.emails);
+                return UserEventStatusService.addInvitees(inputObject.eventId, inputObject.emails, true);
             }
         },
 
