@@ -44,6 +44,7 @@ class CreateEvent extends Component {
   }
 
   render() {
+    console.log(this.state);
     return (
         <div className='event-container'>
           <Header/>

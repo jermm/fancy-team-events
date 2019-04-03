@@ -103,7 +103,7 @@ export class EventService {
 
           if (emails.length > 0) {
               await emailService.send(req.user.email, emails, {
-                  event_link: `http://${hostname}: ${port}/event/${eventSaved.id}`,
+                  event_link: 'www.google.com',
                   event_name: title,
                   event_deadline: deadline
               });

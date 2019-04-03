@@ -10,13 +10,13 @@ $color-white: white;
   text-align: center;
 }
 .event-table {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-family: "Quicksand", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     color: $color-black
 
 
-   th ,td {
+   th,td {
       padding: 8px;
       text-align: left;
       border-bottom: 1px solid $color-grey;
@@ -29,33 +29,24 @@ $color-white: white;
     }
   }
   th {
+    line-height:50px;
     background-color: $color-green;
     color: $color-white;
   }
   }
 
-.event-list-page{
-  display: flex;
-}
-
-.event-list-page-header .event-header {
-  height:100vh;
-  box-shadow: 8px 0 10px -6px black;
-}
-
-.event-list-page-header .event-title{
-  font-size: 2.5vw;
-  text-align: center;
-}
-
 .event-list-page-create-event{
+  span {
+    font-family: "Quicksand", Arial, Helvetica, sans-serif;
+    font-size:2rem;
+  }
   width: 100%;
   padding:1rem;
 }
 
 .event-add-icon{
   margin-left: auto;
-  width: 4rem;
+  width: 2rem;
   display: block;
   margin-bottom: 0.5rem;
 }

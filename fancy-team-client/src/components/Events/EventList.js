@@ -1,57 +1,34 @@
-import { withAuth } from '@okta/okta-react';
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import './EventList.scss';
-import Header from '../Header/header';
 import AddEvent from "../../assets/plus.svg";
 import deleteEvent from "../../assets/delete.png";
-
+import {Link} from 'react-router-dom';
 import editEvent from "../../assets/edit.png";
 import viewEvent from "../../assets/eye.png";
 
-import {getEventByUser} from "../../services/events";
 
-class EventList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { events:[]};
-    }
+function EventList(props){
+    const {events} = props;
 
-    componentDidMount() {
-        this.getEvents();
-    }
-
-    async getEvents() {
-            try {
-                const accessToken = await this.props.auth.getAccessToken();
-                const response = await getEventByUser(accessToken);
-                this.setState({ events:response.eventsByUser, failed: false });
-            } catch (err) {
-                /* eslint-disable no-console */
-                console.error(err);
-            }
-    }
-
-    render() {
         return (
-            <div className='event-list-page'>
-                <div className='event-list-page-header'>
-                  <Header />
-                </div>
                <div className='event-list-page-create-event'>
                    <div className='event-list-page-add-event'>
+                       <span>My Events</span>
                      <Link to="/event/create">
                        <img src={AddEvent} alt="Create Event" className="event-add-icon" width="100" />
                      </Link>
                    </div>
                  <div>
                    <table className='event-table'>
+                       <thead>
                      <tr>
                          <th>EventDate</th>
                          <th>Title</th>
+                         <th>Actions</th>
                      </tr>
+                       </thead>
                      <tbody>
-                     {this.state.events.map(event =>
+                     {events.map(event =>
                          <tr id={event.id} key={event.id}>
                            <td>{event.eventDate}</td>
                              <td>{event.title}</td>
@@ -71,11 +48,7 @@ class EventList extends Component {
                    </table>
                  </div>
                </div>
-            </div>
         );
-    }
 }
 
-export default withAuth(EventList);
-
-// {event.isOrganizer ? <td><Link to={`/event/edit/${event.id}`}>{event.title}</Link></td> : <td><Link to={`/event/${event.id}`}>{event.title}</Link></td>}
+export default EventList;
