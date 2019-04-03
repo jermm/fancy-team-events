@@ -49,7 +49,7 @@ export const eventResolver = {
         },
         updateEvent: {
             resolve(_: any, inputObject: inputForAddingEvent, context): any {
-                convertInputObject(inputObject);]
+                convertInputObject(inputObject);
                 return EventService.updateEvent(inputObject, context);
             }
         }
