@@ -3,7 +3,6 @@ import {Event} from "../../entity/Event";
 import {getConnection} from "typeorm";
 import {createQueryBuilder} from 'typeorm';
 import {UserEventStatus} from "../../entity/UserEventStatus";
-import {EmailService} from "../../services/Email";
 import {UserService} from "../../services/User";
 
 import {UserEventStatusService} from "../../services/UserEventStatus"
@@ -28,7 +27,7 @@ export class EventService {
 
         }
 
-    }
+    };
 
 
     public static updateEvent = async (updateObject, context) => {
@@ -90,7 +89,6 @@ export class EventService {
                       startTime: string, endTime: string, locationName: string,
                       description: string, deadline: string, emails: string, context) => {
       try {
-          const emailService = new EmailService();
           const eventRepository = getConnection().getRepository(Event);
           const event = new Event();
           const userId = context.UserId;

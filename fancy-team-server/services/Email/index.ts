@@ -1,6 +1,8 @@
 import requestPromise from 'request-promise';
 import {config} from 'node-config-ts'
 import {IEmail, IEmailOptions} from "../../common/external";
+import {UserEventStatus} from "../../entity/UserEventStatus";
+import {EventService} from "../Event";
 const emailConfig = config.sendgrid;
 
 export class EmailService {
@@ -18,6 +20,14 @@ export class EmailService {
             },
             json: true
         };
+    }
+
+    public sendEventEmail(usersToEmail: string[], eventId: number) {
+        console.log(usersToEmail);
+        return EventService.findEvent(eventId).then(eventInfo => {
+            console.log(eventInfo);
+            return this.send(eventInfo.organizerEmail, usersToEmail, {event_link: `http://localhost:3000/event/edit/${eventId}`, event_name: eventInfo.title})
+        });
     }
 
     public async send(fromEmail: string, toEmails: string[], content: any ): Promise<any> {

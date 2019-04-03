@@ -46,6 +46,7 @@ export class UserEventStatusService {
         const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
 
         const invitees: UserEventStatus[] = [];
+        const usersToEmail: string[] = [];
 
         return userEventStatusRepository.createQueryBuilder("findEmails")
             .where("email = :emailList", {emailList: emails})
@@ -65,16 +66,18 @@ export class UserEventStatusService {
                         userEventStatus.email = email;
                         userEventStatus.isAttending = false;
                         invitees.push(userEventStatus);
+                        usersToEmail.push(email);
+
                         // TODO always send email here
-                        // const emailService = new EmailService();
-                        // emailService.send(req.user.email, parsedEmails, {
-                        //     event_link: 'www.google.com',
-                        //     event_name: title
-                        // });
                     }
                     // TODO if not onlyEmailChange, send emails here to old emails
+                    else if (!onlyEmailChange) {
+                        usersToEmail.push(email)
+                    }
             });
-            console.log(invitees);
+            if (usersToEmail.length > 0) {
+                new EmailService().sendEventEmail(usersToEmail, eventId);
+            }
             if (invitees.length > 0) {
                 return userEventStatusRepository.insert(invitees);
             }
