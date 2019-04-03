@@ -100,8 +100,6 @@ export class EventService {
           event.deadlineDate = deadline;
 
           let parsedEmails = emails.split(',');
-          console.log(event);
-       
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;

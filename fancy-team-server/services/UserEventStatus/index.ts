@@ -86,13 +86,7 @@ export class UserEventStatusService {
                         userEventStatus.isAttending = false;
                         invitees.push(userEventStatus);
                         usersToEmail.push(email);
-
-                        // TODO always send email here
                     }
-                    // // TODO if not onlyEmailChange, send emails here to old emails
-                    // else if (!onlyEmailChange) {
-                    //     usersToEmail.push(email)
-                    // }
             });
             if (usersToEmail.length > 0) {
                 UserEventStatusService.sendInvitesToEmails(eventId, usersToEmail);
