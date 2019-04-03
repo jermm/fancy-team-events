@@ -96,6 +96,11 @@ export class EventService {
           event.locationName = updateObject.locationName;
           event.description = updateObject.description;
           event.deadlineDate = updateObject.deadline;
+
+          if (parsedEmails) {
+              event.inviteEmails = updateObject.inviteEmails;
+          }
+
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;
