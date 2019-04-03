@@ -58,15 +58,11 @@ export const updateEventById = async (accessToken, eventId, startEvent, event) =
   //in vars, do only diff
   const newEvent = {};
 
-  console.log(startEvent);
-  console.log(event);
-
   Object.keys(event).forEach(function (key) {
     if(event[key] !== startEvent[key]) {
       newEvent[key] = event[key]
     }
   });
-
 
   const query = {
     query: `mutation EditEvent($id:Int!, $title:String, $type: String, $locationName:String,  $inviteEmails:String,  $eventDate:String, $startTime:String, $endTime:String, $description:String)

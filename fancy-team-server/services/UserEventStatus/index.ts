@@ -17,8 +17,6 @@ export class UserEventStatusService {
           catch(error){
            console.log(error);
          }
-
-
     };
 
     public static sendInvites = async (eventId: number) => {

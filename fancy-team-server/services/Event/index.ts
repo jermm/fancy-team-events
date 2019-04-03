@@ -79,27 +79,29 @@ export class EventService {
     };
 
 
-    public static addEvent = async (title: string, tyoe: string, eventDate: string,
-                      startTime: string, endTime: string, locationName: string,
-                      description: string, deadline: string, emails: string, context) => {
+    public static addEvent = async (updateObject, context) => {
       try {
           const eventRepository = getConnection().getRepository(Event);
           const event = new Event();
           const userId = context.UserId;
           const req = context.Request;
+          let parsedEmails = [];
+          if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
+              parsedEmails = updateObject.inviteEmails.split(',');
+              updateObject.inviteEmails = parsedEmails;
+          }
+
           event.createdBy = userId;
           event.organizerEmail = req.user.email;
-          event.title = title;
-          event.eventType = tyoe;
-          event.eventDate = eventDate;
+          event.title = updateObject.title;
+          event.eventType = updateObject.eventType;
+          event.eventDate = updateObject.eventDate;
           event.createdAt = 'now';
-          event.startTime = startTime;
-          event.endTime = endTime;
-          event.locationName = locationName;
-          event.description = description;
-          event.deadlineDate = deadline;
-
-          let parsedEmails = emails.split(',');
+          event.startTime = updateObject.startTime;
+          event.endTime = updateObject.endTime;
+          event.locationName = updateObject.locationName;
+          event.description = updateObject.description;
+          event.deadlineDate = updateObject.deadline;
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;
