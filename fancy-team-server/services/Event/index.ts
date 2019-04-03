@@ -108,15 +108,6 @@ export class EventService {
           event.deadlineDate = deadline;
 
           let parsedEmails = emails.split(',');
-
-        //   if(parsedEmails.length > 0) {
-        //       console.log(parsedEmails);
-        //   await emailService.send(req.user.email, parsedEmails, {
-        //       event_link: 'www.google.com',
-        //       event_name: title
-        //   });
-        // }
-
           console.log(event);
        
           const eventSaved = await eventRepository.save(event);

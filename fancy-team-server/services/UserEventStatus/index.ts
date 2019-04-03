@@ -1,6 +1,7 @@
 import { Client } from 'pg';
 import {getConnection} from "typeorm";
 import {UserEventStatus} from "../../entity/UserEventStatus";
+import {EmailService} from "../Email";
 
 const client = new Client();
 client.connect();
@@ -65,6 +66,11 @@ export class UserEventStatusService {
                         userEventStatus.isAttending = false;
                         invitees.push(userEventStatus);
                         // TODO always send email here
+                        // const emailService = new EmailService();
+                        // emailService.send(req.user.email, parsedEmails, {
+                        //     event_link: 'www.google.com',
+                        //     event_name: title
+                        // });
                     }
                     // TODO if not onlyEmailChange, send emails here to old emails
             });

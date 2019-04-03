@@ -62,18 +62,10 @@ export const updateEventById = async (accessToken, eventId, startEvent, event) =
   console.log(event);
 
   Object.keys(event).forEach(function (key) {
-    // console.log(key);
-    // console.log(startEvent[key]);
-    // console.log(event[key]);
-    console.log(event[key]);
-    console.log(startEvent[key]);
     if(event[key] !== startEvent[key]) {
       newEvent[key] = event[key]
     }
-
   });
-
-  console.log(newEvent);
 
 
   const query = {
