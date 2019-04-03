@@ -21,6 +21,25 @@ export class UserEventStatusService {
 
     };
 
+    public static sendInvites = async (eventId: number) => {
+        const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+        const emailList = [];
+
+        return userEventStatusRepository.createQueryBuilder("findEmails")
+            .where("event = :eventId", {eventId: eventId})
+            .getMany().then(function (result) {
+                result.forEach(function (userEventStatusRow) {
+                    emailList.push(userEventStatusRow.email)
+                });
+                return new EmailService().sendEventEmail(emailList, eventId);
+            });
+    };
+
+    public static sendInvitesToEmails = async (eventId: number, emails: string[]) => {
+        new EmailService().sendEventEmail(emails, eventId);
+
+    };
+
     public static updateInvite = async (eventId: number, email: string, isAttending: boolean) => {
         try {
             return await getConnection()
@@ -38,7 +57,7 @@ export class UserEventStatusService {
 
 
     // TODO handle deletes
-    public static addInvitees = async (eventId: number, emails = [], onlyEmailChange: boolean) => {
+    public static addInvitees = async (eventId: number, emails = []) => {
         if(emails.length < 0){
             return;
         }
@@ -70,13 +89,13 @@ export class UserEventStatusService {
 
                         // TODO always send email here
                     }
-                    // TODO if not onlyEmailChange, send emails here to old emails
-                    else if (!onlyEmailChange) {
-                        usersToEmail.push(email)
-                    }
+                    // // TODO if not onlyEmailChange, send emails here to old emails
+                    // else if (!onlyEmailChange) {
+                    //     usersToEmail.push(email)
+                    // }
             });
             if (usersToEmail.length > 0) {
-                new EmailService().sendEventEmail(usersToEmail, eventId);
+                UserEventStatusService.sendInvitesToEmails(eventId, usersToEmail);
             }
             if (invitees.length > 0) {
                 return userEventStatusRepository.insert(invitees);

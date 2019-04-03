@@ -17,7 +17,6 @@ export class EventService {
         try {
             const eventRepository = getConnection().getRepository(Event);
             return await eventRepository.findOne({id: id}).then(function (res) {
-                console.log(res);
                 return res;
             });
         }
@@ -34,26 +33,21 @@ export class EventService {
        try {
 
            let parsedEmails = [];
-           let onlyEmailChange = true;
            if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
                parsedEmails = updateObject.inviteEmails.split(',');
                updateObject.inviteEmails = parsedEmails;
            }
 
-           console.log(updateObject);
-
-           if (Object.keys(updateObject).length !== 2) {
-               onlyEmailChange = false
-           }
-
-
-           await UserEventStatusService.addInvitees(updateObject.id, parsedEmails, onlyEmailChange);
+           await UserEventStatusService.addInvitees(updateObject.id, parsedEmails);
            await getConnection()
                .createQueryBuilder()
                .update(Event)
                .set(updateObject)
                .where("id = :id", {id: updateObject.id})
                .execute();
+           if (Object.keys(updateObject).length !== 2) {
+               await UserEventStatusService.sendInvites(updateObject.id);
+           }
        }
        catch(error) {
            console.log(error);
@@ -109,7 +103,7 @@ export class EventService {
           console.log(event);
        
           const eventSaved = await eventRepository.save(event);
-                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails, false);
+                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;
         
       }

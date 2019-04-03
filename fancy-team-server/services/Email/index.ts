@@ -23,10 +23,15 @@ export class EmailService {
     }
 
     public sendEventEmail(usersToEmail: string[], eventId: number) {
-        console.log(usersToEmail);
+        const finalEmailList = [];
+        // TODO get subject line to work.
         return EventService.findEvent(eventId).then(eventInfo => {
-            console.log(eventInfo);
-            return this.send(eventInfo.organizerEmail, usersToEmail, {event_link: `http://localhost:3000/event/edit/${eventId}`, event_name: eventInfo.title})
+            usersToEmail.forEach(email => {
+                if (email !== eventInfo.organizerEmail && email.length > 0) {
+                    finalEmailList.push(email)
+                }
+            });
+            return this.send(eventInfo.organizerEmail, finalEmailList, {event_link: `http://localhost:3000/event/view/${eventId}?email=`, subject:"Your invited to a fun event!", event_name: eventInfo.title})
         });
     }
 
@@ -40,20 +45,18 @@ export class EmailService {
             this.options.body = {
                 from: {email: fromEmail},
                 personalizations: [{
-                    to: toEmailList,
+                    to: [{email: fromEmail}],
+                    bcc: toEmailList,
                     dynamic_template_data: content
                 }],
                 template_id: emailConfig.sendgridTemplateId
             };
-            
 
-            console.log(this.options);
-
-            await requestPromise(this.options); // call sendgrid to send the email
-
+            // call sendgrid to send the email
+            await requestPromise(this.options);
         }
         catch (error) {
-
+            console.log(error);
         }
     }
 
