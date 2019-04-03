@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from '../../config';
 
 // Import Search Bar Components
 // import SearchBar from 'material-ui-search-bar';
@@ -73,7 +74,7 @@ class Search extends Component {
     return (
         <div className='autocomplete-container form-group'>
           <Script
-              url="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNPwjXXOCcQGSDjfCj6r4ClDPORVwswr4&libraries=places"
+              url={config.googleAutoCompleteURL}
               onLoad={this.handleScriptLoad}
           />
           <label htmlFor="locationName">Location</label>

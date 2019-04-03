@@ -1,5 +1,5 @@
 
-import {UserEventStatusService} from '../Services/UserEventStatus'
+import {UserEventStatusService} from '../services/UserEventStatus'
 
 interface inputForUser {
     id: number
