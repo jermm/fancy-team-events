@@ -45,7 +45,6 @@ class EditComponent extends Component {
 
   render() {
     const {title, eventDate, description, startTime, endTime, locationName,  type, inviteEmails} = this.state.formInitialValue;
-    console.log(this.state.formInitialValue);
     const FormValues = {
       title: title,
       eventDate: eventDate,
