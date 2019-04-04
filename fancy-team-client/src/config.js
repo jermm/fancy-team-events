@@ -4,7 +4,9 @@ const {
   REACT_APP_redirectUri,
   REACT_APP_scope,
   REACT_APP_eventsUrl,
-  REACT_APP_googleAutoCompleteURL
+  REACT_APP_googleAutoCompleteURL,
+  REACT_APP_hereApiAppId,
+  REACT_APP_hereApiAppCode
 } = process.env;
 
 const Config = {
@@ -17,7 +19,11 @@ const Config = {
     resourceServer: {
       eventsUrl: REACT_APP_eventsUrl,
     },
-    googleAutoCompleteURL : REACT_APP_googleAutoCompleteURL
+    googleAutoCompleteURL : REACT_APP_googleAutoCompleteURL,
+    hereApi: {
+        appId: REACT_APP_hereApiAppId,
+        appCode: REACT_APP_hereApiAppCode
+    }
 };
 
 export default Config;
