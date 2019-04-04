@@ -134,3 +134,11 @@ label{
   display: flex;
   justify-content: space-between;
 }
+
+.back-icon{
+  width: 3rem;
+}
+
+.form-header{
+  text-align: center;
+}
