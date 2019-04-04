@@ -9,6 +9,7 @@ import viewEvent from "../../assets/eye.png";
 
 function EventList(props){
     const {events} = props;
+    console.log(events);
 
         return (
                <div className='event-list-page-create-event'>
@@ -28,20 +29,20 @@ function EventList(props){
                      </tr>
                        </thead>
                      <tbody>
-                     {events.map(event =>
-                         <tr id={event.id} key={event.id}>
+                     {events.map((event, index) =>
+                         <tr id={event.id} key={index}>
                            <td>{event.eventDate}</td>
                              <td>{event.title}</td>
                             <td className="icons">
-                                {event.isOrganizer ? [
-                                <Link to="/event/create">
-                                <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
-                            </Link>, <Link to={`/event/edit/${event.id}`}>
-                                    <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
-                                </Link> ] : (
                                 <Link to={`/event/${event.id}`}>
                                     <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
-                                </Link> )}
+                                </Link>
+                                {event.isOrganizer ? [
+                                <Link key={index + 1} to="/event/create">
+                                <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
+                            </Link>, <Link key={index + 2} to={`/event/edit/${event.id}`}>
+                                    <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
+                                </Link> ] : null}
                             </td>
                          </tr>)}
                      </tbody>

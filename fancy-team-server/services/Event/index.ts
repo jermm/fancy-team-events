@@ -3,7 +3,6 @@ import {Event} from "../../entity/Event";
 import {getConnection} from "typeorm";
 import {createQueryBuilder} from 'typeorm';
 import {UserEventStatus} from "../../entity/UserEventStatus";
-import {EmailService} from "../../services/Email";
 import {UserService} from "../../services/User";
 
 import {UserEventStatusService} from "../../services/UserEventStatus"
@@ -18,7 +17,9 @@ export class EventService {
     public static findEvent = async (id: number) => {
         try {
             const eventRepository = getConnection().getRepository(Event);
-            return await eventRepository.findOne({id: id});
+            return await eventRepository.findOne({id: id}).then(function (res) {
+                return res;
+            });
         }
         catch (error) {
             console.log(error);
@@ -26,24 +27,28 @@ export class EventService {
 
         }
 
-    }
+    };
 
 
-    public static updateEvent = async (id: number, title: string, eventType: string, eventDate: string,
-                                       startTime: string, endTime: string, locationName: string,
-                                       description: string, deadline: string, emails: string[], context) => {
+    public static updateEvent = async (updateObject, context) => {
        try {
-           await UserEventStatusService.addInvitees(id, emails);
+
+           let parsedEmails = [];
+           if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
+               parsedEmails = updateObject.inviteEmails.split(',');
+               updateObject.inviteEmails = parsedEmails;
+           }
+
+           await UserEventStatusService.addInvitees(updateObject.id, parsedEmails);
            await getConnection()
                .createQueryBuilder()
                .update(Event)
-               .set({
-                   eventType: eventType, title: title, eventDate: eventDate,
-                   startTime: startTime, endTime: endTime, locationName: locationName,
-                   description: description, deadlineDate: deadline
-               })
-               .where("id = :id", {id: id})
+               .set(updateObject)
+               .where("id = :id", {id: updateObject.id})
                .execute();
+           if (Object.keys(updateObject).length !== 2) {
+               await UserEventStatusService.sendInvites(updateObject.id);
+           }
        }
        catch(error) {
            console.log(error);
@@ -57,8 +62,8 @@ export class EventService {
         try {
             const req = context.Request;
             const eventsAttended = await getConnection()
-            .getRepository(UserEventStatus).createQueryBuilder("userStatus")
-                .leftJoinAndSelect(Event, "event", "event.organizerEmail = userStatus.email")
+            .getRepository(Event).createQueryBuilder("event")
+                .leftJoinAndSelect(UserEventStatus, "userStatus", "userStatus.email = event.organizerEmail")
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
@@ -75,41 +80,34 @@ export class EventService {
     };
 
 
-    public static addEvent = async (title: string, tyoe: string, eventDate: string,
-                      startTime: string, endTime: string, locationName: string,
-                      description: string, deadline: string, emails = [], context) => {
+    public static addEvent = async (updateObject, context) => {
       try {
-          const emailService = new EmailService();
           const eventRepository = getConnection().getRepository(Event);
           const event = new Event();
           const userId = context.UserId;
           const req = context.Request;
+          let parsedEmails = [];
+          if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
+              parsedEmails = updateObject.inviteEmails.split(',');
+              updateObject.inviteEmails = parsedEmails;
+          }
+
           event.createdBy = userId;
           event.organizerEmail = req.user.email;
-          event.title = title;
-          event.eventType = tyoe;
-          event.eventDate = eventDate;
+          event.title = updateObject.title;
+          event.eventType = updateObject.eventType;
+          event.eventDate = updateObject.eventDate;
           event.createdAt = 'now';
-          event.startTime = startTime;
-          event.endTime = endTime;
-          event.locationName = locationName;
-          event.description = description;
-          event.deadlineDate = deadline;
 
-
-       
+          event.startTime = updateObject.startTime;
+          event.endTime = updateObject.endTime;
+          event.locationName = updateObject.locationName;
+          event.description = updateObject.description;
+          event.deadlineDate = updateObject.deadline;
           const eventSaved = await eventRepository.save(event);
-                             await UserEventStatusService.addInvitees(eventSaved.id, emails);
+                             await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
+                             return eventSaved;
 
-          if (emails.length > 0) {
-              await emailService.send(req.user.email, emails, {
-                  event_link: 'www.google.com',
-                  event_name: title,
-                  event_deadline: deadline
-              });
-          }
-          return eventSaved;
-        
       }
       catch(error){
           throw new Error('failed to save events' + error.message);

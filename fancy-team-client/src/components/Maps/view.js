@@ -11,7 +11,6 @@ class Search extends Component {
   // Define Constructor
   constructor(props) {
     super(props);
-
     // Declare State
     this.state = {
       city: '',
@@ -71,6 +70,12 @@ class Search extends Component {
   }
 
   render() {
+    let value = this.state.query;
+
+    if (!value) {
+      value = this.props.initialValues.locationName;
+    }
+
     return (
         <div className='autocomplete-container form-group'>
           <Script
@@ -78,7 +83,7 @@ class Search extends Component {
               onLoad={this.handleScriptLoad}
           />
           <label htmlFor="locationName">Location</label>
-          <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
+          <input type='text' id="locationName" placeholder="EnterSearchField" value={value} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );
   }
