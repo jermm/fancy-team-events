@@ -62,8 +62,8 @@ export class EventService {
         try {
             const req = context.Request;
             const eventsAttended = await getConnection()
-            .getRepository(UserEventStatus).createQueryBuilder("userStatus")
-                .leftJoinAndSelect(Event, "event", "event.organizerEmail = userStatus.email")
+            .getRepository(Event).createQueryBuilder("event")
+                .leftJoinAndSelect(UserEventStatus, "userStatus", "userStatus.email = event.organizerEmail")
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
