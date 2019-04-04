@@ -136,3 +136,8 @@ label{
   display: flex;
   justify-content: space-between;
 }
+
+.icons > a > img{
+  display:inline;
+  vertical-align: middle;
+}

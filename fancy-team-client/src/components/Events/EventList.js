@@ -32,7 +32,7 @@ function EventList(props){
                          <tr id={event.id} key={event.id}>
                            <td>{event.eventDate}</td>
                              <td>{event.title}</td>
-                            <td>
+                            <td className="icons">
                                 {event.isOrganizer ? [
                                 <Link to="/event/create">
                                 <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
