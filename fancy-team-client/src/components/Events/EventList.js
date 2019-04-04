@@ -9,7 +9,6 @@ import viewEvent from "../../assets/eye.png";
 
 function EventList(props){
     const {events} = props;
-    console.log(events);
 
         return (
                <div className='event-list-page-create-event'>
@@ -34,15 +33,13 @@ function EventList(props){
                            <td>{event.eventDate}</td>
                              <td>{event.title}</td>
                             <td className="icons">
-                                <Link to={`/event/${event.id}`}>
+                                <Link key={index + 1} to={`/event/view/${event.id}`}>
                                     <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
                                 </Link>
-                                {event.isOrganizer ? [
-                                <Link key={index + 1} to="/event/create">
-                                <img src={deleteEvent} alt="Delete Event" className="event-add-icon" width="100" />
-                            </Link>, <Link key={index + 2} to={`/event/edit/${event.id}`}>
+                                {event.isOrganizer ? (
+                               <Link key={index + 2} to={`/event/edit/${event.id}`}>
                                     <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
-                                </Link> ] : null}
+                                </Link> ) : null}
                             </td>
                          </tr>)}
                      </tbody>

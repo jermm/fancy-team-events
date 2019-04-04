@@ -19,10 +19,11 @@ $color-white: white;
    th,td {
       padding: 8px;
       text-align: left;
-      border-bottom: 1px solid $color-grey;
     }
 
   tr {
+    border-bottom: 1px solid $color-grey;
+
     &:hover {
       background-color: $color-grey;
 
