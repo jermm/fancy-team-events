@@ -14,7 +14,7 @@ function FormTextArea (props) {
   return (
       <div className={`${wrapperDivClassName} form-group`}>
         <label htmlFor={id}>{labelText}</label>
-        <textarea value={value} name={name} rows='8' cols='50' placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
+        <textarea value={value === null ? '' : value} name={name} rows='8' cols='50' placeholder={placeholder} id={id} onChange={handleChange} className='form-control'/>
       </div>
   )
 }

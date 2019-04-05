@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import config from '../../config';
-import {getStopsFromGeo, getStopsFromId} from '../../services/getTransitStops';
+import {getStopsFromId} from '../../services/getTransitStops';
 
 // Import Search Bar Components
 // import SearchBar from 'material-ui-search-bar';
@@ -26,6 +26,16 @@ class Search extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.values.locationName !== this.state.query) {
+      this.setState({
+        query: nextProps.initialValues.locationName,
+        transitNames : []
+      })
+    }
+  }
+
   handlequeryChange(e){
     this.setState({
       query:e.target.value,
@@ -47,10 +57,16 @@ class Search extends Component {
 
     // Fire Event when a suggested name is selected
     this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
+
+    let that = this;
+    if (this.props.values.locationId) {
+      getStopsFromId(this.props.values.locationId).then(function (result) {
+        that.setState({transitNames: result})
+      });
+    }
   }
 
   handlePlaceSelect() {
-
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
 
@@ -80,13 +96,13 @@ class Search extends Component {
   }
 
   render() {
-    let value = this.state.query;
+    // let value = this.state.query;
     let transitNames = this.state.transitNames;
-    let transitString = ""
+    let transitString = "";
 
-    if (!value) {
-      value = this.props.initialValues.locationName;
-    }
+    // if (!value) {
+    //   value = this.props.initialValues.locationName;
+    // }
 
     transitNames.forEach(function (name) {
       transitString = transitString + name + ", ";
@@ -99,8 +115,8 @@ class Search extends Component {
               onLoad={this.handleScriptLoad}
           />
           <label htmlFor="locationName">Location</label>
+          <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
           <p>Nearby Transit: {transitString} </p>
-          <input type='text' id="locationName" placeholder="EnterSearchField" value={value} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );
   }

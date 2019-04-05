@@ -28,6 +28,9 @@ class EventView extends Component {
             enableReinitialize: false,
             accessToken: ''
         };
+        this.eventFound = false;
+        this.scriptLoaded = false;
+        this.transitLoaded = false;
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
     }
 
@@ -37,11 +40,16 @@ class EventView extends Component {
             this.setState( { isAttending: isAttending } );
         }.bind(this));
     }
+
     handleScriptLoad() {
-        const that = this;
-        getStopsFromId(this.state.event.locationId).then(function (result) {
-            that.setState({transitStops: result})
-        });
+        if (this.eventFound && !this.transitLoaded) {
+            const that = this;
+            this.transitLoaded = true;
+            getStopsFromId(this.state.event.locationId).then(function (result) {
+                that.setState({transitStops: result})
+            });
+        }
+        this.scriptLoaded = true;
     }
 
 
@@ -61,6 +69,14 @@ class EventView extends Component {
             enableReinitialize: true,
             accessToken: token
         });
+        if (this.scriptLoaded && !this.transitLoaded) {
+            const that = this;
+            this.transitLoaded = true;
+            getStopsFromId(this.state.event.locationId).then(function (result) {
+                that.setState({transitStops: result})
+            });
+        }
+        this.eventFound = true;
     }
 
     render() {
