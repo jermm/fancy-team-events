@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import config from '../../config';
-import {getStopsFromGeo, getStopsFromId} from '../../services/getTransitStops';
+import {getStopsFromId} from '../../services/getTransitStops';
 
 // Import Search Bar Components
 // import SearchBar from 'material-ui-search-bar';
