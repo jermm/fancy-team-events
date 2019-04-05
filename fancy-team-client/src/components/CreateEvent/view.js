@@ -16,6 +16,7 @@ class CreateEvent extends Component {
         startTime:'',
         endTime:'',
         type:'',
+        inviteEmails:'',
         locationName:''
       }
     }
@@ -34,6 +35,7 @@ class CreateEvent extends Component {
       endTime:'',
       type:'',
       locationName:'',
+      inviteEmails:'',
       reset:true
     };
     return (async function createEventCallback(event, action) {
