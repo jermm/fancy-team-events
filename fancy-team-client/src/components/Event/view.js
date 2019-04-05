@@ -4,7 +4,11 @@ import EventInfo from './EventView';
 import Header from '../Header/header';
 import './event.scss';
 
+import {getStopsFromId} from '../../services/getTransitStops'
+
 import {updateInvite, getInvite, getEventById} from "../../services/events";
+import Script from "react-load-script";
+import config from "../../config";
 
 class EventView extends Component {
     constructor(props) {
@@ -19,11 +23,12 @@ class EventView extends Component {
                 Location: '',
                 eventType: 'SelectEvent'
             },
+            transitStops: [],
             eventId: Number(this.props.match.params.id),
             enableReinitialize: false,
             accessToken: ''
         };
-
+        this.handleScriptLoad = this.handleScriptLoad.bind(this);
     }
 
     attendInviteCallBack(accessToken, eventId) {
@@ -32,6 +37,13 @@ class EventView extends Component {
             this.setState( { isAttending: isAttending } );
         }.bind(this));
     }
+    handleScriptLoad() {
+        const that = this;
+        getStopsFromId(this.state.event.locationId).then(function (result) {
+            that.setState({transitStops: result})
+        });
+    }
+
 
     async componentDidMount() {
         const token = await this.props.auth.getAccessToken();
@@ -52,8 +64,17 @@ class EventView extends Component {
     }
 
     render() {
+        let transitStopString = '';
+        this.state.transitStops.forEach(function (stop) {
+            transitStopString = transitStopString + stop + ", ";
+        });
+
         return (
             <div className='event-container'>
+                <Script
+                    url={config.googleAutoCompleteURL}
+                    onLoad={this.handleScriptLoad}
+                />
              {/*//   <aside>*/}
 
                     <div className='event-list-page-header'>
@@ -74,6 +95,8 @@ class EventView extends Component {
                     {/*<span className='event-field-key'>:</span>:*/}
                     {/*<span className='event-field-value'></span>*/}
                     {/*</div>*/}
+
+                    <p>Nearby Transit: {transitStopString}</p>
 
                     <div className='event-field'>
                         <span className='event-field-key'>Parking</span>:

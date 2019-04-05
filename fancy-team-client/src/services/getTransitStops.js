@@ -3,6 +3,18 @@ import config from '../config';
 const appId = config.hereApi.appId;
 const appCode = config.hereApi.appCode;
 
+export const getStopsFromId = (id) => {
+    /*global google*/
+    var service = new google.maps.places.PlacesService(document.getElementById('placeholder'));
+
+    return new Promise(function (resolve, reject) {
+        service.getDetails({placeId: id, fields: ['geometry','address_component','name']}, function (place) {
+            getStopsFromGeo(place.geometry.location.lat(), place.geometry.location.lng()).then(function (result) {
+                resolve(result);
+            });
+        });
+    });
+};
 
 export const getStopsFromGeo = (lat, long) => {
     const requestAddress = `https://transit.api.here.com/v3/stations/by_geocoord.json?app_id=${appId}&app_code=${appCode}&radius=1000&center=${lat},${long}`;

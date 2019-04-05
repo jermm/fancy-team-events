@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import config from '../../config';
-import {getStopsFromGeo} from '../../services/getTransitStops';
+import {getStopsFromGeo, getStopsFromId} from '../../services/getTransitStops';
 
 // Import Search Bar Components
 // import SearchBar from 'material-ui-search-bar';
@@ -53,17 +53,13 @@ class Search extends Component {
 
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
-    let lat = addressObject.geometry.location.lat();
-    let lon = addressObject.geometry.location.lng();
-    // console.log(`${lat},${lon}`);
 
     let that = this;
-
-    getStopsFromGeo(lat,lon).then(function (result) {
+    getStopsFromId(addressObject.place_id).then(function (result) {
       that.setState({transitNames: result})
     });
 
-    this.props.locationIdCallback(addressObject.id);
+    this.props.locationIdCallback(addressObject.place_id);
 
 
     let address = addressObject.address_components;
