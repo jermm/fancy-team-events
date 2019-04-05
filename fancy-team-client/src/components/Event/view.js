@@ -35,8 +35,14 @@ class EventView extends Component {
         const token = await this.props.auth.getAccessToken();
         const fetchInviteBy = await getInvite(token, this.state.eventId);
         const fetchEventById = await getEventById(token, this.state.eventId);
+        let isAttending = false;
+
+        if (fetchEventById && fetchInviteBy.inviteForEvent) {
+            isAttending = fetchInviteBy.inviteForEvent.isAttending
+        }
+
         this.setState({
-            isAttending: fetchInviteBy.inviteForEvent.isAttending,
+            isAttending: isAttending,
             event: fetchEventById.event,
             enableReinitialize: true,
             accessToken: token
