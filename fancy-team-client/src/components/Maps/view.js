@@ -114,9 +114,9 @@ class Search extends Component {
               url={config.googleAutoCompleteURL}
               onLoad={this.handleScriptLoad}
           />
+          <p>Nearby Transit: {transitString} </p>
           <label htmlFor="locationName">Location</label>
           <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
-          <p>Nearby Transit: {transitString} </p>
         </div>
     );
   }
