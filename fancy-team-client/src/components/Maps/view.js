@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import config from '../../config';
+import {getStopsFromGeo} from '../../services/getTransitStops';
 
 // Import Search Bar Components
 // import SearchBar from 'material-ui-search-bar';
@@ -15,6 +16,7 @@ class Search extends Component {
     this.state = {
       city: '',
       query: '',
+      transitNames: []
     };
 
     // Bind Functions
@@ -43,7 +45,6 @@ class Search extends Component {
   handleScriptLoad() {
     // Declare Options For Autocomplete
     var options = {
-      types: ['(cities)'],
     };
 
     // Initialize Google Autocomplete
@@ -60,6 +61,19 @@ class Search extends Component {
   handlePlaceSelect() {
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
+    let lat = addressObject.geometry.location.lat();
+    let lon = addressObject.geometry.location.lng();
+    // console.log(`${lat},${lon}`);
+
+    let that = this;
+
+    getStopsFromGeo(lat,lon).then(function (result) {
+      that.setState({transitNames: result})
+    });
+
+    this.props.locationIdCallback(addressObject.id);
+
+
     let address = addressObject.address_components;
 
     // Check if address is valid
@@ -78,6 +92,18 @@ class Search extends Component {
   }
 
   render() {
+    // let value = this.state.query;
+    let transitNames = this.state.transitNames;
+    let transitString = "";
+
+    // if (!value) {
+    //   value = this.props.initialValues.locationName;
+    // }
+
+    transitNames.forEach(function (name) {
+      transitString = transitString + name + ", ";
+    });
+
     return (
         <div className='autocomplete-container form-group'>
           <Script
@@ -86,6 +112,7 @@ class Search extends Component {
           />
           <label htmlFor="locationName">Location</label>
           <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
+          <p>Nearby Transit: {transitString} </p>
         </div>
     );
   }
