@@ -24,6 +24,15 @@ class Search extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.values.locationName !== this.state.query) {
+      this.setState({
+        query: nextProps.initialValues.locationName
+      })
+    }
+  }
+
   handlequeryChange(e){
     this.setState({
       query:e.target.value,
@@ -49,7 +58,6 @@ class Search extends Component {
   }
 
   handlePlaceSelect() {
-
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
     let address = addressObject.address_components;
@@ -70,12 +78,6 @@ class Search extends Component {
   }
 
   render() {
-    let value = this.state.query;
-
-    if (!value) {
-      value = this.props.initialValues.locationName;
-    }
-
     return (
         <div className='autocomplete-container form-group'>
           <Script
@@ -83,7 +85,7 @@ class Search extends Component {
               onLoad={this.handleScriptLoad}
           />
           <label htmlFor="locationName">Location</label>
-          <input type='text' id="locationName" placeholder="EnterSearchField" value={value} onChange={this.handlequeryChange} className='form-control'/>
+          <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );
   }

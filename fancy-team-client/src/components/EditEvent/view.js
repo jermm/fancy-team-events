@@ -14,7 +14,7 @@ class EditComponent extends Component {
         description:'',
         startTime:'',
         endTime:'',
-        location:'',
+        locationName:'',
         eventType:'SelectEvent'
       },
         formStartValue: {},
@@ -55,7 +55,6 @@ class EditComponent extends Component {
       locationName: locationName,
       inviteEmails: inviteEmails
     };
-
     return (
         <div className='event-container'>
           <Header/>

@@ -15,7 +15,8 @@ class CreateEvent extends Component {
         description:'',
         startTime:'',
         endTime:'',
-        type:''
+        type:'',
+        locationName:''
       }
     }
   }
@@ -25,8 +26,19 @@ class CreateEvent extends Component {
   }
 
   formCallBack(accessToken) {
+    const Values = {
+      title:'',
+      eventDate:'',
+      description:'',
+      startTime:'',
+      endTime:'',
+      type:'',
+      locationName:'',
+      reset:true
+    };
     return (async function createEventCallback(event, action) {
       await createEvent(accessToken, event);
+      action.resetForm(Values);
     });
   }
 
