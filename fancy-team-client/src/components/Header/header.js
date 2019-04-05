@@ -11,8 +11,6 @@ class Header extends Component{
 
   async componentDidMount(){
     let userInfo = await this.props.auth.getUser();
-    console.log(userInfo);
-    console.log(this.props);
     if(this.props.auth._history.location.pathname === '/'){
       this.setState({
         showUserName:false
