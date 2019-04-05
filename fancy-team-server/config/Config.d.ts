@@ -3,6 +3,7 @@
 interface Config {
   okta: Okta;
   sendgrid: Sendgrid;
+  hostName: string;
 }
 interface Sendgrid {
   sendgridSendAPI: string;
