@@ -67,7 +67,6 @@ class EditComponent extends Component {
       locationId: locationId,
       inviteEmails: inviteEmails
     };
-
     return (
         <div className='event-container'>
           <Header/>

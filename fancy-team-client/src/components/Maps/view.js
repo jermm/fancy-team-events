@@ -26,6 +26,16 @@ class Search extends Component {
 
   }
 
+  componentWillReceiveProps(nextProps) {
+    // You don't have to do this check first, but it can help prevent an unneeded render
+    if (nextProps.values.locationName !== this.state.query) {
+      this.setState({
+        query: nextProps.initialValues.locationName,
+        transitNames : []
+      })
+    }
+  }
+
   handlequeryChange(e){
     this.setState({
       query:e.target.value,
@@ -57,7 +67,6 @@ class Search extends Component {
   }
 
   handlePlaceSelect() {
-
     // Extract City From Address Object
     let addressObject = this.autocomplete.getPlace();
 
@@ -87,13 +96,13 @@ class Search extends Component {
   }
 
   render() {
-    let value = this.state.query;
+    // let value = this.state.query;
     let transitNames = this.state.transitNames;
     let transitString = "";
 
-    if (!value) {
-      value = this.props.initialValues.locationName;
-    }
+    // if (!value) {
+    //   value = this.props.initialValues.locationName;
+    // }
 
     transitNames.forEach(function (name) {
       transitString = transitString + name + ", ";
@@ -106,8 +115,8 @@ class Search extends Component {
               onLoad={this.handleScriptLoad}
           />
           <label htmlFor="locationName">Location</label>
+          <input type='text' id="locationName" placeholder="EnterSearchField" value={this.state.query} onChange={this.handlequeryChange} className='form-control'/>
           <p>Nearby Transit: {transitString} </p>
-          <input type='text' id="locationName" placeholder="EnterSearchField" value={value} onChange={this.handlequeryChange} className='form-control'/>
         </div>
     );
   }

@@ -14,6 +14,7 @@ import EditEvent from './components/EditEvent/view';
 import { Security, SecureRoute, ImplicitCallback} from '@okta/okta-react';
 import config from './config';
 import store from './Redux/store';
+import { ToastProvider } from 'react-toast-notifications';
 
 function Routes (){
   return (
@@ -27,9 +28,9 @@ function Routes (){
             <Switch>
               <Route exact path='/' component={ Login } />
               <SecureRoute exact path="/event" component= { Main } />
-                <SecureRoute exact path='/event/view/:id' component={ EventView } />
-              <SecureRoute exact path='/event/create' component={ CreateEvent } />
-              <SecureRoute exact path='/event/edit/:id' component={ EditEvent } />
+              <SecureRoute exact path='/event/view/:id' component={() => <ToastProvider><EventView /></ToastProvider> } />
+              <SecureRoute exact path='/event/create' component={ () => <ToastProvider><CreateEvent /></ToastProvider> } />
+              <SecureRoute exact path='/event/edit/:id' component={ <ToastProvider><EditEvent /></ToastProvider> } />
               <SecureRoute exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
               <Route component={ Handle404 } />

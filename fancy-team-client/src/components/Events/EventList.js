@@ -1,7 +1,6 @@
 import React from 'react';
 import './EventList.scss';
 import AddEvent from "../../assets/plus.svg";
-import deleteEvent from "../../assets/delete.png";
 import {Link} from 'react-router-dom';
 import editEvent from "../../assets/edit.png";
 import viewEvent from "../../assets/eye.png";

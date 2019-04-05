@@ -36,7 +36,7 @@ function EventForm(props) {
           />
           <FromSelect
               name='type'
-              options={['SelectEvent', 'TeamOuting', 'FareWell']}
+              options={['SelectEvent', 'TeamOuting', 'FareWell', 'Volunteering']}
               wrapperDivClassName='event-form-select-event'
               id='type'
               labelName='EventType'

@@ -33,10 +33,7 @@ export const createEvent = async (accessToken, eventFormValues) => {
     variables: {...eventFormValues}
   };
 
-  const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
-
-  const responseJson = await response.json();
-  return responseJson.data;
+  return await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
 };
 
 export const updateInvite = async (accessToken, eventId, isAttending) => {

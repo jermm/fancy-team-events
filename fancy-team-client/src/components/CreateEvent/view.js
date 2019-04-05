@@ -3,6 +3,7 @@ import Form from '../Forms/view';
 import Header from '../Header/header';
 import {withAuth} from '@okta/okta-react';
 import {createEvent} from "../../services/events";
+import { withToastManager } from 'react-toast-notifications';
 
 class CreateEvent extends Component {
   constructor(props) {
@@ -15,11 +16,13 @@ class CreateEvent extends Component {
         description:'',
         startTime:'',
         endTime:'',
-        type:''
+        type:'',
+        inviteEmails:'',
+        locationName:''
       }
     };
     this.locationIdCallback = this.locationIdCallback.bind(this);
-
+    this.formCallBack = this.formCallBack.bind(this);
   }
 
   componentDidMount() {
@@ -27,18 +30,31 @@ class CreateEvent extends Component {
   }
 
   formCallBack(accessToken) {
+    const Values = {
+      title:'',
+      eventDate:'',
+      description:'',
+      startTime:'',
+      endTime:'',
+      type:'',
+      locationName:'',
+      inviteEmails:'',
+    };
+    const that = this;
     const {locationId} = this.state;
-
     return (async function createEventCallback(event, action) {
       if (locationId) {
         event.locationId = locationId;
       }
-      await createEvent(accessToken, event);
+      let eventCreation = await createEvent(accessToken, event);
+      if(eventCreation.statusText === "OK"){
+        that.props.toastManager.add('The event has been successfully saved to. Please visit Events Page to look at the event', { appearance: 'success',autoDismiss: true});
+      }
+      action.resetForm(Values);
     });
   }
 
   locationIdCallback(locationId) {
-    console.log(locationId);
     this.setState({locationId: locationId});
   }
 
@@ -70,4 +86,4 @@ class CreateEvent extends Component {
   }
 }
 
-export default withAuth(CreateEvent);
+export default withAuth(withToastManager(CreateEvent));
