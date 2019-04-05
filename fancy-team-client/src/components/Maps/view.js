@@ -63,6 +63,8 @@ class Search extends Component {
       that.setState({transitNames: result})
     });
 
+    this.props.locationIdCallback(addressObject.id);
+
 
     let address = addressObject.address_components;
 

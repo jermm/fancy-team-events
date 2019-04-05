@@ -29,8 +29,8 @@ export const createEvent = async (accessToken, eventFormValues) => {
   console.log(eventFormValues);
   console.log('$$$$$$$$');
   const query = {
-    query: `mutation createEvent($title:String, $type: String, $locationName:String, $inviteEmails:String $eventDate:String, $startTime:String, $endTime:String, $description:String, $emails:[String])
-      { addEvent(title: $title, type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description, emails:$emails) { id }}
+    query: `mutation createEvent($title:String, $type: String, $locationId: String $locationName:String, $inviteEmails:String $eventDate:String, $startTime:String, $endTime:String, $description:String, $emails:[String])
+      { addEvent(title: $title, locationId: $locationId,  type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description, emails:$emails) { id }}
     `,
     variables: {...eventFormValues}
   };
@@ -43,7 +43,7 @@ export const createEvent = async (accessToken, eventFormValues) => {
 
 export const getEventById = async (accessToken, eventId) => {
   const query = {
-    query: `query GetEvent($id:Int!) {event(id:$id) {id title eventDate startTime endTime locationName description type:eventType inviteEmails }}`,
+    query: `query GetEvent($id:Int!) {event(id:$id) {id title locationId eventDate startTime endTime locationName description type:eventType inviteEmails }}`,
     variables: {id: eventId}
   };
   const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
@@ -57,7 +57,7 @@ export const updateEventById = async (accessToken, eventId, startEvent, event) =
   //Do comparision
   //in vars, do only diff
   const newEvent = {};
-
+  
   Object.keys(event).forEach(function (key) {
     if(event[key] !== startEvent[key]) {
       newEvent[key] = event[key]
@@ -65,8 +65,8 @@ export const updateEventById = async (accessToken, eventId, startEvent, event) =
   });
 
   const query = {
-    query: `mutation EditEvent($id:Int!, $title:String, $type: String, $locationName:String,  $inviteEmails:String,  $eventDate:String, $startTime:String, $endTime:String, $description:String)
-      { updateEvent(id:$id, title: $title, type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description) { id }}
+    query: `mutation EditEvent($id:Int!, $title:String, $locationId: String, $type: String, $locationName:String,  $inviteEmails:String,  $eventDate:String, $startTime:String, $endTime:String, $description:String)
+      { updateEvent(id:$id, title: $title, locationId: $locationId, type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description) { id }}
     `,
     variables: {id: eventId, ...newEvent}
   };

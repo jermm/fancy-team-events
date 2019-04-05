@@ -17,7 +17,9 @@ class CreateEvent extends Component {
         endTime:'',
         type:''
       }
-    }
+    };
+    this.locationIdCallback = this.locationIdCallback.bind(this);
+
   }
 
   componentDidMount() {
@@ -25,10 +27,19 @@ class CreateEvent extends Component {
   }
 
   formCallBack(accessToken) {
+    const {locationId} = this.state;
+
     return (async function createEventCallback(event, action) {
-      console.log(event);
+      if (locationId) {
+        event.locationId = locationId;
+      }
       await createEvent(accessToken, event);
     });
+  }
+
+  locationIdCallback(locationId) {
+    console.log(locationId);
+    this.setState({locationId: locationId});
   }
 
   async getAccessToken() {
@@ -51,6 +62,7 @@ class CreateEvent extends Component {
               type='createEvent'
               headerTitle="Create Event"
               submitBtnText='Create'
+              locationIdCallback={this.locationIdCallback}
               handleFormSubmitCallBack={this.formCallBack(this.state.accessToken)}
               formInitialValues={this.state.formInitialValue}/>
         </div>

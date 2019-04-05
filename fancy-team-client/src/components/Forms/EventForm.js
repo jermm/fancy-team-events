@@ -10,6 +10,7 @@ function EventForm(props) {
     handleSubmit,
     headerTitle,
     values,
+    locationIdCallback,
     submitBtnText
   } = props;
 
@@ -68,7 +69,7 @@ function EventForm(props) {
                 {...props}
             />
           </div>
-          <Search {...props}/>
+          <Search locationIdCallback={locationIdCallback} {...props}/>
           <FromTextArea
               name='inviteEmails'
               placeholder='Enter Invitee Emails'

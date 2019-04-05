@@ -96,6 +96,7 @@ export class EventService {
           event.locationName = updateObject.locationName;
           event.description = updateObject.description;
           event.deadlineDate = updateObject.deadline;
+          event.locationId = updateObject.locationId;
 
           if (parsedEmails) {
               event.inviteEmails = updateObject.inviteEmails;
