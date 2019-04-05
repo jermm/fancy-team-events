@@ -11,6 +11,7 @@
       }
     }
   },
+  "hostName" : "http://localhost:3000",
   "sendgrid": {
     "sendgridSendAPI" : "https://api.sendgrid.com/v3/mail/send",
     "sendgridApiKey": "use-env-vars",

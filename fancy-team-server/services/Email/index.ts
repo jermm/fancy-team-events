@@ -31,7 +31,7 @@ export class EmailService {
                     finalEmailList.push(email)
                 }
             });
-            return this.send(eventInfo.organizerEmail, finalEmailList, {event_link: `http://localhost:3000/event/view/${eventId}`, subject:"Your invited to a fun event!", event_name: eventInfo.title})
+            return this.send(eventInfo.organizerEmail, finalEmailList, {event_link: `${config.hostName}/event/view/${eventId}`, subject:"Your invited to a fun event!", event_name: eventInfo.title})
         });
     }
 
