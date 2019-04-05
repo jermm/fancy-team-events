@@ -23,12 +23,14 @@ class EventView extends Component {
             enableReinitialize: false,
             accessToken: ''
         };
+
     }
 
     attendInviteCallBack(accessToken, eventId) {
         return (async function updateInviteCallback(isAttending) {
             await updateInvite(accessToken, eventId, isAttending);
-        });
+            this.setState( { isAttending: isAttending } );
+        }.bind(this));
     }
 
     async componentDidMount() {
