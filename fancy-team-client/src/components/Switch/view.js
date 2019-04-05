@@ -6,14 +6,17 @@ class Switch extends Component {
     constructor ( props ) {
         super( props );
 
+
         this.state = {
             isChecked: null
         }
+
+        this._handleChange = this._handleChange.bind(this);
     }
 
-    componentWillMount () {
-        this.setState( { isChecked: this.props.isChecked } );
-    }
+    // componentWillMount () {
+    //     this.setState( { isChecked: this.props.isChecked } );
+    // }
 
 
     render () {
@@ -21,7 +24,7 @@ class Switch extends Component {
         return(
             <div className="switch-container">
                 <label>
-                    <input ref="switch" checked={ this.state.isChecked } onChange={ this._handleChange } className="switch" type="checkbox" />
+                    <input ref="switch" checked={ this.props.isChecked } onChange={ this._handleChange } className="switch" type="checkbox" />
                     <div>
 
                         <div></div>
@@ -34,6 +37,7 @@ class Switch extends Component {
 
     _handleChange () {
         this.setState( { isChecked: !this.state.isChecked } );
+        this.props.onToggle(!this.state.isChecked);
     }
 
 }

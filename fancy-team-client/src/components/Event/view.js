@@ -4,7 +4,7 @@ import EventInfo from './EventView';
 import Header from '../Header/header';
 import './event.scss';
 
-import {getEventById} from "../../services/events";
+import {updateInvite, getInvite, getEventById} from "../../services/events";
 
 class EventView extends Component {
     constructor(props) {
@@ -25,11 +25,18 @@ class EventView extends Component {
         };
     }
 
+    attendInviteCallBack(accessToken, eventId) {
+        return (async function updateInviteCallback(isAttending) {
+            await updateInvite(accessToken, eventId, isAttending);
+        });
+    }
 
     async componentDidMount() {
         const token = await this.props.auth.getAccessToken();
+        const fetchInviteBy = await getInvite(token, this.state.eventId);
         const fetchEventById = await getEventById(token, this.state.eventId);
         this.setState({
+            isAttending: fetchInviteBy.inviteForEvent.isAttending,
             event: fetchEventById.event,
             enableReinitialize: true,
             accessToken: token
@@ -37,7 +44,6 @@ class EventView extends Component {
     }
 
     render() {
-        console.log(this.state.event);
         return (
             <div className='event-container'>
              {/*//   <aside>*/}
@@ -48,7 +54,8 @@ class EventView extends Component {
                 {/*</aside>*/}
       <div className='event-container-right'>
                 <EventInfo
-                    event={this.state.event}
+                    event={this.state.event} isAttending={this.state.isAttending}
+                    handleEventInvite={this.attendInviteCallBack(this.state.accessToken, this.state.eventId)}
                 />
 
                 <div className='event-form-container'>

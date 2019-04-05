@@ -5,7 +5,9 @@ import Switch from '../Switch/view';
 
 function EventInfo(props) {
     const {
-        event
+        event,
+        handleEventInvite,
+        isAttending
     } = props;
 
     return (
@@ -23,7 +25,7 @@ function EventInfo(props) {
             <div className='event-field'>
                 <span className='event-field-key'>Attend Invite</span>
                 <span className='event-field-value event-switch'>
-                    <Switch/></span>
+                    <Switch isChecked={isAttending} onToggle={handleEventInvite}/></span>
             </div>
         </div>
 

@@ -41,6 +41,34 @@ export const createEvent = async (accessToken, eventFormValues) => {
   return responseJson.data;
 };
 
+export const updateInvite = async (accessToken, eventId, isAttending) => {
+    const query = {
+        query: `mutation editInvite($eventId:Int!, $isAttending:Boolean)
+      { updateInvite(eventId: $eventId, isAttending:$isAttending) {email}}
+    `,
+        variables: {eventId:eventId, isAttending:isAttending}
+    };
+
+    const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
+
+    const responseJson = await response.json();
+    return responseJson.data;
+};
+
+
+export const getInvite = async (accessToken, eventId) => {
+    const query = {
+        query: `query GetInvite($eventId:Int!)
+            { inviteForEvent(eventId: $eventId) {isAttending eventId:event email}}`,
+        variables: {eventId:eventId}
+    };
+
+    const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
+
+    const responseJson = await response.json();
+    return responseJson.data;
+};
+
 export const getEventById = async (accessToken, eventId) => {
   const query = {
     query: `query GetEvent($id:Int!) {event(id:$id) {id title eventDate startTime endTime locationName description type:eventType inviteEmails }}`,

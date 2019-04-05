@@ -8,7 +8,7 @@ const userEventStatusType: GraphQLObjectType = new GraphQLObjectType({
     fields: {
         userId: { type: GraphQLString },
         email: { type: GraphQLString },
-        eventId: { type: GraphQLInt },
+        event: { type: GraphQLInt },
         isAttending: { type: GraphQLBoolean }
     }
 });
@@ -19,6 +19,12 @@ const userEventStatusQuery = new GraphQLObjectType({
         invitees: {
             type: userEventStatusType,
             // `args` describes the arguments that the `user` query accepts
+            args: {
+                eventId: { type: new GraphQLNonNull(GraphQLInt) }
+            }
+        },
+        inviteForEvent: {
+            type: userEventStatusType,
             args: {
                 eventId: { type: new GraphQLNonNull(GraphQLInt) }
             }
@@ -44,7 +50,6 @@ const userEventStatusMutation = new GraphQLObjectType( {
             updateInvite: {
                 type: userEventStatusType,
                 args: {
-                    userId: { type: GraphQLInt },
                     eventId: { type: GraphQLInt },
                     isAttending: { type: GraphQLBoolean },
                 }

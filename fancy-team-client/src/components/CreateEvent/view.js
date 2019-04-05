@@ -26,7 +26,6 @@ class CreateEvent extends Component {
 
   formCallBack(accessToken) {
     return (async function createEventCallback(event, action) {
-      console.log(event);
       await createEvent(accessToken, event);
     });
   }
@@ -44,7 +43,6 @@ class CreateEvent extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
         <div className='event-container'>
           <Header/>

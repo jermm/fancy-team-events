@@ -1,9 +1,7 @@
 
 import {UserEventStatusService} from '../services/UserEventStatus'
 
-interface inputForUser {
-    id: number
-}
+
 
 interface inputForAddingUserStatus {
     eventId: number,
@@ -15,8 +13,14 @@ interface inputForAddingUserStatus {
 export const userEventStatusResolver = {
     Query: {
         invitees: {
-            resolve(_: any, inputObject: inputForUser): any {
-                return UserEventStatusService.findInviteesByEvent(inputObject.id);
+            resolve(_: any, inputObject: inputForAddingUserStatus): any {
+                return UserEventStatusService.findInviteesByEvent(inputObject.eventId);
+            }
+        },
+
+        inviteForEvent: {
+            resolve(_: any, inputObject: inputForAddingUserStatus, context): Promise<any> {
+                return UserEventStatusService.findInvideByEventForUser(inputObject.eventId, context);
             }
         }
 
@@ -29,8 +33,8 @@ export const userEventStatusResolver = {
         },
 
         updateInvite: {
-            resolve(_: any, inputObject: inputForAddingUserStatus): any {
-                return UserEventStatusService.updateInvite(inputObject.eventId, inputObject.email, inputObject.isAttending);
+            resolve(_: any, inputObject: inputForAddingUserStatus, context): any {
+                return UserEventStatusService.updateInvite(inputObject.eventId, inputObject.isAttending, context);
             }
         }
     }
