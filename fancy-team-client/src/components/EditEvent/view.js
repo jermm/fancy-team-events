@@ -55,7 +55,7 @@ class EditComponent extends Component {
   }
 
   render() {
-    const {title, eventDate, description, startTime, endTime, locationName,  type, inviteEmails} = this.state.formInitialValue;
+    const {title, eventDate, description, startTime, endTime, locationName, locationId, type, inviteEmails} = this.state.formInitialValue;
     const FormValues = {
       title: title,
       eventDate: eventDate,
@@ -64,6 +64,7 @@ class EditComponent extends Component {
       endTime: endTime,
       type: type,
       locationName: locationName,
+      locationId: locationId,
       inviteEmails: inviteEmails
     };
 
