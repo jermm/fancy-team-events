@@ -6,18 +6,8 @@ class Switch extends Component {
     constructor ( props ) {
         super( props );
 
-
-        this.state = {
-            isChecked: null
-        }
-
         this._handleChange = this._handleChange.bind(this);
     }
-
-    // componentWillMount () {
-    //     this.setState( { isChecked: this.props.isChecked } );
-    // }
-
 
     render () {
 
@@ -36,12 +26,10 @@ class Switch extends Component {
 
 
     _handleChange () {
-        this.setState( { isChecked: !this.state.isChecked } );
-        this.props.onToggle(!this.state.isChecked);
+        this.props.onToggle(!this.props.isChecked);
     }
 
 }
 
 export default Switch;
 
-// React.render( <Switch isChecked={ true } />, document.getElementById( "page" ) );
