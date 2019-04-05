@@ -18,15 +18,20 @@ function EventList(props){
                        <img src={AddEvent} alt="Create Event" className="event-add-icon" width="100" />
                      </Link>
                    </div>
-                 <div>
+                  <div className='Event-header'>
+                    <span>EventDate</span>
+                    <span>Title</span>
+                    <span>Actions</span>
+                  </div>
+                 <div className='event-scroll'>
                    <table className='event-table'>
-                       <thead>
+                       {/* <thead>
                      <tr>
                          <th>EventDate</th>
                          <th>Title</th>
                          <th>Actions</th>
                      </tr>
-                       </thead>
+                       </thead> */}
                      <tbody>
                      {events.map((event, index) =>
                          <tr id={event.id} key={index}>
