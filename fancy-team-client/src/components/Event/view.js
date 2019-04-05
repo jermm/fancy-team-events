@@ -29,8 +29,6 @@ class EventView extends Component {
             accessToken: ''
         };
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
-
-
     }
 
     attendInviteCallBack(accessToken, eventId) {
@@ -63,21 +61,13 @@ class EventView extends Component {
             enableReinitialize: true,
             accessToken: token
         });
-
-
-
-
     }
 
     render() {
-
         let transitStopString = '';
-
         this.state.transitStops.forEach(function (stop) {
             transitStopString = transitStopString + stop + ", ";
         });
-
-
 
         return (
             <div className='event-container'>

@@ -56,7 +56,6 @@ class Search extends Component {
 
     let that = this;
     getStopsFromId(addressObject.place_id).then(function (result) {
-      console.log(result);
       that.setState({transitNames: result})
     });
 
