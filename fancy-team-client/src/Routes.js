@@ -28,8 +28,8 @@ function Routes (){
             <Switch>
               <Route exact path='/' component={ Login } />
               <SecureRoute exact path="/event" component= { Main } />
-              <SecureRoute exact path='/event/view/:id' component={() => <ToastProvider><EventView /></ToastProvider> } />
-              <SecureRoute exact path='/event/create' component={ () => <ToastProvider><CreateEvent /></ToastProvider> } />
+              <SecureRoute exact path='/event/view/:id' component={(props) => <ToastProvider><EventView {...props}/></ToastProvider> } />
+              <SecureRoute exact path='/event/create' component={ (props) => <ToastProvider><CreateEvent {...props}/></ToastProvider> } />
               <SecureRoute exact path='/event/edit/:id' component={(props) => <ToastProvider><EditEvent {...props}/></ToastProvider> } />
               <SecureRoute exact path="/profile" component= { Profile } />
               <Route exact path="/implicit/callback" component={ ImplicitCallback } />
