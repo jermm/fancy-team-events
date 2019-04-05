@@ -23,16 +23,13 @@ export class UserEventStatusService {
         try {
             const req = context.Request;
             const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
-            return await userEventStatusRepository.findOne({ event: id, email: req.user.email}).then((res) => {
-                console.log(res);
-                return res;
-            });
+            return await userEventStatusRepository.findOne({ event: id, email: req.user.email} );
         }
         catch(error){
             console.log(error);
         }
 
-    };
+    }
 
 
     public static sendInvites = async (eventId: number) => {
@@ -69,6 +66,7 @@ export class UserEventStatusService {
             console.log(error);
         }
     };
+
 
     // TODO handle deletes
     public static addInvitees = async (eventId: number, emails = []) => {
