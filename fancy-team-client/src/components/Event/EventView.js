@@ -15,7 +15,7 @@ function EventInfo(props) {
             <h1>{event.title}</h1>
 
             {Object.entries(event).map(([key,value]) =>
-               key !== 'id' && key !== 'inviteEmails' && key !== 'title' ? (
+               key !== 'id' && key !== 'inviteEmails' && key !=='locationId' && key !== 'title' ? (
             <div className='event-field'>
                     <span className='event-field-key'>{key}:</span>
                     <span className='event-field-value'>{value}</span>
