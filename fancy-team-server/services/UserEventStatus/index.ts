@@ -19,6 +19,19 @@ export class UserEventStatusService {
          }
     };
 
+    public static findInvideByEventForUser = async(id: number, context) => {
+        try {
+            const req = context.Request;
+            const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
+            return await userEventStatusRepository.findOne({ event: id, email: req.user.email} );
+        }
+        catch(error){
+            console.log(error);
+        }
+
+    }
+
+
     public static sendInvites = async (eventId: number) => {
         const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
         const emailList = [];
@@ -38,14 +51,15 @@ export class UserEventStatusService {
 
     };
 
-    public static updateInvite = async (eventId: number, email: string, isAttending: boolean) => {
+    public static updateInvite = async (eventId: number, isAttending: boolean, context) => {
         try {
+            const req = context.Request;
             return await getConnection()
                 .createQueryBuilder()
                 .update(UserEventStatus)
                 .set({isAttending: isAttending})
                 .where("event = :id", {id: eventId})
-                .andWhere("email = :email", {email: email})
+                .andWhere("email = :email", {email: req.user.email})
                 .execute();
         }
         catch(error){

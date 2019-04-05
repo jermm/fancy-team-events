@@ -3,7 +3,8 @@ import FormInputs from './FormInputs';
 import FromSelect from './FormSelect';
 import FromTextArea from './FormTextArea';
 import Search from '../Maps/view';
-import LinkButton from '../LinkButton/view';
+import Back from "../../assets/back-arrow.svg";
+import { Link } from 'react-router-dom';
 
 function EventForm(props) {
   const {
@@ -16,7 +17,12 @@ function EventForm(props) {
 
   return (
       <div className='event-form-container'>
-        <h1>{headerTitle}</h1>
+        <div>
+          <Link to="/event">
+            <img src={Back} alt="Create Event" className='back-icon' width="100" />
+          </Link>
+        </div>
+        <h1 className='form-header'>{headerTitle}</h1>
         <form onSubmit={handleSubmit} className='event-form'>
           <FormInputs
               type='text'
@@ -100,7 +106,6 @@ function EventForm(props) {
           </div>
           <div>
             <button type='submit' id='event-form-submit-btn'>{submitBtnText}</button>
-            <LinkButton link='/event' text='EventsPage'/>
           </div>
         </form>
       </div>

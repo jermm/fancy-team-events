@@ -26,8 +26,6 @@ export const getEventByUser = async (accessToken) => {
 
 export const createEvent = async (accessToken, eventFormValues) => {
   // const {eventName, eventType, eventDate, eventStart, eventEnd, autoComplete, description, inviteEmails} = event;
-  console.log(eventFormValues);
-  console.log('$$$$$$$$');
   const query = {
     query: `mutation createEvent($title:String, $type: String, $locationId: String $locationName:String, $inviteEmails:String $eventDate:String, $startTime:String, $endTime:String, $description:String, $emails:[String])
       { addEvent(title: $title, locationId: $locationId,  type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description, emails:$emails) { id }}
@@ -39,6 +37,34 @@ export const createEvent = async (accessToken, eventFormValues) => {
 
   const responseJson = await response.json();
   return responseJson.data;
+};
+
+export const updateInvite = async (accessToken, eventId, isAttending) => {
+    const query = {
+        query: `mutation editInvite($eventId:Int!, $isAttending:Boolean)
+      { updateInvite(eventId: $eventId, isAttending:$isAttending) {email}}
+    `,
+        variables: {eventId:eventId, isAttending:isAttending}
+    };
+
+    const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
+
+    const responseJson = await response.json();
+    return responseJson.data;
+};
+
+
+export const getInvite = async (accessToken, eventId) => {
+    const query = {
+        query: `query GetInvite($eventId:Int!)
+            { inviteForEvent(eventId: $eventId) {isAttending eventId:event email}}`,
+        variables: {eventId:eventId}
+    };
+
+    const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
+
+    const responseJson = await response.json();
+    return responseJson.data;
 };
 
 export const getEventById = async (accessToken, eventId) => {

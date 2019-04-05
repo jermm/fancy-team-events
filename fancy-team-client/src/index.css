@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
 * {
   box-sizing: border-box;
 }
@@ -133,4 +135,16 @@ label{
 .event-Date-Time{
   display: flex;
   justify-content: space-between;
+}
+
+.icons > a > img{
+  display:inline;
+  vertical-align: middle;
+}
+.back-icon{
+  width: 3rem;
+}
+
+.form-header{
+  text-align: center;
 }
