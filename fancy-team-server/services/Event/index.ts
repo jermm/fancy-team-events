@@ -33,11 +33,8 @@ export class EventService {
     public static updateEvent = async (updateObject, context) => {
        try {
 
-           let parsedEmails = [];
-           if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
-               parsedEmails = updateObject.inviteEmails.split(',');
-               updateObject.inviteEmails = parsedEmails;
-           }
+           let parsedEmails = parseEmails(updateObject);
+
 
            await UserEventStatusService.addInvitees(updateObject.id, parsedEmails);
            await getConnection()
@@ -86,11 +83,8 @@ export class EventService {
           const event = new Event();
           const userId = context.UserId;
           const req = context.Request;
-          let parsedEmails = [];
-          if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
-              parsedEmails = updateObject.inviteEmails.split(',');
-              updateObject.inviteEmails = parsedEmails;
-          }
+          let parsedEmails = parseEmails(updateObject);
+
 
           event.createdBy = userId;
           event.organizerEmail = req.user.email;
@@ -104,6 +98,11 @@ export class EventService {
           event.locationName = updateObject.locationName;
           event.description = updateObject.description;
           event.deadlineDate = updateObject.deadline;
+
+          if (parsedEmails) {
+              event.inviteEmails = updateObject.inviteEmails;
+          }
+
           const eventSaved = await eventRepository.save(event);
                              await UserEventStatusService.addInvitees(eventSaved.id, parsedEmails);
                              return eventSaved;
@@ -113,4 +112,14 @@ export class EventService {
           throw new Error('failed to save events' + error.message);
       }
     };
+}
+
+function parseEmails(updateObject) {
+    let parsedEmails = [];
+    if (updateObject.inviteEmails && updateObject.inviteEmails.length > 0) {
+        parsedEmails = updateObject.inviteEmails.split(',');
+        updateObject.inviteEmails = parsedEmails;
+    }
+    return parsedEmails
+
 }

@@ -26,8 +26,6 @@ export const getEventByUser = async (accessToken) => {
 
 export const createEvent = async (accessToken, eventFormValues) => {
   // const {eventName, eventType, eventDate, eventStart, eventEnd, autoComplete, description, inviteEmails} = event;
-  console.log(eventFormValues);
-  console.log('$$$$$$$$');
   const query = {
     query: `mutation createEvent($title:String, $type: String, $locationName:String, $inviteEmails:String $eventDate:String, $startTime:String, $endTime:String, $description:String, $emails:[String])
       { addEvent(title: $title, type:$type, date:$eventDate, locationName:$locationName, inviteEmails:$inviteEmails, startTime:$startTime, endTime:$endTime, description:$description, emails:$emails) { id }}
