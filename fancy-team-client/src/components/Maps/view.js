@@ -30,7 +30,8 @@ class Search extends Component {
     // You don't have to do this check first, but it can help prevent an unneeded render
     if (nextProps.values.locationName !== this.state.query) {
       this.setState({
-        query: nextProps.initialValues.locationName
+        query: nextProps.initialValues.locationName,
+        transitNames : []
       })
     }
   }
