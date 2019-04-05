@@ -6,7 +6,7 @@ import editEvent from "../../assets/edit.png";
 import viewEvent from "../../assets/eye.png";
 
 
-function EventList(props){
+function EventList(props) {
     const {events} = props;
 
         return (
@@ -24,13 +24,6 @@ function EventList(props){
                   </div>
                  <div className='event-scroll'>
                    <table className='event-table'>
-                       {/* <thead>
-                     <tr>
-                         <th>EventDate</th>
-                         <th>Title</th>
-                         <th>Actions</th>
-                     </tr>
-                       </thead> */}
                      <tbody>
                      {events.map((event, index) =>
                          <tr id={event.id} key={index}>
