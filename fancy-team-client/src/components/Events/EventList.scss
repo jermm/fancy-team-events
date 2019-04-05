@@ -3,20 +3,20 @@ $color-grey: #ddd;
 $color-green: #4CAF50;
 $color-white: white;
 
-
 .table-name{
   display: block;
   margin: 0 auto;
   text-align: center;
 }
+
 .event-table {
     font-family: "Quicksand", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    color: $color-black
-
+    color: $color-black;
 
    th,td {
+      width: 40%;
       padding: 8px;
       text-align: left;
     }
@@ -34,7 +34,11 @@ $color-white: white;
     background-color: $color-green;
     color: $color-white;
   }
+
+  tbody {
+    overflow: auto;
   }
+}
 
 .event-list-page-create-event{
   span {
@@ -47,7 +51,22 @@ $color-white: white;
 
 .event-add-icon{
   margin-left: auto;
-  width: 1.5rem;
+  width: 3rem;
   display: block;
   margin-bottom: 0.5rem;
+}
+
+.event-scroll {
+  margin-top: 20px; 
+  height: 80vh; 
+  overflow: auto; 
+}
+
+.Event-header{
+  & > span{
+    display: inline-block;
+    background-color: $color-green;
+    color: white;
+    width: 33.3%;
+  }
 }
