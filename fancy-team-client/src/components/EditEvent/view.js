@@ -15,6 +15,7 @@ class EditComponent extends Component {
         startTime:'',
         endTime:'',
         location:'',
+        locationIdCallback:'',
         eventType:'SelectEvent'
       },
         formStartValue: {},
@@ -22,14 +23,24 @@ class EditComponent extends Component {
       enableReinitialize: false,
       accessToken:''
     };
+    this.locationIdCallback = this.locationIdCallback.bind(this);
+    this.editEventCallback = this.editEventCallback.bind(this);
+
   }
 
   editEventCallback() {
-    const {accessToken, eventId, formStartValue} = this.state;
+    const {accessToken, eventId, formStartValue, locationId} = this.state;
     return(async function editEventFnCallback(event, action){
+        if (locationId) {
+            event.locationId = locationId;
+        }
       await updateEventById(accessToken, eventId, formStartValue, event);
     });
   }
+
+    locationIdCallback(locationId) {
+      this.setState({locationId: locationId});
+    }
 
   async componentDidMount() {
     const token = await this.props.auth.getAccessToken();
@@ -65,6 +76,7 @@ class EditComponent extends Component {
               type='editEvent'
               headerTitle="Edit Event"
               submitBtnText='Edit'
+              locationIdCallback={this.locationIdCallback}
               handleFormSubmitCallBack={this.editEventCallback()}
           />
         </div>
