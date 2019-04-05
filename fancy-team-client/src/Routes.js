@@ -6,7 +6,8 @@ import Profile from './components/Profile/view';
 
 import Login from './components/Login/view'
 // import Profile from './components/Profile/view';
-import EventList from './components/Events/EventList';
+import Main from './components/Main/view';
+import EventView from './components/Event/view';
 import Handle404 from './components/404/view';
 import CreateEvent from './components/CreateEvent/view';
 import EditEvent from './components/EditEvent/view';
@@ -25,7 +26,8 @@ function Routes (){
           >
             <Switch>
               <Route exact path='/' component={ Login } />
-              <SecureRoute exact path="/event" component= { EventList } />
+              <SecureRoute exact path="/event" component= { Main } />
+                <SecureRoute exact path='/event/view/:id' component={ EventView } />
               <SecureRoute exact path='/event/create' component={ CreateEvent } />
               <SecureRoute exact path='/event/edit/:id' component={ EditEvent } />
               <SecureRoute exact path="/profile" component= { Profile } />
