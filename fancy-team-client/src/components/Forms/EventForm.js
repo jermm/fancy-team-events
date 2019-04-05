@@ -3,7 +3,7 @@ import FormInputs from './FormInputs';
 import FromSelect from './FormSelect';
 import FromTextArea from './FormTextArea';
 import Search from '../Maps/view';
-import Back from "../../assets/back-arrow.svg";
+import Back from "../../assets/back-svgrepo-com.svg";
 import { Link } from 'react-router-dom';
 
 function EventForm(props) {
