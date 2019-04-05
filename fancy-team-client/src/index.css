@@ -141,8 +141,9 @@ label{
   display:inline;
   vertical-align: middle;
 }
+
 .back-icon{
-  width: 3rem;
+  width: 3rem;  
 }
 
 .form-header{
