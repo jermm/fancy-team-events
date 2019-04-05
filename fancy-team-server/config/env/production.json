@@ -1,9 +1,10 @@
 {
-  "okta":{
-  "resourceServer": {
-    "assertClaims": {
-      "cid": "0oadrmminV9IDToNc356"
+  "okta": {
+    "resourceServer": {
+      "assertClaims": {
+        "cid": "0oadrmminV9IDToNc356"
+      }
     }
-  }
-}
+  },
+  "hostName" : "http://34.211.115.42"
 }
