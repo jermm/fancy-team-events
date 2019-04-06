@@ -38,16 +38,15 @@ function EventList(props) {
                      <tbody>
                      {Object.values(tempArr).map((event, index) =>
                          <tr id={event.id} key={index}>
-                           <td>{event.eventDate}</td>
-                             <td>{event.title}</td>
+                            <td>{event.eventDate}</td>
+                            <td>{event.title}</td>
                             <td className="icons">
-                                <Link key={index + 1} to={`/event/view/${event.id}`}>
-                                    <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
-                                </Link>
                                 {event.isOrganizer ? (
-                               <Link key={index + 2} to={`/event/edit/${event.id}`}>
+                                <Link to={`/event/edit/${event.id}`}>
                                     <img src={editEvent} alt="Edit Event" className="event-add-icon" width="100" />
-                                </Link> ) : null}
+                                </Link>) : (<Link  to={`/event/view/${event.id}`}>
+                                    <img src={viewEvent} alt="View Event" className="event-add-icon" width="100" />
+                                </Link>)}
                             </td>
                          </tr>)}
                      </tbody>
