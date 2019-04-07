@@ -17,7 +17,7 @@ const userEventStatusQuery = new GraphQLObjectType({
     name: 'Query',
     fields: {
         invitees: {
-            type: userEventStatusType,
+            type: new GraphQLList(userEventStatusType),
             // `args` describes the arguments that the `user` query accepts
             args: {
                 eventId: { type: new GraphQLNonNull(GraphQLInt) }

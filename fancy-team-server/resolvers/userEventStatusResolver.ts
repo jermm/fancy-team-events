@@ -1,5 +1,6 @@
 
 import {UserEventStatusService} from '../services/UserEventStatus'
+import {UserEventStatus} from "../entity/UserEventStatus";
 
 
 
@@ -13,8 +14,10 @@ interface inputForAddingUserStatus {
 export const userEventStatusResolver = {
     Query: {
         invitees: {
-            resolve(_: any, inputObject: inputForAddingUserStatus): any {
-                return UserEventStatusService.findInviteesByEvent(inputObject.eventId);
+            resolve(_: any, inputObject: inputForAddingUserStatus): Promise<UserEventStatus[]> {
+                return UserEventStatusService.findInviteesByEvent(inputObject.eventId).then(data => {
+                    return data;
+                });
             }
         },
 

@@ -37,7 +37,7 @@ class EventView extends Component {
     attendInviteCallBack(accessToken, eventId) {
         return (async function updateInviteCallback(isAttending) {
             await updateInvite(accessToken, eventId, isAttending);
-            this.setState( { isAttending: isAttending } );
+            this.setState({isAttending: isAttending});
         }.bind(this));
     }
 
@@ -91,39 +91,32 @@ class EventView extends Component {
                     url={config.googleAutoCompleteURL}
                     onLoad={this.handleScriptLoad}
                 />
-             {/*//   <aside>*/}
+                <div className='event-container-header'>
+                    <Header/>
+                </div>
+                <div className='event-container-right'>
+                    <EventInfo
+                        event={this.state.event} isAttending={this.state.isAttending}
+                        handleEventInvite={this.attendInviteCallBack(this.state.accessToken, this.state.eventId)}
+                    />
 
-                    <div className='event-list-page-header'>
-                        <Header/>
-                    </div>
-                {/*</aside>*/}
-      <div className='event-container-right'>
-                <EventInfo
-                    event={this.state.event} isAttending={this.state.isAttending}
-                    handleEventInvite={this.attendInviteCallBack(this.state.accessToken, this.state.eventId)}
-                />
+                    <div className='event-form-container'>
+                        <hr className='event-separator'/>
 
-                <div className='event-form-container'>
-                    <hr className='event-separator'/>
+                        <h3>Transportation</h3>
 
-                    <h3>Transportation</h3>
-                    {/*<div className='event-field'>*/}
-                    {/*<span className='event-field-key'>:</span>:*/}
-                    {/*<span className='event-field-value'></span>*/}
-                    {/*</div>*/}
+                        <p>Nearby Transit: {transitStopString}</p>
 
-                    <p>Nearby Transit: {transitStopString}</p>
-
-                    <div className='event-field'>
-                        <span className='event-field-key'>Parking</span>:
-                        <span className='event-field-value'>free</span>
-                    </div>
-                    <div className='event-field'>
-                        <span className='event-field-key'>Carpool:</span>:
-                        <span className='event-field-value'></span>
+                        <div className='event-field'>
+                            <span className='event-field-key'>Parking:</span>
+                            <span className='event-field-value'>free</span>
+                        </div>
+                        <div className='event-field'>
+                            <span className='event-field-key'>Carpool:</span>:
+                            <span className='event-field-value event-switch'></span>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         );
     }

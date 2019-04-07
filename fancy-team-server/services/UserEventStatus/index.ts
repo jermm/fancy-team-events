@@ -23,12 +23,11 @@ export class UserEventStatusService {
         try {
             const req = context.Request;
             const userEventStatusRepository = getConnection().getRepository(UserEventStatus);
-            return await userEventStatusRepository.findOne({ event: id, email: req.user.email} );
+            return await userEventStatusRepository.findOne({ where:{ event: id, email: req.user.email} });
         }
         catch(error){
             console.log(error);
         }
-
     }
 
 

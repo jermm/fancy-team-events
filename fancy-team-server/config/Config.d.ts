@@ -2,8 +2,8 @@
 /* eslint-disable */
 interface Config {
   okta: Okta;
-  sendgrid: Sendgrid;
   hostName: string;
+  sendgrid: Sendgrid;
 }
 interface Sendgrid {
   sendgridSendAPI: string;

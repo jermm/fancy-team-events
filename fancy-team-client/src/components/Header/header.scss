@@ -1,16 +1,14 @@
 .event-header {
-    background-color: #282c34;
+    background: #282c34;
     min-height: 50vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  overflow-x: hidden;
-  overflow-y: auto;
-  font-family: "Quicksand", Arial, Helvetica, sans-serif;
-  font-size: calc(10px + 2vmin);
+    font-family: "Quicksand", Arial, Helvetica, sans-serif;
+    font-size: calc(10px + 2vmin);
     color: white;
-    height:100%;
+   height: 100%;
   }
   
   .event-logo {

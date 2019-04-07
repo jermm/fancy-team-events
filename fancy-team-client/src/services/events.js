@@ -64,9 +64,22 @@ export const getInvite = async (accessToken, eventId) => {
     return responseJson.data;
 };
 
+export const getInvitees = async (accessToken, eventId) => {
+    const query = {
+        query: `query GetInvite($eventId:Int!)
+            { invitees(eventId: $eventId) {isAttending eventId:event email}}`,
+        variables: {eventId:eventId}
+    };
+
+    const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));
+
+    const responseJson = await response.json();
+    return responseJson.data;
+};
+
 export const getEventById = async (accessToken, eventId) => {
   const query = {
-    query: `query GetEvent($id:Int!) {event(id:$id) {id title locationId eventDate startTime endTime locationName description type:eventType inviteEmails }}`,
+    query: `query GetEvent($id:Int!) {event(id:$id) {id title locationId eventDate startTime endTime locationName description type:eventType inviteEmails deadlineDate}}`,
     variables: {id: eventId}
   };
   const response = await fetch(config.resourceServer.eventsUrl, constructFetchRequestObject('POST', accessToken, query));

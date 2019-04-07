@@ -1,6 +1,7 @@
-$color-black: #0000FF;
+$color-black: #333333;
 $color-grey: #ddd;
-$color-green: #4CAF50;
+$color-darkgrey: #5c5c5c;
+$color-green: rgba(45,182,124,.85);
 $color-white: white;
 
 .table-name{
@@ -16,9 +17,11 @@ $color-white: white;
     color: $color-black;
 
    th,td {
-      width: 40%;
+      width: 35%;
       padding: 8px;
+      font-size:1.5rem;
       text-align: left;
+      color: $color-darkgrey;
     }
 
   tr {
@@ -51,7 +54,7 @@ $color-white: white;
 
 .event-add-icon{
   margin-left: auto;
-  width: 3rem;
+  width: 2rem;
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -62,8 +65,11 @@ $color-white: white;
   overflow: auto; 
 }
 
-.Event-header{
+.event-table-header{
   & > span{
+    text-align: left;
+    font-size:2rem;
+    padding-left: 1.5rem;
     display: inline-block;
     background-color: $color-green;
     color: white;

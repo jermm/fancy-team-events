@@ -26,13 +26,11 @@ class Header extends Component{
   render(){
     const userName = <div>Hi {this.state.userInfo}</div>;
     return (
-        <div>
-          <header className="event-header">
+          <div className="event-header">
             <img src={EventLogo} className="event-logo" alt="Event header logo" width="200" height="300" />
             <h1 className='event-title'>Fancy Event Organizer</h1>
             {this.state.showUserName ? userName : null}
-          </header>
-        </div>
+          </div>
     )
   }
 

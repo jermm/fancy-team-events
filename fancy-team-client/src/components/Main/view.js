@@ -30,13 +30,12 @@ class Main extends Component {
 
     render() {
         return (
-            <div className='event-list-page'>
-                <aside>
-            <div className='event-list-page-header'>
+            <div className='event-container'>
+                <div className='event-container-header'>
                 <Header/>
-            </div>
-                </aside>
-              <div className='event-list-page-main'>
+                </div>
+
+              <div className='event-container-right'>
                   {this.state.events.length === 0 ? (
                           <div className='event-list-page-main-zero'> <p>Welcome to Fancy Events Organizer ! You have no events so far... Do you want to go ahead and create one ?</p>
                   <Link to="/event/create">

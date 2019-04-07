@@ -1,19 +1,22 @@
-$color-green: #4CAF50;
+$color-green:#81d8d0;
+$color-black: #333333;
 .event-container {
-  position:relative;
-    width: 100%;
   display: flex;
-  overflow: auto;
-  height: auto;
+  width:100%;
+  overflow: hidden;
   font-family: "Quicksand", Arial, Helvetica, sans-serif;
 
-
+  &-header{
+    flex:1;
+  }
   &-right {
-    width:100%;
+    flex:5;
   }
   .event-field {
+    font-size:1rem;
     display: flex;
     justify-content: flex-end;
+
 
     padding: .5em;
     &-key {
@@ -22,19 +25,18 @@ $color-green: #4CAF50;
       flex: 1;
     }
     &-value {
-      flex: 2;
+      padding: .5em 1em .5em 0;
+      flex: 5;
+
     }
-
-
 
   }
   .event-separator {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid $color-green;
-    margin: 1em 0;
-    padding: 0;
+    border-top: 3px solid $color-green;
+    padding-bottom: 1.5rem;
   }
 
   .event-title {
@@ -43,14 +45,21 @@ $color-green: #4CAF50;
     text-align: center;
   }
 
-  .event-header{
-    flex-grow:1;
-    height:100vh;
-    box-shadow: 8px 0 10px -6px black;
+}
+.event-participant{
+  color: $color-black;
+  font-size:1rem;
+  padding: .5em;
+  font-weight: 900;
+  &-table{
+    margin: .5em;
+    width: 50%;
+    th, td {
+      font-size: 1rem;
+    }
   }
 }
-
 .event-switch{
   margin-top:1.5rem;
-  margin-left:25rem;
+  margin-left:26rem;
 }

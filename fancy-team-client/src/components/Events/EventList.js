@@ -1,6 +1,6 @@
 import React from 'react';
 import './EventList.scss';
-import AddEvent from "../../assets/plus.svg";
+import AddEvent from "../../assets/plus.png";
 import {Link} from 'react-router-dom';
 import editEvent from "../../assets/edit.png";
 import viewEvent from "../../assets/eye.png";
@@ -28,7 +28,7 @@ function EventList(props) {
                        <img src={AddEvent} alt="Create Event" className="event-add-icon" width="100" />
                      </Link>
                    </div>
-                  <div className='Event-header'>
+                  <div className='event-table-header'>
                     <span>EventDate</span>
                     <span>Title</span>
                     <span>Actions</span>
