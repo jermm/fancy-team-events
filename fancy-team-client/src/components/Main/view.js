@@ -31,7 +31,7 @@ class Main extends Component {
     render() {
         return (
             <div className='event-container'>
-                <div className='event-container-header'>
+                <div className='event-container-header event-list-page-main-header'>
                 <Header/>
                 </div>
 
