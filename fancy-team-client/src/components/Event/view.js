@@ -41,6 +41,14 @@ class EventView extends Component {
         }.bind(this));
     }
 
+    selecttshirtInviteCallBack(accessToken, eventId) {
+        return (async function updateInviteCallback(tShirtSize) {
+            await updateInvite(accessToken, eventId, this.state.isAttending, tShirtSize);
+            this.setState({tShirtSize: tShirtSize});
+        }.bind(this));
+    }
+
+
     handleScriptLoad() {
         if (this.eventFound && !this.transitLoaded) {
             const that = this;
@@ -58,13 +66,16 @@ class EventView extends Component {
         const fetchInviteBy = await getInvite(token, this.state.eventId);
         const fetchEventById = await getEventById(token, this.state.eventId);
         let isAttending = false;
+        let tShirtSize = '';
 
         if (fetchEventById && fetchInviteBy.inviteForEvent) {
-            isAttending = fetchInviteBy.inviteForEvent.isAttending
+            isAttending = fetchInviteBy.inviteForEvent.isAttending;
+            tShirtSize = fetchInviteBy.inviteForEvent.tShirtSize;
         }
 
         this.setState({
             isAttending: isAttending,
+            tShirtSize: tShirtSize,
             event: fetchEventById.event,
             enableReinitialize: true,
             accessToken: token
@@ -96,8 +107,9 @@ class EventView extends Component {
                 </div>
                 <div className='event-container-right'>
                     <EventInfo
-                        event={this.state.event} isAttending={this.state.isAttending}
+                        event={this.state.event} isAttending={this.state.isAttending} tShirtSize={this.state.tShirtSize}
                         handleEventInvite={this.attendInviteCallBack(this.state.accessToken, this.state.eventId)}
+                        handleSelect={this.selecttshirtInviteCallBack(this.state.accessToken, this.state.eventId)}
                     />
 
                     <div className='event-form-container'>

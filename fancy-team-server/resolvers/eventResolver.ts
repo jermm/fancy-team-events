@@ -19,7 +19,8 @@ interface inputForAddingEvent {
     description: string,
     deadline: string,
     inviteEmails: string,
-    emails: string[]
+    emails: string[],
+    tshirt:string
 }
 
 export const eventResolver = {

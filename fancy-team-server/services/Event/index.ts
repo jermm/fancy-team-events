@@ -60,7 +60,7 @@ export class EventService {
             const req = context.Request;
             const eventsAttended = await getConnection()
             .getRepository(Event).createQueryBuilder("event")
-                .leftJoinAndSelect(UserEventStatus, "userStatus", "userStatus.email = event.organizerEmail")
+                .leftJoinAndSelect(UserEventStatus, "userStatus", "event.organizerEmail = userStatus.email")
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
@@ -99,6 +99,7 @@ export class EventService {
           event.description = updateObject.description;
           event.deadlineDate = updateObject.deadline;
           event.locationId = updateObject.locationId;
+          event.tshirt = updateObject.tshirt;
 
           if (parsedEmails) {
               event.inviteEmails = updateObject.inviteEmails;

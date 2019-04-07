@@ -1,6 +1,7 @@
 
 import {UserEventStatusService} from '../services/UserEventStatus'
 import {UserEventStatus} from "../entity/UserEventStatus";
+import {GraphQLString} from "graphql";
 
 
 
@@ -8,7 +9,8 @@ interface inputForAddingUserStatus {
     eventId: number,
     email: string,
     isAttending: boolean,
-    emails: string[]
+    emails: string[],
+    tShirtSize: string
 }
 
 export const userEventStatusResolver = {
@@ -37,7 +39,7 @@ export const userEventStatusResolver = {
 
         updateInvite: {
             resolve(_: any, inputObject: inputForAddingUserStatus, context): any {
-                return UserEventStatusService.updateInvite(inputObject.eventId, inputObject.isAttending, context);
+                return UserEventStatusService.updateInvite(inputObject.eventId, inputObject.isAttending, inputObject.tShirtSize, context);
             }
         }
     }

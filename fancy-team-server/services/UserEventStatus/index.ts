@@ -50,13 +50,13 @@ export class UserEventStatusService {
 
     };
 
-    public static updateInvite = async (eventId: number, isAttending: boolean, context) => {
+    public static updateInvite = async (eventId: number, isAttending: boolean, tShirtSize: string, context) => {
         try {
             const req = context.Request;
             return await getConnection()
                 .createQueryBuilder()
                 .update(UserEventStatus)
-                .set({isAttending: isAttending})
+                .set({isAttending: isAttending, tShirtSize: tShirtSize })
                 .where("event = :id", {id: eventId})
                 .andWhere("email = :email", {email: req.user.email})
                 .execute();

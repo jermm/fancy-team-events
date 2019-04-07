@@ -19,6 +19,7 @@ class EditComponent extends Component {
                 locationIdCallback: '',
                 eventType: 'SelectEvent',
                 deadlineDate: '',
+                tshirt: ''
             }, formStartValue: {},
             eventId: Number(this.props.match.params.id),
             enableReinitialize: false,
@@ -67,7 +68,7 @@ class EditComponent extends Component {
     }
 
     render() {
-        const {title, eventDate, description, startTime, endTime, locationName, locationId, type, inviteEmails, deadlineDate} = this.state.formInitialValue;
+        const {title, eventDate, description, startTime, endTime, locationName, locationId, type, inviteEmails, deadlineDate, tshirt} = this.state.formInitialValue;
         const FormValues = {
             title: title,
             eventDate: eventDate,
@@ -78,7 +79,8 @@ class EditComponent extends Component {
             locationName: locationName,
             locationId: locationId,
             inviteEmails: inviteEmails,
-            deadlineDate: deadlineDate
+            deadlineDate: deadlineDate,
+            tshirt: tshirt
         };
         return (
             <div className='event-container'>
@@ -109,6 +111,8 @@ class EditComponent extends Component {
                                 <tr>
                                     <th>Email</th>
                                     <th>Signed-Up</th>
+                                    <th>T-shirt size</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -117,6 +121,7 @@ class EditComponent extends Component {
                                         <td>{invitee.email}</td>
                                         {invitee.isAttending ?
                                             (<td>Yes</td>) : (<td>No</td>)}
+                                        <td>{invitee.tShirtSize}</td>
                                     </tr>)}
                                 </tbody>
                             </table>] : null

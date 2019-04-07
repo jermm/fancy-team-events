@@ -17,6 +17,7 @@ const EventType: GraphQLObjectType = new GraphQLObjectType({
         description: { type: GraphQLString },
         deadlineDate: { type: GraphQLString },
         isOrganizer: { type: GraphQLBoolean },
+        tshirt: {type: GraphQLString },
         inviteEmails: {type: GraphQLList(GraphQLString) }
 
     }
@@ -58,7 +59,9 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 description: { type: GraphQLString },
                 deadlineDate: { type: GraphQLString },
                 emails:{type: new GraphQLList(GraphQLString)},
-                inviteEmails: {type: GraphQLString }
+                inviteEmails: {type: GraphQLString },
+                tshirt: {type: GraphQLString }
+
             }
         },
         updateEvent: {
@@ -74,7 +77,8 @@ const EventMutation: GraphQLObjectType = new GraphQLObjectType( {
                 locationName: { type: GraphQLString },
                 description: { type: GraphQLString },
                 deadlineDate: { type: GraphQLString },
-                inviteEmails: {type: GraphQLString }
+                inviteEmails: {type: GraphQLString },
+                tshirt: {type: GraphQLString }
             }
         }
     }

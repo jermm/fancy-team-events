@@ -49,4 +49,7 @@ export class Event {
     @Column('text', {nullable: true})
     deadlineDate?: string;
 
+    @Column({nullable: true})
+    tshirt?: string;
+
 }

@@ -21,7 +21,7 @@ function EventList(props) {
                      </Link>
                    </div>
                   <div className='event-table-header'>
-                    <span>EventDate</span>
+                    <span>Event Date</span>
                     <span>Title</span>
                     <span>Actions</span>
                   </div>

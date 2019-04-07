@@ -19,7 +19,8 @@ class CreateEvent extends Component {
                 type: '',
                 inviteEmails: '',
                 locationName: '',
-                deadlineDate: ''
+                deadlineDate: '',
+                tshirt:''
             }
         };
         this.locationIdCallback = this.locationIdCallback.bind(this);
@@ -40,7 +41,8 @@ class CreateEvent extends Component {
             type: '',
             locationName: '',
             inviteEmails: '',
-            deadlineDate: ''
+            deadlineDate: '',
+            tshirt:''
         };
         const that = this;
         const {locationId} = this.state;

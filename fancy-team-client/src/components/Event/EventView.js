@@ -3,13 +3,15 @@ import './event.scss';
 import Switch from '../Switch/view';
 import Back from "../../assets/back.png";
 import {Link} from 'react-router-dom';
-
+import SelectBox from '../Select/view';
 
 function EventInfo(props) {
     const {
         event,
         handleEventInvite,
-        isAttending
+        isAttending,
+        tShirtSize,
+        handleSelect
     } = props;
 
     return (
@@ -34,6 +36,18 @@ function EventInfo(props) {
                 <span className='event-field-value event-switch'>
                     <Switch isChecked={isAttending} onToggle={handleEventInvite}/></span>
             </div>
+
+            {event.tshirt === 'Yes' ?
+                (<div className='event-field'>
+                <span className='event-field-key'>Tshirt size:</span>
+                <span className='event-field-value event-select'>
+                   <SelectBox
+                       options={['','Large', 'Medium', 'Small']}
+                       value={tShirtSize}
+                       onSelect={handleSelect}
+                   /></span>
+            </div>) :null
+            }
         </div>
 
     )

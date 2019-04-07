@@ -9,7 +9,8 @@ const userEventStatusType: GraphQLObjectType = new GraphQLObjectType({
         userId: { type: GraphQLString },
         email: { type: GraphQLString },
         event: { type: GraphQLInt },
-        isAttending: { type: GraphQLBoolean }
+        isAttending: { type: GraphQLBoolean },
+        tShirtSize: { type: GraphQLString }
     }
 });
 
@@ -44,6 +45,7 @@ const userEventStatusMutation = new GraphQLObjectType( {
                     userId: { type: GraphQLString },
                     emails: { type: new GraphQLList(GraphQLString) },
                     isAttending: { type: GraphQLBoolean },
+                    tShirtSize: { type: GraphQLString }
                 }
             },
 
@@ -52,6 +54,7 @@ const userEventStatusMutation = new GraphQLObjectType( {
                 args: {
                     eventId: { type: GraphQLInt },
                     isAttending: { type: GraphQLBoolean },
+                    tShirtSize: { type: GraphQLString }
                 }
             }
         }
