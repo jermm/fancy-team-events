@@ -28,7 +28,7 @@ function EventForm(props) {
               type='text'
               name='title'
               placeholder='eventName*'
-              labelText='EventName'
+              labelText='Event Name'
               id='name'
               wrapperDivClassName='event-form-eventName'
               value={values.title}
@@ -39,7 +39,7 @@ function EventForm(props) {
               options={['SelectEvent', 'TeamOuting', 'FareWell', 'Volunteering']}
               wrapperDivClassName='event-form-select-event'
               id='type'
-              labelName='EventType'
+              labelName='Event Type'
               value={values.type}
               {...props}
           />
@@ -48,7 +48,7 @@ function EventForm(props) {
                 type='date'
                 name='eventDate'
                 placeholder=''
-                labelText='EventDate'
+                labelText='Event Date'
                 id='eventDate'
                 wrapperDivClassName='event-form-eventDate'
                 value={values.eventDate}
@@ -58,7 +58,7 @@ function EventForm(props) {
                 type='time'
                 name='startTime'
                 placeholder=''
-                labelText='EventStartTime'
+                labelText='Start Time'
                 id='eventStartTime'
                 wrapperDivClassName='event-form-eventStartTime'
                 value={values.startTime}
@@ -68,13 +68,24 @@ function EventForm(props) {
                 type='time'
                 name='endTime'
                 placeholder=''
-                labelText='EventEndTime'
+                labelText='End Time'
                 id='eventEndTime'
                 wrapperDivClassName='event-form-eventEndTime'
                 value={values.endTime}
                 {...props}
             />
+              <FormInputs
+                  type='date'
+                  name='deadlineDate'
+                  placeholder=''
+                  labelText='Deadline Date'
+                  id='eventDeadlineDate'
+                  wrapperDivClassName='event-form-eventDate'
+                  value={values.deadlineDate}
+                  {...props}
+              />
           </div>
+
           <Search locationIdCallback={locationIdCallback} {...props}/>
           <FromTextArea
               name='inviteEmails'

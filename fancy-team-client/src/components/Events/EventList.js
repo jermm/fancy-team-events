@@ -11,14 +11,6 @@ function EventList(props) {
     let tempArr={};
     let sortedEvents = events.map(event => event).sort(function(a, b){
       return new Date(a.eventDate) - new Date(b.eventDate);
-    }).map(event => {
-      if(!tempArr[event.id]){
-        tempArr[event.id] = event;
-      }else{
-        if(!tempArr[event.id].isOrganizer && event.isOrganizer){
-          tempArr[event.id] = event;
-        }
-      }
     });
         return (
                <div className='event-list-page-create-event'>
@@ -36,7 +28,7 @@ function EventList(props) {
                  <div className='event-scroll'>
                    <table className='event-table'>
                      <tbody>
-                     {Object.values(tempArr).map((event, index) =>
+                     {sortedEvents.map((event, index) =>
                          <tr id={event.id} key={index}>
                             <td>{event.eventDate}</td>
                             <td>{event.title}</td>

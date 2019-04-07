@@ -17,7 +17,8 @@ class EditComponent extends Component {
                 endTime: '',
                 location: '',
                 locationIdCallback: '',
-                eventType: 'SelectEvent'
+                eventType: 'SelectEvent',
+                deadlineDate: '',
             }, formStartValue: {},
             eventId: Number(this.props.match.params.id),
             enableReinitialize: false,
@@ -66,7 +67,7 @@ class EditComponent extends Component {
     }
 
     render() {
-        const {title, eventDate, description, startTime, endTime, locationName, locationId, type, inviteEmails} = this.state.formInitialValue;
+        const {title, eventDate, description, startTime, endTime, locationName, locationId, type, inviteEmails, deadlineDate} = this.state.formInitialValue;
         const FormValues = {
             title: title,
             eventDate: eventDate,
@@ -76,7 +77,8 @@ class EditComponent extends Component {
             type: type,
             locationName: locationName,
             locationId: locationId,
-            inviteEmails: inviteEmails
+            inviteEmails: inviteEmails,
+            deadlineDate: deadlineDate
         };
         return (
             <div className='event-container'>
