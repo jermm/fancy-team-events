@@ -97,7 +97,7 @@ export class EventService {
           event.endTime = updateObject.endTime;
           event.locationName = updateObject.locationName;
           event.description = updateObject.description;
-          event.deadlineDate = updateObject.deadline;
+          event.deadlineDate = updateObject.deadlineDate;
           event.locationId = updateObject.locationId;
           event.tshirt = updateObject.tshirt;
 

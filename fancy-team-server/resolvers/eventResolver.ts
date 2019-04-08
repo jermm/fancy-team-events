@@ -17,7 +17,7 @@ interface inputForAddingEvent {
     endTime: string,
     locationName: string,
     description: string,
-    deadline: string,
+    deadlineDate: string,
     inviteEmails: string,
     emails: string[],
     tshirt:string

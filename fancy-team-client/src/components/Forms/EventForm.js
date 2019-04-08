@@ -100,6 +100,7 @@ function EventForm(props) {
             <FromSelect
                 name='tshirt'
                 options={['No', 'Yes']}
+                value={values.tshirt}
                 wrapperDivClassName='event-form-tShirt'
                 id='tShirt'
                 labelName='Tshirt'
