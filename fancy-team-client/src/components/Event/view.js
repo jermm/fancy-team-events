@@ -119,14 +119,14 @@ class EventView extends Component {
 
                         <p>Nearby Transit: {transitStopString}</p>
 
-                        <div className='event-field'>
+                        {/* <div className='event-field'>
                             <span className='event-field-key'>Parking:</span>
                             <span className='event-field-value'>free</span>
                         </div>
                         <div className='event-field'>
                             <span className='event-field-key'>Carpool:</span>:
                             <span className='event-field-value event-switch'></span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
