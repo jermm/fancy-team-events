@@ -58,9 +58,17 @@ export class EventService {
     public static findEventsByUser = async (context): Promise<any> => {
         try {
             const req = context.Request;
-            const eventsAttended = await getConnection()
-            .getRepository(Event).createQueryBuilder("event")
-                .leftJoinAndSelect(UserEventStatus, "userStatus", "event.organizerEmail = userStatus.email")
+            const eventsAttended = await getConnection().getRepository(Event)
+                .createQueryBuilder("event")
+                .where(qb => {
+                    const subQuery = qb.subQuery()
+                        .select("userStatus.event")
+                        .from(UserEventStatus, "userStatus")
+                        .where("userStatus.email = :email")
+                        .getQuery();
+                    return "event.id IN " + subQuery;
+                })
+                .setParameter("email", req.user.email)
                 .getMany();
             const eventsCreated = await getConnection()
                 .getRepository(Event)
